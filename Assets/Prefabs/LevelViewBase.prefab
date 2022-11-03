@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3000152031736089516}
-  - component: {fileID: 3000152031736089517}
   - component: {fileID: 3000152031736089519}
   m_Layer: 0
   m_Name: Paint
@@ -33,44 +32,6 @@ Transform:
   m_Father: {fileID: 3000152032301219230}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3000152031736089517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000152031736089514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e79b29143865f7c43ac098b70c6cffec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
-  layers:
-    serializedVersion: 2
-    m_Bits: 4294967291
-  requiredButtons: -1
-  requiredKey: 0
-  guiLayers:
-    serializedVersion: 2
-    m_Bits: 32
-  emit: 0
-  rotateTo: 0
-  normalDirection: 1
-  normalRelativeTo: 0
-  customTransform: {fileID: 0}
-  normalOffset: 0
-  mouseOffset: 0
-  touchOffset: 0
-  storeStates: 0
-  showPreview: 0
-  priority: 0
-  frequency: 5
-  interval: 5
-  connector:
-    hitSpacing: 0
-    hitLimit: 30
-    connectHits: 1
 --- !u!114 &3000152031736089519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,13 +58,13 @@ MonoBehaviour:
     Kernel: 1
     Channels: {x: 1, y: 1, z: 1, w: 1}
   texture: {fileID: 0}
-  shape: {fileID: 2800000, guid: 5d41353f796af564bb2f1f30234e8817, type: 3}
+  shape: {fileID: 2800000, guid: eb2c4ecdfbcb4bd4eb3057da4db6fa5a, type: 3}
   shapeChannel: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   opacity: 1
   angle: 0
   scale: {x: 1, y: 1, z: 15}
-  radius: 0.1
+  radius: 0.3
   hardness: 1
   wrapping: 0
   normalFront: 0.9
@@ -175,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counter: {fileID: 8871031301127120659}
+  hitScreen: {fileID: 0}
 --- !u!1 &3495116761914770001
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +356,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 6157995340878927524}
-  cooldown: -749.9694
+  cooldown: -755.02344
   currentReader:
     requested: 0
     buffer: {fileID: 0}

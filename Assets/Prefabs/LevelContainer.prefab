@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1942555402374640123}
   - component: {fileID: 566519204892903193}
+  - component: {fileID: 7876337229399507212}
   m_Layer: 0
   m_Name: LevelContainer
   m_TagString: Untagged
@@ -44,3 +45,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f1f97edea9408fa664b1900fcb4861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitScreen: {fileID: 7876337229399507212}
+--- !u!114 &7876337229399507212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870680150544482365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79b29143865f7c43ac098b70c6cffec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  requiredButtons: -1
+  requiredKey: 0
+  guiLayers:
+    serializedVersion: 2
+    m_Bits: 32
+  emit: 0
+  rotateTo: 0
+  normalDirection: 1
+  normalRelativeTo: 0
+  customTransform: {fileID: 0}
+  normalOffset: 0
+  mouseOffset: 0
+  touchOffset: 0
+  storeStates: 0
+  showPreview: 0
+  priority: 0
+  frequency: 5
+  interval: 5
+  connector:
+    hitSpacing: 0
+    hitLimit: 30
+    connectHits: 1

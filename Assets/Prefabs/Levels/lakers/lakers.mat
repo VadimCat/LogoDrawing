@@ -59,12 +59,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 1
+    - _BumpScale: 0
     - _EnableEmission: 0
     - _EnableMos: 0
     - _EnableNormal: 0
     - _EnableOpacity: 0
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0.252
     - _Metallic: 0
     - _Tiling: 1
     - _UseUV2: 0

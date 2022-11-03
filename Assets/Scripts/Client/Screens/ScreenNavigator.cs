@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Utils.Client;
@@ -23,21 +24,30 @@ namespace Client.Screens
             }
         }
 
-        public TScreen PushScreen<TScreen>() where TScreen : BaseScreen
+        public async Task<TScreen> PushScreen<TScreen>() where TScreen : BaseScreen
         {
             if (CurrentScreen != null)
-                CurrentScreen.Close();
+                CurrentScreen.AnimateClose();
 
             CurrentScreen = Instantiate(screenOrigins[typeof(TScreen)], transform);
-            CurrentScreen.Show();
+            await CurrentScreen.AnimateShow();
             return (TScreen)CurrentScreen;
         }
-    }
 
-    public abstract class BaseScreen : MonoBehaviour
-    {
-        public abstract UniTask Show();
+        public async UniTask CloseScreen<TScreen>() where TScreen : BaseScreen
+        {
+            if (CurrentScreen is TScreen)
+            {
+                await CurrentScreen.AnimateClose();
+                Destroy(CurrentScreen.gameObject);
+                CurrentScreen = null;
+            }
+        }
 
-        public abstract UniTask Close();
+        public async UniTask CloseCurrent()
+        {
+            await CurrentScreen.AnimateClose();
+            CurrentScreen = null;
+        }
     }
 }
