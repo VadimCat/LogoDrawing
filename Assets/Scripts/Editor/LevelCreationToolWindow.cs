@@ -1,4 +1,6 @@
 using System.IO;
+using System.Security.Cryptography;
+using PaintIn3D;
 using SceneView;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Editor
     {
         private const string LevelsFolderPath = "Assets/Configs/Levels";
 
-        private static ColoringLevelView levelView;
+        private static GameObject levelView;
         private static LevelsViewDataStorage storage;
         private static Material baseDirtMaterial;
         
@@ -24,17 +26,23 @@ namespace Editor
         [MenuItem ("Tools/LevelCreationTool")]
         private static void ShowWindow()
         {
+            SetDefaultData();
+
+            var wind = GetWindow(typeof(LevelCreationToolWindow));
+            wind.Show();
+        }
+
+        private static void SetDefaultData()
+        {
             var levelDataStorage = AssetDatabase.FindAssets("t:LevelsViewDataStorage")[0];
-            storage = AssetDatabase.LoadAssetAtPath<LevelsViewDataStorage>(AssetDatabase.GUIDToAssetPath(levelDataStorage));
+            storage = AssetDatabase.LoadAssetAtPath<LevelsViewDataStorage>(
+                AssetDatabase.GUIDToAssetPath(levelDataStorage));
 
             var material = AssetDatabase.FindAssets("dirt t:Material")[0];
             baseDirtMaterial = AssetDatabase.LoadAssetAtPath<Material>(AssetDatabase.GUIDToAssetPath(material));
 
             var level = AssetDatabase.FindAssets("LevelViewBase t:Prefab")[0];
-            levelView = AssetDatabase.LoadAssetAtPath<ColoringLevelView>(AssetDatabase.GUIDToAssetPath(level));
-            
-            var wind = GetWindow(typeof(LevelCreationToolWindow));
-            wind.Show();
+            levelView = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(level));
         }
 
         private void OnGUI()
@@ -44,7 +52,7 @@ namespace Editor
             EditorGUILayout.LabelField("Base and dirt material");
             baseDirtMaterial = (Material)EditorGUILayout.ObjectField(baseDirtMaterial, typeof(Material), true);
             EditorGUILayout.LabelField("LevelConfigBasePrefab");
-            levelView = (ColoringLevelView)EditorGUILayout.ObjectField(levelView, typeof(ColoringLevelView), true);
+            levelView = (GameObject)EditorGUILayout.ObjectField(levelView, typeof(GameObject), true);
 
             EditorGUILayout.LabelField("Level name");
             levelName = EditorGUILayout.TextField(levelName);
@@ -56,14 +64,43 @@ namespace Editor
 
             if (GUILayout.Button("Add level"))
             {
-                var path = Path.Combine("Assets/Configs/Levels", levelName);
-                Material mat = new Material(baseDirtMaterial.shader);
-                mat.CopyPropertiesFromMaterial(baseDirtMaterial);
-                mat.name = levelName+"_color";
-                AssetDatabase.CreateFolder("Assets/Configs/Levels", levelName);
-                AssetDatabase.CreateAsset(mat, path);
-                // PrefabUtility.SaveAsPrefabAssetAndConnect()
+                CreateLevelMaterial();
+                
+                var path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Dirt.prefab");
+
+                var levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
+                levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = maskSprite.texture; 
+                levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = maskSprite.texture; 
+                levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = maskSprite.texture;
+                var maskSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
+                DestroyImmediate(levelPref);
+                
+                path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Color.prefab");
+
+                levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
+                levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = maskSprite.texture; 
+                levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = maskSprite.texture; 
+                levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = maskSprite.texture;
+                var colorSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
+                DestroyImmediate(levelPref);
             }
+        }
+
+        private static void CreateLevelMaterial()
+        {
+            var path = Path.Combine("Assets\\Prefabs\\Levels", levelName);
+            Material mat = new Material(baseDirtMaterial.shader);
+            mat.name = levelName;
+            mat.CopyPropertiesFromMaterial(baseDirtMaterial);
+            mat.mainTexture = maskSprite.texture;
+            AssetDatabase.CreateFolder("Assets\\Prefabs\\Levels", levelName);
+            path = Path.Combine(path, $"{mat.name}.mat");
+            AssetDatabase.CreateAsset(mat, path);
+        }
+
+        private void OnFocus()
+        {
+            SetDefaultData();
         }
     }
 }
