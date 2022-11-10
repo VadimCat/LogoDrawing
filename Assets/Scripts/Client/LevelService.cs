@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -7,9 +7,12 @@ using SceneView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Client;
+using Object = UnityEngine.Object;
 
-public class LevelService : ISavable
+public class LevelService : ISavable, IUpdatable
 {
+    public event Action<float> OnProgressUpdate; 
+
     private const string Savekey = "lvl";
     
     private int currentLvlInd = -1;
@@ -18,31 +21,54 @@ public class LevelService : ISavable
     private readonly LevelsViewDataStorage levelsViewDataStorage;
     private readonly LevelViewContainer levelView;
     private readonly ScreenNavigator screenNavigator;
+    private readonly UpdateService updateService;
+    private readonly BackGroundService backGroundService;
 
+    private AsyncOperation currentLoadingTask;
+    
     public LevelService(LevelsViewDataStorage levelsViewDataStorage, LevelViewContainer levelView,
-        ScreenNavigator screenNavigator)
+        ScreenNavigator screenNavigator, UpdateService updateService, BackGroundService backGroundService)
     {
         this.levelsViewDataStorage = levelsViewDataStorage;
         this.levelView = levelView;
         this.screenNavigator = screenNavigator;
-        
+        this.updateService = updateService;
+        this.backGroundService = backGroundService;
+
         Load();    
     }
 
-    public async Task<Level> LoadNextLevel()
+    public void OnUpdate()
+    {
+        OnProgressUpdate?.Invoke(currentLoadingTask.progress);
+    }
+
+    public async UniTask<Level> LoadNextLevel()
     {
         currentLvlInd++;
         if (currentLvlInd >= levelsViewDataStorage.levelsList.Count)
             currentLvlInd = 0;
+
         
-        await SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Single).ToUniTask();
+        currentLoadingTask = SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Single);
+        updateService.Add(this);
+        await currentLoadingTask.ToUniTask();
+        ForceFullProgress();
+        updateService.Remove(this);
+
+        backGroundService.SwitchBackground(Background.Game);
         var scene = SceneManager.GetSceneByName("LevelScene");
         SceneManager.SetActiveScene(scene);
         var viewData = levelsViewDataStorage.GetData(currentLvlId);
         var view = Object.Instantiate(levelView);
-        var level = new Level("bmw");
+        var level = new Level(viewData.ID);
         new LevelPresenter(level, view, viewData, this, screenNavigator);
         return level;
+    }
+
+    private void ForceFullProgress()
+    {
+        OnProgressUpdate?.Invoke(1);
     }
 
     public void Save()

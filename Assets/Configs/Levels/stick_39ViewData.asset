@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fef4251e474717a419d47d62ebe53e, type: 3}
+  m_Name: stick_39ViewData
+  m_EditorClassIdentifier: 
+  id: stick_39
+  levelResult: {fileID: 21300000, guid: b02638c830eb965419a147e68e7cf8a8, type: 3}
+  dirtView: {fileID: 1466127328274467254, guid: 67723d37f9cf27d479af9ac98271a04c, type: 3}
+  coloringView: {fileID: 2731566274940256407, guid: 6d054c0708a1b4f49a32898d48d77cd9, type: 3}

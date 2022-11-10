@@ -1,5 +1,5 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +8,9 @@ namespace Client.Screens
     public class LevelCompletedScreen : BaseScreen
     {
         [SerializeField] private Button nextButton;
-
+        [SerializeField] private Image levelResult;
+        [SerializeField] private TMP_Text levelName;
+        
         public event Action OnClickNext;
 
         private void Awake()
@@ -16,21 +18,17 @@ namespace Client.Screens
             nextButton.onClick.AddListener(FireNext);
         }
 
+        public void SetLevelResult(Sprite levelResult, string levelName)
+        {
+            this.levelResult.sprite = levelResult;
+            this.levelName.text = levelName;
+        }
+        
         private void FireNext()
         {
             OnClickNext?.Invoke();
         }
-
-        public override UniTask AnimateShow()
-        {
-            return UniTask.CompletedTask;
-        }
-
-        public override UniTask AnimateClose()
-        {
-            return UniTask.CompletedTask;
-        }
-
+        
         private void OnDestroy()
         {
             OnClickNext = null;

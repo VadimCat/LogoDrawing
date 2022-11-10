@@ -1,5 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
+using System.Linq;
 using PaintIn3D;
 using SceneView;
 using UnityEditor;
@@ -10,20 +12,22 @@ namespace Editor
 {
     public class LevelCreationToolWindow : EditorWindow
     {
-        private const string LevelsFolderPath = "Assets/Configs/Levels";
+        private const string BaseArtPath = "Assets/Art/LevelsArt/";
 
         private static GameObject levelView;
         private static LevelsViewDataStorage storage;
         private static Material baseDirtMaterial;
-        
+
         private static Sprite colorSprite;
         private static Sprite maskSprite;
-        
+
         private static string levelName;
-        
-        private bool isInitialized = false;    
-        
-        [MenuItem ("Tools/LevelCreationTool")]
+
+        private static string assetsDirectory => Path.Combine(Directory.GetCurrentDirectory(), "Assets");
+
+        private bool isInitialized = false;
+
+        [MenuItem("Tools/LevelCreationTool")]
         private static void ShowWindow()
         {
             SetDefaultData();
@@ -47,6 +51,57 @@ namespace Editor
 
         private void OnGUI()
         {
+            DrawGUI();
+
+            if (GUILayout.Button("Add level"))
+            {
+                if (storage.LevelIdExists(levelName))
+                {
+                    throw new LevelExistsException(levelName);
+                }
+
+                CreateLevel(levelName, maskSprite, colorSprite);
+            }
+
+            if (GUILayout.Button("Fill levels automaticly"))
+            {
+                var assets = AssetDatabase.FindAssets("t:Sprite");
+
+                var pathes = from guid in assets
+                    where AssetDatabase.GUIDToAssetPath(guid).Contains(BaseArtPath)
+                    select AssetDatabase.GUIDToAssetPath(guid);
+
+                var spritePathes = pathes.ToArray();
+
+                Func<string, bool> greyFilter = s => s.Contains("grey");
+                Func<string, bool> colorFilter = s => !s.Contains("grey");
+
+                var greySprites = GetSpritesFromPathesByFilter(spritePathes, greyFilter);
+                var colorSprites = GetSpritesFromPathesByFilter(spritePathes, colorFilter);
+                foreach (var spr in greySprites)
+                {
+                    var sprName = spr.name.Replace("-grey", string.Empty);
+
+                    var findIndex = colorSprites.FindIndex(sp => sp.name == sprName);
+                    if (findIndex != -1)
+                    {
+                        CreateLevel(sprName, spr, colorSprites[findIndex]);
+                    }
+                }
+            }
+        }
+
+        private void CreateLevel(string levelName, Sprite maskSprite, Sprite colorSprite)
+        {
+            var material = CreateLevelMaterial(levelName, maskSprite);
+            var maskSavedPref = CreateMaskPref(levelName, maskSprite);
+            var colorSavedPref = CreateColorPref(levelName, colorSprite, material);
+
+            AddConfig(levelName, maskSavedPref, colorSavedPref, colorSprite);
+        }
+
+        private static void DrawGUI()
+        {
             EditorGUILayout.LabelField("LevelsStorage");
             storage = (LevelsViewDataStorage)EditorGUILayout.ObjectField(storage, typeof(LevelsViewDataStorage), true);
             EditorGUILayout.LabelField("Base and dirt material");
@@ -61,41 +116,89 @@ namespace Editor
             colorSprite = (Sprite)EditorGUILayout.ObjectField(colorSprite, typeof(Sprite), true);
             EditorGUILayout.LabelField("Mask sprite");
             maskSprite = (Sprite)EditorGUILayout.ObjectField(maskSprite, typeof(Sprite), true);
-
-            if (GUILayout.Button("Add level"))
-            {
-                CreateLevelMaterial();
-                
-                var path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Dirt.prefab");
-
-                var levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
-                levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = maskSprite.texture; 
-                levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = maskSprite.texture; 
-                levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = maskSprite.texture;
-                var maskSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
-                DestroyImmediate(levelPref);
-                
-                path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Color.prefab");
-
-                levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
-                levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = maskSprite.texture; 
-                levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = maskSprite.texture; 
-                levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = maskSprite.texture;
-                var colorSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
-                DestroyImmediate(levelPref);
-            }
         }
 
-        private static void CreateLevelMaterial()
+        private static List<Sprite> GetSpritesFromPathesByFilter(string[] spritePathes, Func<string, bool> filter)
+        {
+            var greyAtlases = (from path in spritePathes
+                where filter(path)
+                select path);
+
+            List<Sprite> sprites = new List<Sprite>();
+            foreach (var atlas in greyAtlases)
+            {
+                var spriteObjs = AssetDatabase.LoadAllAssetsAtPath(atlas);
+                foreach (var obj in spriteObjs)
+                {
+                    if (obj is Sprite spr)
+                        sprites.Add(spr);
+                }
+            }
+
+            return sprites;
+        }
+
+        private static void AddConfig(string levelName, GameObject maskSavedPref, GameObject colorSavedPref,
+            Sprite resultSprite)
+        {
+            var levelAsset = CreateInstance<LevelViewData>();
+            levelAsset.SetData(levelName, maskSavedPref.GetComponent<ColoringLevelView>(),
+                colorSavedPref.GetComponent<ColoringLevelView>(), resultSprite);
+
+            var path = Path.Combine("Assets\\Configs\\Levels", $"{levelName}ViewData.asset");
+
+            AssetDatabase.CreateAsset(levelAsset, path);
+            EditorUtility.SetDirty(levelAsset);
+
+            storage.AddLevel(levelAsset);
+            EditorUtility.SetDirty(storage);
+
+            AssetDatabase.Refresh();
+        }
+
+        private static GameObject CreateColorPref(string levelName, Sprite sprite, Material material)
+        {
+            var path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Color.prefab");
+
+            var levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
+            levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = sprite.texture;
+            levelPref.GetComponentInChildren<Renderer>().material = material;
+            levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = sprite.texture;
+            levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = sprite.texture;
+            var colorSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
+            DestroyImmediate(levelPref);
+            return colorSavedPref;
+        }
+
+        private static GameObject CreateMaskPref(string levelName, Sprite sprite)
+        {
+            string path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Dirt.prefab");
+
+            var levelPref = PrefabUtility.InstantiatePrefab(levelView) as GameObject;
+            levelPref.GetComponentInChildren<P3dPaintableTexture>().Texture = sprite.texture;
+            levelPref.GetComponentInChildren<P3dChangeCounter>().MaskTexture = sprite.texture;
+            levelPref.GetComponentInChildren<P3dChangeCounter>().Texture = sprite.texture;
+            var maskSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
+            DestroyImmediate(levelPref);
+            return maskSavedPref;
+        }
+
+        // public void FillLevelsAutomaticly()
+        // {
+        //     
+        // }
+
+        private Material CreateLevelMaterial(string levelName, Sprite sprite)
         {
             var path = Path.Combine("Assets\\Prefabs\\Levels", levelName);
             Material mat = new Material(baseDirtMaterial.shader);
             mat.name = levelName;
             mat.CopyPropertiesFromMaterial(baseDirtMaterial);
-            mat.mainTexture = maskSprite.texture;
+            mat.mainTexture = sprite.texture;
             AssetDatabase.CreateFolder("Assets\\Prefabs\\Levels", levelName);
             path = Path.Combine(path, $"{mat.name}.mat");
             AssetDatabase.CreateAsset(mat, path);
+            return mat;
         }
 
         private void OnFocus()

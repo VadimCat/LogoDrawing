@@ -1,5 +1,6 @@
 ﻿using SceneView;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Utils.Client
 {
@@ -7,13 +8,26 @@ namespace Utils.Client
     public class LevelViewData : ScriptableObject
     {
         [SerializeField] private string id;
-
+        [SerializeField] private Sprite levelResult;
+        
         [Header("Data")] [SerializeField] private ColoringLevelView dirtView;
-        [Header("Data")] [SerializeField] private ColoringLevelView coloringColoringView;
+        [FormerlySerializedAs("coloringColoringView")] [Header("Data")] [SerializeField] private ColoringLevelView coloringView;
 
         public string ID => id;
 
         public ColoringLevelView DirtView => dirtView;
-        public ColoringLevelView ColoringView => coloringColoringView;
+        public ColoringLevelView ColoringView => coloringView;
+
+        public Sprite LevelResult => levelResult;
+
+#if UNITY_EDITOR
+        public void SetData(string id, ColoringLevelView dirt, ColoringLevelView color, Sprite resultSprite)
+        {
+            this.id = id;
+            this.dirtView = dirt;
+            this.coloringView = color;
+            this.levelResult = resultSprite;
+        }
+#endif
     }
 }

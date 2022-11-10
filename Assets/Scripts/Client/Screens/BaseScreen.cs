@@ -5,8 +5,14 @@ namespace Client.Screens
 {
     public abstract class BaseScreen : MonoBehaviour
     {
-        public abstract UniTask AnimateShow();
+        public virtual UniTask AnimateShow()
+        {
+            return UniTask.CompletedTask;
+        }
 
-        public abstract UniTask AnimateClose();
+        public virtual UniTask AnimateClose()
+        {
+            return UniTask.CompletedTask;
+        }
     }
 }
