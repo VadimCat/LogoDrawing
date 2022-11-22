@@ -25,7 +25,7 @@ namespace Client
             loadingScreen = await screenNavigator.PushScreen<AppLoadingScreen>();
             levelService.OnProgressUpdate += UpdateLoadingScreen;
 
-            await UniTask.WhenAll(levelService.LoadNextLevel(), UniTask.Delay(2000)) ;
+            await levelService.LoadNextLevel();
             await screenNavigator.CloseScreen<AppLoadingScreen>();
             levelService.OnProgressUpdate -= UpdateLoadingScreen;
         }

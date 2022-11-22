@@ -52,7 +52,8 @@ public class LevelService : ISavable, IUpdatable
         
         currentLoadingTask = SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Single);
         updateService.Add(this);
-        await currentLoadingTask.ToUniTask();
+        
+        await UniTask.WhenAll(currentLoadingTask.ToUniTask(), UniTask.Delay(2000));
         ForceFullProgress();
         updateService.Remove(this);
 

@@ -27,7 +27,9 @@ namespace Client.Screens
         public async Task<TScreen> PushScreen<TScreen>() where TScreen : BaseScreen
         {
             if (CurrentScreen != null)
+            {
                 await CloseCurrent();
+            }
             
             CurrentScreen = Instantiate(screenOrigins[typeof(TScreen)], transform);
             await CurrentScreen.AnimateShow();
@@ -44,7 +46,7 @@ namespace Client.Screens
             }
         }
 
-        public async UniTask CloseCurrent()
+        private async UniTask CloseCurrent()
         {
             await CurrentScreen.AnimateClose();
             Destroy(CurrentScreen.gameObject);
