@@ -16,12 +16,17 @@ namespace Client.Screens
         //TODO: Fix and create common class with ApploadingScreen loading functionality 
         public void SetCleaningProgress(float progress)
         {
-            loadingBar.SetLoadingProgress(progress/2);
+            loadingBar.SetLoadingProgress(GetThresholdProgress(progress));
         }
 
         public void SetColoringProgress(float progress)
         {
             loadingBar.SetLoadingProgress(.5f + progress/2);
+        }
+
+        private float GetThresholdProgress(float progress)
+        {
+            return progress / 1.92f;
         }
     }
 }

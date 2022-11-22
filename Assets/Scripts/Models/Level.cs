@@ -27,6 +27,8 @@ namespace Models
 
         public void UpdateColoringProgress(float progress, float oldValue)
         {
+            progress = Mathf.Clamp01(progress * 1.015f);
+            
             switch (stage.Value)
             {
                 case ColoringStage.Cleaning:
