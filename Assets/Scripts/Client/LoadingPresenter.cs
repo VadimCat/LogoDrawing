@@ -29,7 +29,7 @@ namespace Client
             await screenNavigator.CloseScreen<AppLoadingScreen>();
             levelService.OnProgressUpdate -= UpdateLoadingScreen;
         }
-        
+
         private void UpdateLoadingScreen(float progress)
         {
             loadingScreen.SetProgress(progress);

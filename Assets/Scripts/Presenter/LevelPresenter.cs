@@ -1,4 +1,5 @@
 ﻿using System;
+using Client;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -13,18 +14,20 @@ namespace Presenter
         private readonly LevelViewData levelData;
         private readonly LevelService levelService;
         private readonly ScreenNavigator screenNavigator;
+        private readonly CursorService cursorService;
         private readonly LevelViewContainer view;
 
         private ColoringLevelScreen levelScreen;
         
         public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, LevelService levelService,
-            ScreenNavigator screenNavigator)
+            ScreenNavigator screenNavigator, CursorService cursorService)
         {
             this.level = level;
             this.view = view;
             this.levelData = levelData;
             this.levelService = levelService;
             this.screenNavigator = screenNavigator;
+            this.cursorService = cursorService;
 
             switch (level.Stage.Value)
             {
@@ -72,6 +75,7 @@ namespace Presenter
 
         private async void CompleteLevel()
         {
+            cursorService.Disable();
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
 
@@ -90,18 +94,20 @@ namespace Presenter
 
         private void SetCleaningStage()
         {
+            cursorService.SetBrush();
             view.SetColoringData(levelData.DirtView);
         }
 
         private void SetColoringStageInstant()
         {
+            cursorService.SetSpray();
             view.SetColoringData(levelData.ColoringView);
         }
         
         private async void SetColoringStage()
         {
             view.RemoveColoringObject();
-            view.SetColoringData(levelData.ColoringView);
+            SetColoringStageInstant();
 
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;

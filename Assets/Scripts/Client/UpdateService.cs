@@ -7,7 +7,6 @@ public class UpdateService : MonoBehaviour
 
     private void Update()
     {
-        
         foreach (var updatable in updatables)
         {
             updatable.OnUpdate();
@@ -16,14 +15,15 @@ public class UpdateService : MonoBehaviour
 
     public void Add(IUpdatable updatable)
     {
-        updatables.Add(updatable);
+        if (!updatables.Contains(updatable))
+            updatables.Add(updatable);
     }
 
     public void Remove(IUpdatable updatable)
     {
-        updatables.Remove(updatable);
+        if (updatables.Contains(updatable))
+            updatables.Remove(updatable);
     }
-    
 }
 
 public interface IUpdatable

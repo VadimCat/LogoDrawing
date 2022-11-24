@@ -6,7 +6,7 @@ namespace Models
 {
     public class Level : ISavable
     {
-        private const float COLORING_COMPLETE_THRESHOLD = .99f;
+        private const float COLORING_COMPLETE_THRESHOLD = .995f;
 
         private string id;
 

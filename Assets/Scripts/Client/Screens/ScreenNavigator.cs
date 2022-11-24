@@ -30,7 +30,7 @@ namespace Client.Screens
             {
                 await CloseCurrent();
             }
-            
+
             CurrentScreen = Instantiate(screenOrigins[typeof(TScreen)], transform);
             await CurrentScreen.AnimateShow();
             return (TScreen)CurrentScreen;

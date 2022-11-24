@@ -1,4 +1,5 @@
 using System;
+using Client;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -11,10 +12,10 @@ using Object = UnityEngine.Object;
 
 public class LevelService : ISavable, IUpdatable
 {
-    public event Action<float> OnProgressUpdate; 
+    public event Action<float> OnProgressUpdate;
 
     private const string Savekey = "lvl";
-    
+
     private int currentLvlInd = -1;
     private string currentLvlId => levelsViewDataStorage.levelsList[currentLvlInd];
 
@@ -23,19 +24,23 @@ public class LevelService : ISavable, IUpdatable
     private readonly ScreenNavigator screenNavigator;
     private readonly UpdateService updateService;
     private readonly BackGroundService backGroundService;
+    private readonly Context context;
 
     private AsyncOperation currentLoadingTask;
-    
+
+    //TODO: Check dependencies and use context where needed
     public LevelService(LevelsViewDataStorage levelsViewDataStorage, LevelViewContainer levelView,
-        ScreenNavigator screenNavigator, UpdateService updateService, BackGroundService backGroundService)
+        ScreenNavigator screenNavigator, UpdateService updateService, BackGroundService backGroundService,
+        Context context)
     {
         this.levelsViewDataStorage = levelsViewDataStorage;
         this.levelView = levelView;
         this.screenNavigator = screenNavigator;
         this.updateService = updateService;
         this.backGroundService = backGroundService;
+        this.context = context;
 
-        Load();    
+        Load();
     }
 
     public void OnUpdate()
@@ -49,10 +54,10 @@ public class LevelService : ISavable, IUpdatable
         if (currentLvlInd >= levelsViewDataStorage.levelsList.Count)
             currentLvlInd = 0;
 
-        
+
         currentLoadingTask = SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Single);
         updateService.Add(this);
-        
+
         await UniTask.WhenAll(currentLoadingTask.ToUniTask(), UniTask.Delay(2000));
         ForceFullProgress();
         updateService.Remove(this);
@@ -63,7 +68,7 @@ public class LevelService : ISavable, IUpdatable
         var viewData = levelsViewDataStorage.GetData(currentLvlId);
         var view = Object.Instantiate(levelView);
         var level = new Level(viewData.ID);
-        new LevelPresenter(level, view, viewData, this, screenNavigator);
+        new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>());
         return level;
     }
 

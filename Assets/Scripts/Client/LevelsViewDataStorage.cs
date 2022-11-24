@@ -21,7 +21,7 @@ namespace Utils.Client
             return levelsDict[levelId];
         }
 
-        public void Bootstrap() 
+        public void Bootstrap()
         {
             levelsDict = new Dictionary<string, LevelViewData>(levels.Count);
             foreach (var lvl in levels)
@@ -43,7 +43,7 @@ namespace Utils.Client
                 throw new LevelExistsException(level.ID);
                 return;
             }
-            
+
             levels.Add(level);
             EditorUtility.SetDirty(this);
             AssetDatabase.Refresh();

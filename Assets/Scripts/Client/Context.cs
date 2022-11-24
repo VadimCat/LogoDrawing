@@ -23,7 +23,7 @@ namespace Client
         {
             return (TContract)services[typeof(TContract)];
         }
-        
+
         public void Remove<TContract>()
         {
             if (!services.ContainsKey(typeof(TContract)))

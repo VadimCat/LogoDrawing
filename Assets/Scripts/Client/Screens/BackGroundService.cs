@@ -37,6 +37,5 @@ namespace Client.Screens
                     throw new ArgumentOutOfRangeException(nameof(background), background, null);
             }
         }
-        
     }
 }

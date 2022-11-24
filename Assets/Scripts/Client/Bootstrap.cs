@@ -12,21 +12,30 @@ namespace Client
         [SerializeField] private ScreenNavigator screenNavigator;
         [SerializeField] private BackGroundService backGroundService;
         [SerializeField] private UpdateService updateService;
-        
+        [SerializeField] private CursorService cursorService;
+
         private readonly Context context = new();
         private LevelService levelService;
-        
+
         private async void Awake()
         {
             DontDestroyOnLoad(this);
             InstallLevelsData();
             InstallNavigator();
+            InstallСursor();
 
-            levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService, backGroundService);
+            levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
+                backGroundService, context);
 
             new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
-            
+
+            context.Register(cursorService);
             context.Register(levelService);
+        }
+
+        private void InstallСursor()
+        {
+            cursorService.Construct(updateService);
         }
 
         private void InstallNavigator()

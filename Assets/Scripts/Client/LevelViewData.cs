@@ -9,9 +9,11 @@ namespace Utils.Client
     {
         [SerializeField] private string id;
         [SerializeField] private Sprite levelResult;
-        
+
         [Header("Data")] [SerializeField] private ColoringLevelView dirtView;
-        [FormerlySerializedAs("coloringColoringView")] [Header("Data")] [SerializeField] private ColoringLevelView coloringView;
+
+        [FormerlySerializedAs("coloringColoringView")] [Header("Data")] [SerializeField]
+        private ColoringLevelView coloringView;
 
         public string ID => id;
 
