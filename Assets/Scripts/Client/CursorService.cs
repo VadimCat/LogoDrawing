@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,8 +10,11 @@ namespace Client
         [SerializeField] private Sprite brush;
         [SerializeField] private Sprite sprayCan;
 
+        private readonly Vector3 disabledPos = new Vector3(100, 100, 100);
+        
         private UpdateService updateService;
-
+        
+        
         private bool isEnabled;
 
         public void Construct(UpdateService updateService)
@@ -39,17 +41,26 @@ namespace Client
         public void Disable()
         {
             updateService.Remove(this);
-            cursor.DOColor(new Color(), 0);
+            gameObject.SetActive(false);
         }
 
         public void OnUpdate()
         {
-            float z = transform.position.z;
+            if (Input.GetMouseButton(0))
+            {
+                gameObject.SetActive(true);
 
-            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                float z = transform.position.z;
 
-            newPos.z = z;
-            transform.position = newPos;
+                Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                newPos.z = z;
+                transform.position = newPos;       
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         private void Enable()

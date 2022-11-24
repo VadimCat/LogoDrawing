@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6636be04d75829b45baf40159ab92f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsStorage: {fileID: 11400000, guid: 2733c95e24ff17c41bae5e68c37c7e19, type: 2}
+  levelsStorage: {fileID: 11400000, guid: 09b3d91768f5b3a4fa6813569e2a017d, type: 2}
   levelViewOrigin: {fileID: 566519204892903193, guid: eb75f46a2babe734ca46d63b0de5ad21, type: 3}
   screenNavigator: {fileID: 907379513472099776}
   backGroundService: {fileID: 907379514284693776}
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5119629567882330040, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5119629567882330040, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -181,6 +181,22 @@ PrefabInstance:
     - target: {fileID: 5119629567882330043, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_Name
       value: CursorService
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119629568100640513, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119629568100640513, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119629568100640513, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119629569537755023, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
@@ -356,6 +372,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907379513116661682}
     m_Modifications:
+    - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: NaN
+      objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938277, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -440,11 +468,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 946
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938282, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_Name
       value: BackgroundService
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3876011219920502219, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
 --- !u!114 &907379514284693776 stripped
 MonoBehaviour:

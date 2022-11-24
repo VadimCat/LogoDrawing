@@ -10,6 +10,7 @@ namespace Presenter
 {
     public class LevelPresenter
     {
+        private const string levelNamePattern = "Level {0}";
         private readonly Level level;
         private readonly LevelViewData levelData;
         private readonly LevelService levelService;
@@ -49,7 +50,7 @@ namespace Presenter
         private async void StartLevel()
         {
             levelScreen = await screenNavigator.PushScreen<ColoringLevelScreen>();
-            levelScreen.SetLevelName(levelData.ID);
+            levelScreen.SetLevelName(string.Format(levelNamePattern, levelNamePattern));
             switch (level.Stage.Value)
             {
                 case ColoringStage.Cleaning:

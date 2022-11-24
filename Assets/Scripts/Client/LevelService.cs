@@ -17,7 +17,6 @@ public class LevelService : ISavable, IUpdatable
     private const string Savekey = "lvl";
 
     private int currentLvlInd = -1;
-    private string currentLvlId => levelsViewDataStorage.levelsList[currentLvlInd];
 
     private readonly LevelsViewDataStorage levelsViewDataStorage;
     private readonly LevelViewContainer levelView;
@@ -51,9 +50,7 @@ public class LevelService : ISavable, IUpdatable
     public async UniTask<Level> LoadNextLevel()
     {
         currentLvlInd++;
-        if (currentLvlInd >= levelsViewDataStorage.levelsList.Count)
-            currentLvlInd = 0;
-
+        int lvlToLoad = GetNormalizedLevelInd(currentLvlInd);
 
         currentLoadingTask = SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Single);
         updateService.Add(this);
@@ -65,13 +62,23 @@ public class LevelService : ISavable, IUpdatable
         backGroundService.SwitchBackground(Background.Game);
         var scene = SceneManager.GetSceneByName("LevelScene");
         SceneManager.SetActiveScene(scene);
-        var viewData = levelsViewDataStorage.GetData(currentLvlId);
+        var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
-        var level = new Level(viewData.ID);
+        var level = new Level(viewData.ID, lvlToLoad);
         new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>());
         return level;
     }
 
+    private int GetNormalizedLevelInd(int currentLvlInd)
+    {
+        while (currentLvlInd >= levelsViewDataStorage.levelsList.Count)
+        {
+            currentLvlInd -= levelsViewDataStorage.levelsList.Count;
+        }
+
+        return currentLvlInd;
+    }
+    
     private void ForceFullProgress()
     {
         OnProgressUpdate?.Invoke(1);

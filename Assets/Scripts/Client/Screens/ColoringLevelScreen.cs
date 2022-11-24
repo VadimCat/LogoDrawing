@@ -13,20 +13,20 @@ namespace Client.Screens
             levelName.text = name;
         }
 
-        //TODO: Fix and create common class with ApploadingScreen loading functionality 
         public void SetCleaningProgress(float progress)
         {
+            //TODO: MOVE FAKE PROGRESS LOGIC TO MODEL
             loadingBar.SetLoadingProgress(GetThresholdProgress(progress));
         }
 
         public void SetColoringProgress(float progress)
         {
-            loadingBar.SetLoadingProgress(.5f + progress / 2);
+            loadingBar.SetLoadingProgress(.5f + GetThresholdProgress(progress));
         }
 
         private float GetThresholdProgress(float progress)
         {
-            return progress / 1.92f;
+            return progress / 1.98f;
         }
     }
 }

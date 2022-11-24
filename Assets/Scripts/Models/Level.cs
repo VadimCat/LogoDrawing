@@ -9,6 +9,7 @@ namespace Models
         private const float COLORING_COMPLETE_THRESHOLD = .999f;
 
         private string id;
+        public readonly int levelPlayedTotal;
 
         public event Action OnColoringComplete;
         public event Action OnCleaningComplete;
@@ -19,9 +20,10 @@ namespace Models
 
         private ReactiveProperty<ColoringStage> stage = new();
 
-        public Level(string id)
+        public Level(string id, int levelPlayedTotal)
         {
             this.id = id;
+            this.levelPlayedTotal = levelPlayedTotal;
             Load();
         }
 

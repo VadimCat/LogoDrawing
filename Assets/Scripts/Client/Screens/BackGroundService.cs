@@ -21,6 +21,9 @@ namespace Client.Screens
         {
             //EAT SOME SHIT
             canvas.worldCamera = FindObjectOfType<Camera>();
+            var pos = transform.position;
+            pos.z = -1;
+            transform.position = pos;
         }
 
         public void SwitchBackground(Background background)
