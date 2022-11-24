@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cb641aed964d2b90e3e4692c84935d, type: 3}
   m_Name: ColoringConfig
   m_EditorClassIdentifier: 
-  brushRadius: 0.3
+  brushRadius: 0.15

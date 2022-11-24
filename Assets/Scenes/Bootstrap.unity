@@ -642,6 +642,22 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 946
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 6669128334661287243, guid: 422e870f1e656684988b108db764a5cf, type: 3}
       propertyPath: screens.Array.size
       value: 3
