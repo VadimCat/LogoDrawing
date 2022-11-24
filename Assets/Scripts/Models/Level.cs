@@ -9,7 +9,7 @@ namespace Models
         private const float COLORING_COMPLETE_THRESHOLD = .999f;
 
         private string id;
-        public readonly int levelPlayedTotal;
+        public readonly int LevelPlayedTotal;
 
         public event Action OnColoringComplete;
         public event Action OnCleaningComplete;
@@ -23,7 +23,7 @@ namespace Models
         public Level(string id, int levelPlayedTotal)
         {
             this.id = id;
-            this.levelPlayedTotal = levelPlayedTotal;
+            LevelPlayedTotal = levelPlayedTotal;
             Load();
         }
 

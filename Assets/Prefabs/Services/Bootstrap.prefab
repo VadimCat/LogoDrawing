@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CursorService
       objectReference: {fileID: 0}
+    - target: {fileID: 5119629568100640512, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5119629568100640513, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -374,15 +378,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938277, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_Pivot.x

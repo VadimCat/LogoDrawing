@@ -8,6 +8,7 @@ namespace Client.Screens
 {
     public class LevelCompletedScreen : BaseScreen
     {
+        private const string levelNamePattern = "Level {0}";
         [SerializeField] private Button nextButton;
         [SerializeField] private Image levelResult;
         [SerializeField] private TMP_Text levelName;
@@ -29,10 +30,10 @@ namespace Client.Screens
                 .SetLink(gameObject);
         }
 
-        public void SetLevelResult(Sprite levelResult, string levelName)
+        public void SetLevelResult(Sprite levelResult, int levelNumber)
         {
             this.levelResult.sprite = levelResult;
-            this.levelName.text = levelName;
+            this.levelName.text = string.Format(levelNamePattern, levelNumber);
         }
 
         private void FireNext()
