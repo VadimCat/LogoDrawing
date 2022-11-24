@@ -6,7 +6,7 @@ namespace Models
 {
     public class Level : ISavable
     {
-        private const float COLORING_COMPLETE_THRESHOLD = .995f;
+        private const float COLORING_COMPLETE_THRESHOLD = .999f;
 
         private string id;
 
@@ -27,7 +27,7 @@ namespace Models
 
         public void UpdateColoringProgress(float progress, float oldValue)
         {
-            progress = Mathf.Clamp01(progress * 1.015f);
+            progress = Mathf.Clamp01(progress * 1.022f);
             
             switch (stage.Value)
             {
