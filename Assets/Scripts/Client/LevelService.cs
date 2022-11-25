@@ -64,7 +64,7 @@ public class LevelService : ISavable, IUpdatable
         SceneManager.SetActiveScene(scene);
         var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
-        var level = new Level(viewData.ID, lvlToLoad);
+        var level = new Level(viewData.ID, currentLvlInd);
         new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>());
         return level;
     }
