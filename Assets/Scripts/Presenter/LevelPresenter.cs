@@ -50,7 +50,7 @@ namespace Presenter
         private async void StartLevel()
         {
             levelScreen = await screenNavigator.PushScreen<ColoringLevelScreen>();
-            levelScreen.SetLevelName(string.Format(levelNamePattern, level.LevelPlayedTotal));
+            levelScreen.SetLevelName(string.Format(levelNamePattern, level.LevelPlayedTotal + 1));
             switch (level.Stage.Value)
             {
                 case ColoringStage.Cleaning:
@@ -82,7 +82,7 @@ namespace Presenter
 
             levelService.Save();
             var screen = await screenNavigator.PushScreen<LevelCompletedScreen>();
-            screen.SetLevelResult(levelData.LevelResult, level.LevelPlayedTotal);
+            screen.SetLevelResult(levelData.LevelResult, level.LevelPlayedTotal + 1);
             screen.OnClickNext += SwitchToNextLevel;
         }
 
