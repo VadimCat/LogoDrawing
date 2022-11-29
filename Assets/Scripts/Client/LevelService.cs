@@ -69,14 +69,14 @@ public class LevelService : ISavable, IUpdatable
         return level;
     }
 
-    private int GetNormalizedLevelInd(int currentLvlInd)
+    private int GetNormalizedLevelInd(int lvlInd)
     {
-        while (currentLvlInd >= levelsViewDataStorage.levelsList.Count)
+        while (lvlInd >= levelsViewDataStorage.levelsList.Count)
         {
-            currentLvlInd -= levelsViewDataStorage.levelsList.Count;
+            lvlInd -= levelsViewDataStorage.levelsList.Count;
         }
 
-        return currentLvlInd;
+        return lvlInd;
     }
     
     private void ForceFullProgress()
