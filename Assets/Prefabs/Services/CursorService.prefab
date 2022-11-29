@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 5119629569537755022}
-  brush: {fileID: 21300000, guid: 45e0bab73a32c4648a563fea5058ea45, type: 3}
-  sprayCan: {fileID: 21300000, guid: 678c1f653a05c10429f1890208264177, type: 3}
+  brush: {fileID: 21300000, guid: 7e6f7f0dc91c6b44b953c99658afb5d6, type: 3}
+  sprayCan: {fileID: 21300000, guid: 321b767919ab51a4f878aa931df6bc09, type: 3}
 --- !u!1 &5119629569537755017
 GameObject:
   m_ObjectHideFlags: 0

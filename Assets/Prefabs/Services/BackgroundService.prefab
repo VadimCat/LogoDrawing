@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4258633, g: 0.6226415, b: 0.5131928, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -207,5 +207,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 8963441976716938278}
   backRoot: {fileID: 8963441975732018682}
-  loadingBack: {fileID: 21300000, guid: f02a4eab85a772644b65e7157bdda71f, type: 3}
-  gameBack: {fileID: 21300000, guid: c447c665f103e9243ad55add9b0f5b98, type: 3}
+  loadingBack: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  gameBack: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
