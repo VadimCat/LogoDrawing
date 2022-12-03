@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Client.Screens
 {
@@ -11,6 +12,8 @@ namespace Client.Screens
         [SerializeField] private Image backRoot;
         [SerializeField] private Sprite loadingBack;
         [SerializeField] private Sprite gameBack;
+
+        [SerializeField] private Sprite[] levelBackgroundImages;
 
         private void Awake()
         {
@@ -34,7 +37,7 @@ namespace Client.Screens
                     backRoot.sprite = loadingBack;
                     break;
                 case Background.Game:
-                    backRoot.sprite = gameBack;
+                    backRoot.sprite = levelBackgroundImages[Random.Range(0, 8)];
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(background), background, null);

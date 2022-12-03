@@ -8,7 +8,7 @@ namespace Client.Screens
 {
     public class LevelCompletedScreen : BaseScreen
     {
-        private const string levelNamePattern = "Level {0}";
+        private const string levelNamePattern = "LEVEL {0}";
         [SerializeField] private Button nextButton;
         [SerializeField] private Image levelResult;
         [SerializeField] private TMP_Text levelName;
@@ -24,8 +24,23 @@ namespace Client.Screens
 
         private void AnimateBackLight()
         {
-            light0.DORotate(Vector3.back * 180, 5)
+            light0.DORotate(Vector3.back * 180, 8)
                 .SetLoops(-1, LoopType.Incremental)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);
+            
+            light0.DOScale(1.2f, 1)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);
+
+            levelResult.transform.DOScale(1.06f, 1)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);
+
+            levelResult.transform.DORotate(Vector3.forward * 2.2f, 1)
+                .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.Linear)
                 .SetLink(gameObject);
         }
@@ -37,6 +52,12 @@ namespace Client.Screens
         }
 
         private void FireNext()
+        {
+            nextButton.transform.DOScale(0.9f, 0.1f)
+            .OnComplete(Complete);
+        }
+
+        private void Complete()
         {
             OnClickNext?.Invoke();
         }

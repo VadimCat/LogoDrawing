@@ -10,7 +10,7 @@ namespace Presenter
 {
     public class LevelPresenter
     {
-        private const string levelNamePattern = "Level {0}";
+        private const string levelNamePattern = "LEVEL {0}";
         private readonly Level level;
         private readonly LevelViewData levelData;
         private readonly LevelService levelService;
