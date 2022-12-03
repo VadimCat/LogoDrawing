@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: stick_10
   levelResult: {fileID: 21300000, guid: 944fbbb858caa75429555c8e3f184158, type: 3}
-  dirtView: {fileID: 6023109641798510972, guid: efc7fe4d5398eec42ba82e45a1ad97b3, type: 3}
-  coloringView: {fileID: 1192640569872201798, guid: 9b9b7d1d8eb73bc41a46db87aa988d26, type: 3}
+  dirtView: {fileID: 6276111102278861969, guid: 4d6468cf587aa50478f7e05c19821e14, type: 3}
+  coloringView: {fileID: 2979970948692056295, guid: f211fb9755279a24a8287dbac5195523, type: 3}

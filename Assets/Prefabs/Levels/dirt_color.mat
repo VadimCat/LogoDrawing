@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bmw
-  m_Shader: {fileID: 4800000, guid: d2862e538ed34704297d434d0ab8c398, type: 3}
+  m_Name: dirt_color
+  m_Shader: {fileID: 4800000, guid: d6f550d8415a0c9418e9373a81155d4e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _USE_UV2_ALT
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f9aa779696633a1488ae98bf117a68a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 31584b60f04665a4fa59869bc1d5ce65, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -64,7 +64,7 @@ Material:
     - _EnableMos: 0
     - _EnableNormal: 0
     - _EnableOpacity: 0
-    - _GlossMapScale: 0.252
+    - _GlossMapScale: 0
     - _Metallic: 0
     - _Tiling: 1
     - _UseUV2: 0

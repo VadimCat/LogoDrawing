@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: stick_42
-  m_Shader: {fileID: 4800000, guid: d2862e538ed34704297d434d0ab8c398, type: 3}
+  m_Shader: {fileID: 4800000, guid: d6f550d8415a0c9418e9373a81155d4e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _USE_UV2_ALT
@@ -59,12 +59,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 5
+    - _BumpScale: 0
     - _EnableEmission: 0
     - _EnableMos: 0
     - _EnableNormal: 0
     - _EnableOpacity: 0
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0
     - _Metallic: 0
     - _Tiling: 1
     - _UseUV2: 0
