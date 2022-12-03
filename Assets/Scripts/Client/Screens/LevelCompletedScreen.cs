@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace Client.Screens
 {
@@ -24,23 +25,25 @@ namespace Client.Screens
 
         private void AnimateBackLight()
         {
-            light0.DORotate(Vector3.back * 180, 8)
-                .SetLoops(-1, LoopType.Incremental)
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject);
-            
-            light0.DOScale(1.2f, 1)
-                .SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject);
+            AnimateLight();
 
-            levelResult.transform.DOScale(1.06f, 1)
-                .SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject);
+            AnimateLevelResultImage();
+        }
 
+        private void AnimateLevelResultImage()
+        {
+            levelResult.transform.DoPulseScale(1.06f, 1, gameObject);
             levelResult.transform.DORotate(Vector3.forward * 2.2f, 1)
                 .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);
+        }
+
+        private void AnimateLight()
+        {
+            light0.transform.DoPulseScale(1.2f, 1, gameObject);
+            light0.DORotate(Vector3.back * 180, 8)
+                .SetLoops(-1, LoopType.Incremental)
                 .SetEase(Ease.Linear)
                 .SetLink(gameObject);
         }

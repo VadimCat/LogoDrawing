@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Utils;
 
 namespace Client.Screens
 {
@@ -15,10 +16,7 @@ namespace Client.Screens
 
         private void AnimateLogo()
         {
-            logo0.DOScale(1.04f, 1)
-                .SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject);
+            logo0.DoPulseScale(1.04f, 1, gameObject);
         }
 
         public void SetProgress(float progress)
