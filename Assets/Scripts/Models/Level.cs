@@ -29,7 +29,7 @@ namespace Models
 
         public void UpdateColoringProgress(float progress, float oldValue)
         {
-            progress = Mathf.Clamp01(progress * 1.022f);
+            progress = Mathf.Clamp01(progress * 1.1f);
             
             switch (stage.Value)
             {
