@@ -7,7 +7,9 @@ namespace Models
     public class Level : ISavable
     {
         private const float COLORING_COMPLETE_THRESHOLD = .999f;
-
+        //Used to show a bit faked overdone progress to avoid non-visible remaining pixels to paint.
+        //Calculated as 1 / PRf : where PRf is progress to mark level as completed
+        private const float LEVEL_PROGRESS_MULTIPLIER = 1.1f;
         private string id;
         public readonly int LevelPlayedTotal;
 
@@ -29,7 +31,7 @@ namespace Models
 
         public void UpdateColoringProgress(float progress, float oldValue)
         {
-            progress = Mathf.Clamp01(progress * 1.022f);
+            progress = Mathf.Clamp01(progress * LEVEL_PROGRESS_MULTIPLIER);
             
             switch (stage.Value)
             {
