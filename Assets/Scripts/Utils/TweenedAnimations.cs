@@ -9,7 +9,7 @@ namespace Utils
             Ease ease = Ease.Linear, int loops = -1)
         {
             return transform.DOScale(maxScale, duraion)
-                .SetLoops(-1)
+                .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.Linear)
                 .SetLink(link);
         }
