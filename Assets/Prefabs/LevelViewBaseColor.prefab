@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1f04419b49a40544ba5375c45387a24a, type: 2}
+  - {fileID: 2100000, guid: 6d4ff523ba921c941800acaefaf269e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 6188322221499324871}
-  cooldown: -171.71916
+  cooldown: -192.18832
   currentReader:
     requested: 0
     buffer: {fileID: 0}
@@ -252,7 +252,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911109923, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1529437518114972441, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive
@@ -324,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 31584b60f04665a4fa59869bc1d5ce65, type: 3}
     - target: {fileID: 6748589024762582394, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: cooldown
-      value: -41.77647
+      value: -67.69171
       objectReference: {fileID: 0}
     - target: {fileID: 7444262036418379654, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive

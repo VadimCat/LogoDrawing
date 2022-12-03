@@ -14,8 +14,8 @@ namespace Editor
     {
         private const string BaseArtPath = "Assets/Art/LevelsArt/";
 
-        private static GameObject levelViewColor;
-        private static GameObject levelViewGrey;
+        private static GameObject levelBaseGrey;
+        private static GameObject levelBaseColor;
         private static LevelsViewDataStorage storage;
         private static Material baseDirtMaterial;
 
@@ -47,10 +47,10 @@ namespace Editor
             baseDirtMaterial = AssetDatabase.LoadAssetAtPath<Material>(AssetDatabase.GUIDToAssetPath(material));
 
             var levelColor = AssetDatabase.FindAssets("LevelViewBase t:Prefab")[0];
-            levelViewColor = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(levelColor));
+            levelBaseGrey = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(levelColor));
             
             var levelGrey = AssetDatabase.FindAssets("LevelViewBaseColor t:Prefab")[0];
-            levelViewGrey = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(levelGrey));
+            levelBaseColor = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(levelGrey));
         }
 
         private void OnGUI()
@@ -111,9 +111,9 @@ namespace Editor
             EditorGUILayout.LabelField("Base and dirt material");
             baseDirtMaterial = (Material)EditorGUILayout.ObjectField(baseDirtMaterial, typeof(Material), true);
             EditorGUILayout.LabelField("LevelConfigBasePrefab");
-            levelViewColor = (GameObject)EditorGUILayout.ObjectField(levelViewColor, typeof(GameObject), true);
+            levelBaseGrey = (GameObject)EditorGUILayout.ObjectField(levelBaseGrey, typeof(GameObject), true);
             EditorGUILayout.LabelField("LevelConfigBasePrefab");
-            levelViewGrey = (GameObject)EditorGUILayout.ObjectField(levelViewGrey, typeof(GameObject), true);
+            levelBaseColor = (GameObject)EditorGUILayout.ObjectField(levelBaseColor, typeof(GameObject), true);
 
             EditorGUILayout.LabelField("Level name");
             levelName = EditorGUILayout.TextField(levelName);
@@ -166,11 +166,12 @@ namespace Editor
         {
             var path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Color.prefab");
 
-            var levelPref = PrefabUtility.InstantiatePrefab(levelViewColor) as GameObject;
-            levelPref.GetComponentInChildren<SpriteRenderer>().sprite = ColorSprite;
+            var levelPref = PrefabUtility.InstantiatePrefab(levelBaseColor) as GameObject;
+            var sprites = levelPref.GetComponentsInChildren<SpriteRenderer>();
+            sprites[1].sprite = ColorSprite;
             
             var colorings = levelPref.GetComponentsInChildren<Renderer>();
-            colorings[1].material = material;
+            colorings[2].material = material;
             
             var colorSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
             DestroyImmediate(levelPref);
@@ -181,8 +182,9 @@ namespace Editor
         {
             string path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Dirt.prefab");
             
-            var levelPref = PrefabUtility.InstantiatePrefab(levelViewGrey) as GameObject;
-            levelPref.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            var levelPref = PrefabUtility.InstantiatePrefab(levelBaseGrey) as GameObject;
+            var sprites = levelPref.GetComponentsInChildren<SpriteRenderer>();
+            sprites[1].sprite = sprite;
 
             var maskSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
             DestroyImmediate(levelPref);
