@@ -30,9 +30,9 @@ namespace SceneView
 
         private void Update()
         {
-            //HACK: TO FIX INNER BUGGY IMPLEMENTATION OF Coloring plugin
-            if (Mathf.Approximately(1, levelView.ProgressRatio))
-                return;
+            // HACK: TO FIX INNER BUGGY IMPLEMENTATION OF Coloring plugin
+             if (Mathf.Approximately(1, levelView.ProgressRatio))
+                 return;
 
             progress.Value = levelView.ProgressRatio;
         }

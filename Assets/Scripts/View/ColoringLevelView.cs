@@ -9,12 +9,12 @@ namespace SceneView
         [SerializeField] private P3dPaintDecal decal;
         
         [SerializeField] private ColoringConfig coloringConfig;
-
+        
         private void Awake()
         {
             decal.Radius = coloringConfig.BrushRadius;
         }
 
-        public float ProgressRatio => 1 - counter.Ratio;
+        public float ProgressRatio => counter.Ratio;
     }
 }
