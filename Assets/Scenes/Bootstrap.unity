@@ -139,6 +139,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 907379512822139082, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907379512822139082, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907379512822139082, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
@@ -146,6 +154,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 907379512822139082, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907379512822139082, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 907379512822139083, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 953b8abb3b6548c4294b547c2f473be0, type: 3}
     - target: {fileID: 907379513116661680, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
       propertyPath: m_Name
       value: Bootstrap
@@ -233,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 907379514284693783, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219404506506617429, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
+      propertyPath: m_AspectMode
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebe0b4796b5ce1746809f6da5aae686e, type: 3}
