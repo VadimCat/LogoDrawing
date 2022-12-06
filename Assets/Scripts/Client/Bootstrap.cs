@@ -1,5 +1,6 @@
 using Client.Screens;
 using SceneView;
+using UI;
 using UnityEngine;
 using Utils.Client;
 
@@ -13,6 +14,7 @@ namespace Client
         [SerializeField] private BackGroundService backGroundService;
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
+        [SerializeField] private ComplimentsWordsService complimentsWordsService;
 
         private readonly Context context = new();
         private LevelService levelService;
@@ -23,6 +25,7 @@ namespace Client
             InstallLevelsData();
             InstallNavigator();
             InstallСursor();
+            InstallComplimentsWordsShowData();
 
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backGroundService, context);
@@ -31,6 +34,7 @@ namespace Client
 
             context.Register(cursorService);
             context.Register(levelService);
+            context.Register(complimentsWordsService);
         }
 
         private void InstallСursor()
@@ -46,6 +50,11 @@ namespace Client
         private void InstallLevelsData()
         {
             levelsStorage.Bootstrap();
+        }
+
+        private void InstallComplimentsWordsShowData()
+        {
+            complimentsWordsService.Bootstrap();
         }
     }
 }
