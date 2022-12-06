@@ -4,6 +4,8 @@ using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
+using UI;
+using UnityEngine;
 using Utils.Client;
 
 namespace Presenter
@@ -17,11 +19,12 @@ namespace Presenter
         private readonly ScreenNavigator screenNavigator;
         private readonly CursorService cursorService;
         private readonly LevelViewContainer view;
+        private readonly ComplimentsWordsService complimentsWordsService;
 
         private ColoringLevelScreen levelScreen;
         
         public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, LevelService levelService,
-            ScreenNavigator screenNavigator, CursorService cursorService)
+            ScreenNavigator screenNavigator, CursorService cursorService, ComplimentsWordsService complimentsWordsService)
         {
             this.level = level;
             this.view = view;
@@ -29,6 +32,7 @@ namespace Presenter
             this.levelService = levelService;
             this.screenNavigator = screenNavigator;
             this.cursorService = cursorService;
+            this.complimentsWordsService = complimentsWordsService;
 
             switch (level.Stage.Value)
             {
@@ -101,6 +105,7 @@ namespace Presenter
 
         private void SetColoringStageInstant()
         {
+            complimentsWordsService.ShowRandomComplimentWordFromScreenPosition(cursorService.PointerScreenPosition);
             cursorService.SetSpray();
             view.SetColoringData(levelData.ColoringView);
         }

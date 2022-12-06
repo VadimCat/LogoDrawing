@@ -6,22 +6,24 @@ namespace Client
     public class CursorService : MonoBehaviour, IUpdatable
     {
         [SerializeField] private SpriteRenderer cursor;
-        
+
         [SerializeField] private Sprite brush;
         [SerializeField] private Sprite sprayCan;
 
         private readonly Vector3 disabledPos = new Vector3(100, 100, 100);
-        
+
         private UpdateService updateService;
-        
-        
+
+
         private bool isEnabled;
+
+        public Vector2 PointerScreenPosition { get; private set; }
 
         public void Construct(UpdateService updateService)
         {
             this.updateService = updateService;
         }
-        
+
         public void SetBrush()
         {
             Enable();
@@ -51,11 +53,11 @@ namespace Client
                 gameObject.SetActive(true);
 
                 float z = transform.position.z;
-
-                Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                PointerScreenPosition = Input.mousePosition;
+                Vector3 newPos = Camera.main.ScreenToWorldPoint(PointerScreenPosition);
 
                 newPos.z = z;
-                transform.position = newPos;       
+                transform.position = newPos;
             }
             else
             {

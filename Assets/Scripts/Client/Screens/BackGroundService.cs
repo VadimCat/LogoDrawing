@@ -22,7 +22,7 @@ namespace Client.Screens
 
         private void HandleSceneChanged(Scene arg0, Scene arg1)
         {
-            //EAT SOME SHIT
+            //TODO: REMOVE EAT SOME SHIT
             canvas.worldCamera = FindObjectOfType<Camera>();
             var pos = transform.position;
             pos.z = -1;
