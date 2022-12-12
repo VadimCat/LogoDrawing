@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Models;
 using Presenter;
 using SceneView;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Client;
@@ -65,7 +66,7 @@ public class LevelService : ISavable, IUpdatable
         var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
         var level = new Level(viewData.ID, lvlToLoad);
-        new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>());
+        new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>(), context.GetService<ComplimentsWordsService>());
         return level;
     }
 
