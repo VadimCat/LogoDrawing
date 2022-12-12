@@ -1,3 +1,4 @@
+using Client.Audio;
 using Client.Screens;
 using SceneView;
 using UI;
@@ -15,18 +16,23 @@ namespace Client
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
-
+        [SerializeField] private AudioService audioService;
+        
+        
         private readonly Context context = new();
         private LevelService levelService;
 
-        private async void Awake()
+        private void Awake()
         {
             DontDestroyOnLoad(this);
             InstallLevelsData();
             InstallNavigator();
             InstallСursor();
             InstallComplimentsWordsShowData();
+            InstallAudioService();
 
+            audioService.PlayMusic(AudioClipName.DefaultBackgroundMusic);
+            
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backGroundService, context);
 
@@ -35,6 +41,11 @@ namespace Client
             context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
+        }
+
+        private void InstallAudioService()
+        {
+            audioService.Bootstrap();
         }
 
         private void InstallСursor()
