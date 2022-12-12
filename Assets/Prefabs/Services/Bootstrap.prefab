@@ -198,6 +198,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5119629569537755022, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 678c1f653a05c10429f1890208264177, type: 3}
+    - target: {fileID: 5119629569537755023, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5119629569537755023, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -474,11 +482,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_RenderMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_SortingOrder
-      value: -1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_UiScaleMode
