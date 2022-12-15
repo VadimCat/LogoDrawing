@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Utils;
@@ -22,6 +24,11 @@ namespace Client.Screens
         public void SetProgress(float progress)
         {
             loadingBar.SetLoadingProgress(progress);
+        }
+
+        public void AnimateLoadingBar(float duration, Action AnimationEndedCallback)
+        {
+            loadingBar.AnimateProgress(duration, () => AnimationEndedCallback?.Invoke());
         }
     }
 }
