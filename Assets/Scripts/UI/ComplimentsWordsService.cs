@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data.ScriptableObjects;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -11,46 +12,51 @@ namespace UI
 {
     public class ComplimentsWordsService : MonoBehaviour, IBootstrapable
     {
-        const string WORDS_FILE_PATH = "CongratsWords";
+        private Random random;
         private List<string> congratsWords;
+        private readonly Color[] colors = { Color.blue, Color.cyan, Color.red, Color.green, Color.yellow, };
         [SerializeField] private TMP_Text complimentText;
+        [SerializeField] private CongratulationWords congratsWordsConfig;
+
 
         public void ShowRandomComplimentWordFromScreenPosition(Vector2 startPosition)
         {
-            Debug.Log(startPosition);
             complimentText.text = GetRandomWord();
             complimentText.transform.position = startPosition;
+            complimentText.color = GetRandomColor();
             complimentText.gameObject.SetActive(true);
+            
+            var targetPosition = GetTargetPosition(startPosition);
 
-            var targetPosition = new Vector3(startPosition.x + startPosition.x * 0.2f,
-                startPosition.y + startPosition.y * 0.2f, 10);
-
-            complimentText.transform.DOMove(targetPosition, 1).OnComplete(() => complimentText.gameObject.SetActive(false));;
-            //complimentText.DOFade(0, 1.5f).OnComplete(() => complimentText.gameObject.SetActive(false));
+            complimentText.transform.DOMove(targetPosition, 1)
+                .OnComplete(() => complimentText.gameObject.SetActive(false));
         }
 
         public void Bootstrap()
         {
-            var words = LoadWords();
-            congratsWords = JsonUtility.FromJson<CongratsWords>(words.ToString()).words;
+            random = new Random();
+            congratsWords = congratsWordsConfig.words;
         }
 
         private string GetRandomWord()
         {
-            var random = new Random();
             var index = random.Next(congratsWords.Count);
             return congratsWords[index];
         }
 
-        private TextAsset LoadWords()
+        private Color GetRandomColor()
         {
-            return Resources.Load<TextAsset>(WORDS_FILE_PATH);
+            var index = random.Next(colors.Length);
+            return colors[index];
         }
-    }
 
-    [Serializable]
-    public class CongratsWords
-    {
-        public List<string> words;
+        private Vector2 GetTargetPosition(Vector2 startPosition)
+        {
+            var x = Screen.width / 2;
+            var y = Screen.height;
+            var topScreenPosition = new Vector2(x, y);
+            var directionVector = (topScreenPosition - startPosition).normalized;
+            return startPosition + directionVector * random.Next(250, 500);
+        }
     }
 }
