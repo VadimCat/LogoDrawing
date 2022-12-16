@@ -5,7 +5,7 @@ namespace Client.Audio
     [CreateAssetMenu]
     public class AudioClipConfig : ScriptableObject
     {
-        [SerializeField] private float playVolume = 1;
+        [SerializeField][Range(0.00000001f, 1)] private float playVolume = 1;
         [SerializeField] private AudioClip clip;
         [SerializeField] private AudioClipName clipName;
 

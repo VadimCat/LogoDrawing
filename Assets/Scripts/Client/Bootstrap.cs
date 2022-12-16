@@ -26,7 +26,7 @@ namespace Client
         private readonly Context context = new();
         private LevelService levelService;
 
-        private void Awake()
+        private void Start()
         {
             DontDestroyOnLoad(this);
             InstallAudioService();
@@ -43,12 +43,12 @@ namespace Client
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backGroundService, context);
 
-            new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
-            
             context.Register(audioService);
             context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
+            
+            new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
         }
 
         private void InstallAudioService()

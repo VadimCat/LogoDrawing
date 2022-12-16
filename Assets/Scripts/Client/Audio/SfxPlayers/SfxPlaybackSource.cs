@@ -17,20 +17,21 @@ namespace Client.Audio.SfxPlayers
             source.volume = clipConfig.PlayVolume;
         }
     
-        public async UniTask PlaybackAsync()
+        public async UniTask PlaybackAsync(bool isLooped = false)
         {
+            source.loop = isLooped;
             source.Play();
             await UniTask.WaitWhile(IsPlaying);
         }
 
+        public void Pause()
+        {
+            source.Pause();
+        }
+        
         public void Stop()
         {
             source.Stop();
-        }
-        
-        private bool IsPlaying()
-        {
-            return source.isPlaying;
         }
 
         public void Spawn()
@@ -42,8 +43,14 @@ namespace Client.Audio.SfxPlayers
         {
             gameObject.SetActive(false);
 
+            source.loop = false;
             source.Stop();
             source.clip = null;
+        }
+        
+        private bool IsPlaying()
+        {
+            return source.isPlaying;
         }
     }
 }

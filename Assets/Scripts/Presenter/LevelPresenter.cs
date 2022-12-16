@@ -110,14 +110,14 @@ namespace Presenter
 
         private void SetCleaningStage()
         {
-            cursorService.SetBrush();
+            cursorService.SetCleaning();
             view.SetColoringData(levelData.DirtView);
         }
 
         private void SetColoringStageInstant()
         {
             complimentsWordsService.ShowRandomComplimentWordFromScreenPosition(cursorService.PointerScreenPosition);
-            cursorService.SetSpray();
+            cursorService.SetColoring();
             view.SetColoringData(levelData.ColoringView);
         }
         

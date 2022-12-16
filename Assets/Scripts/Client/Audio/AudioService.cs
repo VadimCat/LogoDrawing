@@ -3,6 +3,7 @@ using Client.Audio.SfxPlayers;
 using Client.Pools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Audio;
 using Utils;
 using Utils.Client;
 
@@ -17,7 +18,8 @@ namespace Client.Audio
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioConfig audioConfig;
         [SerializeField] private AudioClipsConfig clipsConfig;
-
+        [SerializeField] private AudioMixer mixer;
+        
         [SerializeField] private SfxPlaybackSource playbackSource;
 
         public ReactiveProperty<float> sfxVolume;
@@ -30,22 +32,18 @@ namespace Client.Audio
         {
             sfxPlaybackPool = new Pool<SfxPlaybackSource>(playbackSource, transform);
             audioSettings = new();
-            //TODO: May be inject from outside
             clipsConfig.Bootstrap();
             sfxVolume = new ReactiveProperty<float>((audioSettings.SfxLevel * audioConfig.MaxSfxLevel).ToAudioLevel());
             musicVolume = new ReactiveProperty<float>((audioSettings.MusicLevel * audioConfig.MaxMusicLevel).ToAudioLevel());
             
-            sfxSource.outputAudioMixerGroup.audioMixer.SetFloat(SFX_KEY, sfxVolume.Value);
-            musicSource.outputAudioMixerGroup.audioMixer.SetFloat(MUSIC_KEY, musicVolume.Value);
-
-            SetSfxLevel(audioSettings.SfxLevel);
-            SetMusicLevel(audioSettings.MusicLevel);
+            mixer.SetFloat(SFX_KEY, sfxVolume.Value);
+            mixer.SetFloat(MUSIC_KEY, musicVolume.Value);
         }
 
         public void SetSfxLevel(float level)
         {
             var groupVolume = (audioConfig.MaxSfxLevel * level).ToAudioLevel();
-            musicSource.outputAudioMixerGroup.audioMixer.SetFloat(SFX_KEY, groupVolume);
+            sfxSource.outputAudioMixerGroup.audioMixer.SetFloat(MUSIC_KEY, groupVolume);
 
             audioSettings.SfxLevel = level;
             sfxVolume.Value = level;
@@ -56,8 +54,8 @@ namespace Client.Audio
         public void SetMusicLevel(float level)
         {
             var groupVolume = (audioConfig.MaxMusicLevel * level).ToAudioLevel();
-            sfxSource.outputAudioMixerGroup.audioMixer.SetFloat(MUSIC_KEY, groupVolume);
-            
+            musicSource.outputAudioMixerGroup.audioMixer.SetFloat(SFX_KEY, groupVolume);
+
             audioSettings.MusicLevel = level;
             musicVolume.Value = level;
             
@@ -68,7 +66,7 @@ namespace Client.Audio
         {
             var clipConfig = clipsConfig.GetClip(clipName);
             musicSource.clip = clipConfig.Clip;
-            musicSource.volume = clipConfig.PlayVolume;
+            // musicSource.volume = clipConfig.PlayVolume;
             musicSource.Play();
             musicSource.clip.LoadAudioData();
         }
@@ -80,6 +78,19 @@ namespace Client.Audio
             source.SetDependencies(clipConfig);
             await source.PlaybackAsync();
             sfxPlaybackPool.DeSpawn(source);
+        }
+
+        public SfxPlaybackSource GetPlaybackSource(AudioClipName clipName)
+        {
+            var source = sfxPlaybackPool.Spawn();
+            var clipConfig = clipsConfig.GetClip(clipName);
+            source.SetDependencies(clipConfig);
+            return source;
+        }
+
+        public void ReleasePlaybackSource(SfxPlaybackSource playbackSource)
+        {
+            sfxPlaybackPool.DeSpawn(playbackSource);
         }
     }
 

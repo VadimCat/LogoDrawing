@@ -41,7 +41,6 @@ namespace Utils.Client
             if (LevelIdExists(level.ID))
             {
                 throw new LevelExistsException(level.ID);
-                return;
             }
 
             levels.Add(level);
