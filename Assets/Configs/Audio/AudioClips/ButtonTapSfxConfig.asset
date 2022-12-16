@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2db75aaaaa44ecfbc158cad3df558e2, type: 3}
-  m_Name: BackgroundMusicClipConfig
+  m_Name: ButtonTapSfxConfig
   m_EditorClassIdentifier: 
-  playVolume: 0.5
-  clip: {fileID: 8300000, guid: 2bd7394c22028ee459bb2f55659622f8, type: 3}
-  clipName: 0
+  playVolume: 1
+  clip: {fileID: 8300000, guid: c7fdbd7f8bafe3e46a8294e0c63b8763, type: 3}
+  clipName: 1

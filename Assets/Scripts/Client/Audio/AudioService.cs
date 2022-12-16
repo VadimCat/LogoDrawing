@@ -1,3 +1,7 @@
+using System.Threading.Tasks;
+using Client.Audio.SfxPlayers;
+using Client.Pools;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Utils;
 using Utils.Client;
@@ -14,20 +18,23 @@ namespace Client.Audio
         [SerializeField] private AudioConfig audioConfig;
         [SerializeField] private AudioClipsConfig clipsConfig;
 
-        private AudioSettings audioSettings;
+        [SerializeField] private SfxPlaybackSource playbackSource;
 
         public ReactiveProperty<float> sfxVolume;
         public ReactiveProperty<float> musicVolume;
 
+        private AudioSettings audioSettings;
+        private Pool<SfxPlaybackSource> sfxPlaybackPool; 
+
         public void Bootstrap()
         {
+            sfxPlaybackPool = new Pool<SfxPlaybackSource>(playbackSource, transform);
             audioSettings = new();
             //TODO: May be inject from outside
             clipsConfig.Bootstrap();
-
             sfxVolume = new ReactiveProperty<float>((audioSettings.SfxLevel * audioConfig.MaxSfxLevel).ToAudioLevel());
             musicVolume = new ReactiveProperty<float>((audioSettings.MusicLevel * audioConfig.MaxMusicLevel).ToAudioLevel());
-
+            
             sfxSource.outputAudioMixerGroup.audioMixer.SetFloat(SFX_KEY, sfxVolume.Value);
             musicSource.outputAudioMixerGroup.audioMixer.SetFloat(MUSIC_KEY, musicVolume.Value);
 
@@ -66,11 +73,13 @@ namespace Client.Audio
             musicSource.clip.LoadAudioData();
         }
         
-        public void PlaySfx(AudioClipName clipName)
+        public async UniTask PlaySfxAsync(AudioClipName clipName)
         {
+            var source = sfxPlaybackPool.Spawn();
             var clipConfig = clipsConfig.GetClip(clipName);
-            musicSource.PlayOneShot(clipConfig.Clip, clipConfig.PlayVolume);
-            musicSource.clip.LoadAudioData();
+            source.SetDependencies(clipConfig);
+            await source.PlaybackAsync();
+            sfxPlaybackPool.DeSpawn(source);
         }
     }
 

@@ -1,4 +1,6 @@
 using Client.Audio;
+using Client.Audio.SfxPlayers;
+using Client.Pools;
 using Client.Screens;
 using SceneView;
 using UI;
@@ -16,28 +18,34 @@ namespace Client
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
+
         [SerializeField] private AudioService audioService;
-        
-        
+
+        private Pool<SfxPlaybackSource> sfxPlaybackPool;
+
         private readonly Context context = new();
         private LevelService levelService;
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
+            InstallAudioService();
             InstallLevelsData();
             InstallNavigator();
+            
+            context.Register(new InputService(updateService));
+
             InstallСursor();
             InstallComplimentsWordsShowData();
-            InstallAudioService();
 
             audioService.PlayMusic(AudioClipName.DefaultBackgroundMusic);
-            
+
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backGroundService, context);
 
             new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
-
+            
+            context.Register(audioService);
             context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
@@ -50,7 +58,7 @@ namespace Client
 
         private void InstallСursor()
         {
-            cursorService.Construct(updateService);
+            cursorService.SetDependencies(context.GetService<InputService>(), audioService);
         }
 
         private void InstallNavigator()

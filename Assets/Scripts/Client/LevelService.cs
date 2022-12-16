@@ -1,5 +1,6 @@
 using System;
 using Client;
+using Client.Audio;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -66,8 +67,9 @@ public class LevelService : ISavable, IUpdatable
         var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
         var level = new Level(viewData.ID, currentLvlInd);
+        //TODO : Level presenter factory? 
         new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>(),
-            context.GetService<ComplimentsWordsService>());
+            context.GetService<ComplimentsWordsService>(), context.GetService<AudioService>());
         return level;
     }
 
