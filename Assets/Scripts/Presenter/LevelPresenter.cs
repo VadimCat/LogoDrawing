@@ -105,7 +105,6 @@ namespace Presenter
 
         private void SetColoringStageInstant()
         {
-            complimentsWordsService.ShowRandomComplimentWordFromScreenPosition(cursorService.PointerScreenPosition);
             cursorService.SetSpray();
             view.SetColoringData(levelData.ColoringView);
         }
@@ -114,6 +113,7 @@ namespace Presenter
         {
             view.RemoveColoringObject();
             SetColoringStageInstant();
+            complimentsWordsService.ShowRandomComplimentWordFromScreenPosition(cursorService.PointerScreenPosition);
 
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
