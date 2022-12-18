@@ -2,7 +2,8 @@ using System.Collections.Generic;
 
 namespace Utils
 {
-    static class CircularLinkedList {
+    public static class CircularLinkedListNodeExtension
+    {
         public static LinkedListNode<T> NextOrFirst<T>(this LinkedListNode<T> current)
         {
             return current.Next ?? current.List.First;

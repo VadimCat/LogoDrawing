@@ -51,7 +51,6 @@ namespace Client.Screens
                     backRoot.sprite = loadingBack;
                     break;
                 case Background.Game:
-                    // backRoot.sprite = levelBackgroundImages[Random.Range(0, 8)];
                     currentBackground = currentBackground.NextOrFirst();
                     backRoot.sprite = currentBackground.Value;
                     break;
