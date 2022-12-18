@@ -250,4 +250,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complimentText: {fileID: 5199524247284523215}
-  congratsWordsConfig: {fileID: 11400000, guid: 4c5b9d4c124d440af8dd28643a5e186f, type: 2}
+  complimentsWordsAssets: {fileID: 11400000, guid: 4c5b9d4c124d440af8dd28643a5e186f, type: 2}

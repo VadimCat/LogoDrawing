@@ -1,29 +1,22 @@
-using System;
-using System.Collections.Generic;
 using Data.ScriptableObjects;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Utils.Client;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
-    public class ComplimentsWordsService : MonoBehaviour, IBootstrapable
+    public class ComplimentsWordsService : MonoBehaviour
     {
-        private Random random;
-        private List<string> congratsWords;
-        private readonly Color[] colors = { Color.blue, Color.cyan, Color.red, Color.green, Color.yellow, };
         [SerializeField] private TMP_Text complimentText;
-        [SerializeField] private CongratulationWords congratsWordsConfig;
+        [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
 
 
         public void ShowRandomComplimentWordFromScreenPosition(Vector2 startPosition)
         {
-            complimentText.text = GetRandomWord();
+            complimentText.text = complimentsWordsAssets.GetRandomWord();
             complimentText.transform.position = startPosition;
-            complimentText.color = GetRandomColor();
+            complimentText.color = complimentsWordsAssets.GetRandomColor();
             complimentText.gameObject.SetActive(true);
             
             var targetPosition = GetTargetPosition(startPosition);
@@ -31,24 +24,7 @@ namespace UI
             complimentText.transform.DOMove(targetPosition, 1)
                 .OnComplete(() => complimentText.gameObject.SetActive(false));
         }
-
-        public void Bootstrap()
-        {
-            random = new Random();
-            congratsWords = congratsWordsConfig.words;
-        }
-
-        private string GetRandomWord()
-        {
-            var index = random.Next(congratsWords.Count);
-            return congratsWords[index];
-        }
-
-        private Color GetRandomColor()
-        {
-            var index = random.Next(colors.Length);
-            return colors[index];
-        }
+        
 
         private Vector2 GetTargetPosition(Vector2 startPosition)
         {
@@ -56,7 +32,7 @@ namespace UI
             var y = Screen.height;
             var topScreenPosition = new Vector2(x, y);
             var directionVector = (topScreenPosition - startPosition).normalized;
-            return startPosition + directionVector * random.Next(250, 500);
+            return startPosition + directionVector * Random.Range(250, 500);
         }
     }
 }
