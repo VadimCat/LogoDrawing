@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Globalization;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,15 +23,16 @@ namespace Client.Screens
             progress.text = string.Format(ProgressTemplate, (int)(normalProgress * 100));
         }
 
-        public void AnimateProgress(float duration, TweenCallback OnAnimationEndedCallback)
+        public async UniTask AnimateProgress(float duration)
         {
+            var isAnimating = true;
             loadingBar.DOFillAmount(1, duration)
-                .OnComplete(OnAnimationEndedCallback)
+                .OnComplete(() => isAnimating = false)
                 .OnUpdate(() =>
                 {
-                    Debug.Log(loadingBar.fillAmount);
                     progress.text = string.Format(ProgressTemplate, (loadingBar.fillAmount * 100).ToString("N0"));
                 });
+            await UniTask.WaitUntil(() => isAnimating == false);
         }
     }
 }

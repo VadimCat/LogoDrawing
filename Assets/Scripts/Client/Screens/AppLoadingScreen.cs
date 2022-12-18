@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.VersionControl;
 using Utils;
 
 namespace Client.Screens
@@ -26,9 +28,9 @@ namespace Client.Screens
             loadingBar.SetLoadingProgress(progress);
         }
 
-        public void AnimateLoadingBar(float duration, Action AnimationEndedCallback)
+        public async UniTask AnimateLoadingBar(float duration)
         {
-            loadingBar.AnimateProgress(duration, () => AnimationEndedCallback?.Invoke());
+            await loadingBar.AnimateProgress(duration);
         }
     }
 }

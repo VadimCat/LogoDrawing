@@ -24,7 +24,8 @@ namespace Client
             backGroundService.SwitchBackground(Background.Loading);
             loadingScreen = await screenNavigator.PushScreen<AppLoadingScreen>();
             // levelService.OnProgressUpdate += UpdateLoadingScreen;
-            loadingScreen.AnimateLoadingBar(5, LoadNextLevelAsync);
+            await loadingScreen.AnimateLoadingBar(5);
+            LoadNextLevelAsync();
             // levelService.OnProgressUpdate -= UpdateLoadingScreen;
         }
 

@@ -94,6 +94,8 @@ namespace Presenter
         {
             view.EnableColoring(false);
             await screenNavigator.CloseScreen<LevelCompletedScreen>();
+            var loadingScreen = await screenNavigator.PushScreen<AppLoadingScreen>();
+            await loadingScreen.AnimateLoadingBar(5);
             await levelService.LoadNextLevel();
         }
 
