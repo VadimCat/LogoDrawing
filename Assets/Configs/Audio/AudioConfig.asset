@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AudioConfig
   m_EditorClassIdentifier: 
   maxSfxLevel: 1
-  maxMusicLevel: 0.5
+  maxMusicLevel: 0.8

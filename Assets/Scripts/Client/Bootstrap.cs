@@ -14,7 +14,7 @@ namespace Client
         [SerializeField] private LevelsViewDataStorage levelsStorage;
         [SerializeField] private LevelViewContainer levelViewOrigin;
         [SerializeField] private ScreenNavigator screenNavigator;
-        [SerializeField] private BackGroundService backGroundService;
+        [SerializeField] private BackgroundService backgroundService;
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
@@ -26,7 +26,7 @@ namespace Client
         private readonly Context context = new();
         private LevelService levelService;
 
-        private void Start()
+        private async void Start()
         {
             DontDestroyOnLoad(this);
             InstallAudioService();
@@ -34,21 +34,21 @@ namespace Client
             InstallNavigator();
             
             context.Register(new InputService(updateService));
-
             InstallСursor();
-            InstallComplimentsWordsShowData();
 
             audioService.PlayMusic(AudioClipName.DefaultBackgroundMusic);
 
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
-                backGroundService, context);
+                backgroundService, context);
+            var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
 
             context.Register(audioService);
             context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
-            
-            new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
+            context.Register(loadingFactory);
+
+            await loadingFactory.Create(5).LoadAsync();
         }
 
         private void InstallAudioService()
@@ -69,11 +69,6 @@ namespace Client
         private void InstallLevelsData()
         {
             levelsStorage.Bootstrap();
-        }
-
-        private void InstallComplimentsWordsShowData()
-        {
-            complimentsWordsService.Bootstrap();
         }
     }
 }

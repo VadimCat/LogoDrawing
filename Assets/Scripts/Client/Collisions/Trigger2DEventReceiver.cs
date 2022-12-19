@@ -11,13 +11,11 @@ namespace Client.Collisions
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.LogError("ENTER");
             CollisionEnter?.Invoke(other);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            Debug.LogError("EXIT");
             CollisionExit?.Invoke(other);
         }
 

@@ -24,21 +24,21 @@ public class LevelService : ISavable, IUpdatable
     private readonly LevelViewContainer levelView;
     private readonly ScreenNavigator screenNavigator;
     private readonly UpdateService updateService;
-    private readonly BackGroundService backGroundService;
+    private readonly BackgroundService backgroundService;
     private readonly Context context;
 
     private AsyncOperation currentLoadingTask;
 
     //TODO: Check dependencies and use context where needed
     public LevelService(LevelsViewDataStorage levelsViewDataStorage, LevelViewContainer levelView,
-        ScreenNavigator screenNavigator, UpdateService updateService, BackGroundService backGroundService,
+        ScreenNavigator screenNavigator, UpdateService updateService, BackgroundService backgroundService,
         Context context)
     {
         this.levelsViewDataStorage = levelsViewDataStorage;
         this.levelView = levelView;
         this.screenNavigator = screenNavigator;
         this.updateService = updateService;
-        this.backGroundService = backGroundService;
+        this.backgroundService = backgroundService;
         this.context = context;
 
         Load();
@@ -49,7 +49,7 @@ public class LevelService : ISavable, IUpdatable
         OnProgressUpdate?.Invoke(currentLoadingTask.progress);
     }
 
-    public async UniTask<Level> LoadNextLevel()
+    public async UniTask<LevelPresenter> LoadNextLevelAsync()
     {
         currentLvlInd++;
         int lvlToLoad = GetNormalizedLevelInd(currentLvlInd);
@@ -61,16 +61,17 @@ public class LevelService : ISavable, IUpdatable
         ForceFullProgress();
         updateService.Remove(this);
 
-        backGroundService.SwitchBackground(Background.Game);
+        backgroundService.SwitchBackground(Background.Game);
         var scene = SceneManager.GetSceneByName("LevelScene");
         SceneManager.SetActiveScene(scene);
         var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
+        //TODO: Level presenter should create or get level from factory
         var level = new Level(viewData.ID, currentLvlInd);
-        //TODO : Level presenter factory? 
-        new LevelPresenter(level, view, viewData, this, screenNavigator, context.GetService<CursorService>(),
-            context.GetService<ComplimentsWordsService>(), context.GetService<AudioService>());
-        return level;
+        level.OnColoringComplete += Save;
+        return new LevelPresenter(level, view, viewData, context.GetService<LoadingPresenterFactory>(), screenNavigator,
+            context.GetService<CursorService>(), context.GetService<ComplimentsWordsService>(),
+            context.GetService<AudioService>());
     }
 
     private int GetNormalizedLevelInd(int lvlInd)
@@ -82,7 +83,7 @@ public class LevelService : ISavable, IUpdatable
 
         return lvlInd;
     }
-    
+
     private void ForceFullProgress()
     {
         OnProgressUpdate?.Invoke(1);
@@ -103,11 +104,4 @@ public class LevelService : ISavable, IUpdatable
     {
         PlayerPrefs.DeleteKey(Savekey);
     }
-}
-
-public interface ISavable
-{
-    public void Save();
-    public void Load();
-    public void ClearSave();
 }

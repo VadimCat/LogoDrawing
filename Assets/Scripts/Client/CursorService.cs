@@ -75,7 +75,8 @@ namespace Client
         }
         
         public void Disable()
-        {            
+        {           
+            gameObject.SetActive(false);
             ReleaseCurrentSfx();
 
             inputService.PointerMove -= OnPointerMove;

@@ -53,7 +53,7 @@ MonoBehaviour:
   levelsStorage: {fileID: 11400000, guid: 6093e31574d420241bfe66d91e985bc6, type: 2}
   levelViewOrigin: {fileID: 566519204892903193, guid: eb75f46a2babe734ca46d63b0de5ad21, type: 3}
   screenNavigator: {fileID: 907379513472099776}
-  backGroundService: {fileID: 907379514284693776}
+  backgroundService: {fileID: 907379514284693776}
   updateService: {fileID: 907379513036217410}
   cursorService: {fileID: 907379513697181792}
   complimentsWordsService: {fileID: 4032787900542854738}
