@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using DG.Tweening;
-using UnityEditor.VersionControl;
 using Utils;
 
 namespace Client.Screens

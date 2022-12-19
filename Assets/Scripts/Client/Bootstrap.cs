@@ -1,3 +1,4 @@
+using System;
 using Client.Screens;
 using SceneView;
 using UI;
@@ -11,7 +12,7 @@ namespace Client
         [SerializeField] private LevelsViewDataStorage levelsStorage;
         [SerializeField] private LevelViewContainer levelViewOrigin;
         [SerializeField] private ScreenNavigator screenNavigator;
-        [SerializeField] private BackGroundService backGroundService;
+        [SerializeField] private BackgroundService backgroundService;
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
@@ -25,16 +26,19 @@ namespace Client
             InstallLevelsData();
             InstallNavigator();
             InstallСursor();
-            InstallComplimentsWordsShowData();
+            InstallComplimentsWords();
 
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
-                backGroundService, context);
+                backgroundService, context);
 
-            new LoadingPresenter(screenNavigator, backGroundService, levelService).Load();
-
+            var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
+            
+            context.Register(loadingFactory);
             context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
+
+            await loadingFactory.Create(5).LoadAsync();
         }
 
         private void InstallСursor()
@@ -52,7 +56,7 @@ namespace Client
             levelsStorage.Bootstrap();
         }
 
-        private void InstallComplimentsWordsShowData()
+        private void InstallComplimentsWords()
         {
             complimentsWordsService.Bootstrap();
         }

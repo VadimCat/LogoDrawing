@@ -15,7 +15,7 @@ namespace UI
         private List<string> congratsWords;
         [SerializeField] private TMP_Text complimentText;
 
-        public void ShowRandomComplimentWordFromScreenPosition(Vector2 startPosition)
+        public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {
             Debug.Log(startPosition);
             complimentText.text = GetRandomWord();

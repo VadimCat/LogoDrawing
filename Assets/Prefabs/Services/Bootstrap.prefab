@@ -52,7 +52,7 @@ MonoBehaviour:
   levelsStorage: {fileID: 11400000, guid: 09b3d91768f5b3a4fa6813569e2a017d, type: 2}
   levelViewOrigin: {fileID: 566519204892903193, guid: eb75f46a2babe734ca46d63b0de5ad21, type: 3}
   screenNavigator: {fileID: 907379513472099776}
-  backGroundService: {fileID: 907379514284693776}
+  backgroundService: {fileID: 907379514284693776}
   updateService: {fileID: 907379513036217410}
   cursorService: {fileID: 907379513697181792}
   complimentsWordsService: {fileID: 4032787900542854738}
@@ -225,42 +225,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907379513116661682}
     m_Modifications:
-    - target: {fileID: 6669128334661287240, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 946
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287241, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287243, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: screens.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6669128334661287243, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: screens.Array.data[0]
-      value: 
-      objectReference: {fileID: 8759322470126098185, guid: 3dc1b17ad67f19643aab6410707372b4, type: 3}
-    - target: {fileID: 6669128334661287243, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: screens.Array.data[1]
-      value: 
-      objectReference: {fileID: 2673282795225721937, guid: 2a7dc7d5aff9f5f44833dd5a82c50aef, type: 3}
-    - target: {fileID: 6669128334661287243, guid: 422e870f1e656684988b108db764a5cf, type: 3}
-      propertyPath: screens.Array.data[2]
-      value: 
-      objectReference: {fileID: 6398871294771498080, guid: c416dce2c9eaf124190fc494b1e27bbe, type: 3}
     - target: {fileID: 6669128334661287244, guid: 422e870f1e656684988b108db764a5cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -487,10 +451,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907379513116661682}
     m_Modifications:
-    - target: {fileID: 7944290933125969764, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_AspectRatio
-      value: 0.4619141
-      objectReference: {fileID: 0}
     - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -500,12 +460,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8963441975732018683, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_SizeDelta.x
+      propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938273, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: gameBack
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938277, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_Pivot.x
@@ -591,40 +547,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938278, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 946
-      objectReference: {fileID: 0}
-    - target: {fileID: 8963441976716938279, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 8963441976716938282, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
       propertyPath: m_Name
       value: BackgroundService
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3876011219920502219, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: debb614a4e3957f468d370bd83bb21d5, type: 3}
 --- !u!114 &907379514284693776 stripped
 MonoBehaviour:
