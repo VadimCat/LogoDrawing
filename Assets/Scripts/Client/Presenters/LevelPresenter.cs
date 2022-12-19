@@ -57,9 +57,6 @@ namespace Presenter
                     SetColoringStageFromSave();
                     break;
             }
-            view.Progress.OnValueChanged += level.UpdateColoringProgress;
-
-            level.OnColoringComplete += CompleteLevel;
         }
 
         public async void Start()
@@ -131,9 +128,9 @@ namespace Presenter
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
+            await UniTask.Delay(2000);
             view.Progress.OnValueChanged += UpdateColoringProgress;
 
-            await UniTask.Delay(2000);
 
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
             view.EnableColoring(true);
