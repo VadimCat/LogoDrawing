@@ -1,7 +1,5 @@
-﻿using System;
-using Client.Screens;
+﻿using Client.Screens;
 using Cysharp.Threading.Tasks;
-using Presenter;
 using UnityEngine;
 
 namespace Client

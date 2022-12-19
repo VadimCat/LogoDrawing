@@ -9,7 +9,7 @@ namespace Models
         private const float COLORING_COMPLETE_THRESHOLD = .999f;
         //Used to show a bit faked overdone progress to avoid non-visible remaining pixels to paint.
         //Calculated as 1 / PRf : where PRf is progress to mark level as completed
-        private const float LEVEL_PROGRESS_MULTIPLIER = 1.1f;
+        private const float LEVEL_PROGRESS_MULTIPLIER = 1.05f;
         private string id;
         public readonly int LevelPlayedTotal;
 

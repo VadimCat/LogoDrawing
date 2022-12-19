@@ -15,7 +15,6 @@ namespace Client.Screens
 
         public void SetCleaningProgress(float progress)
         {
-            //TODO: MOVE FAKE PROGRESS LOGIC TO MODEL
             loadingBar.SetLoadingProgress(GetThresholdProgress(progress));
         }
 
@@ -26,7 +25,7 @@ namespace Client.Screens
 
         private float GetThresholdProgress(float progress)
         {
-            return progress / 1.98f;
+            return progress / 2;
         }
     }
 }

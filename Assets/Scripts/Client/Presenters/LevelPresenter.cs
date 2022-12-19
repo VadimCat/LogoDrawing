@@ -1,5 +1,6 @@
 ﻿using System;
 using Client;
+using Client.Audio;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -19,13 +20,14 @@ namespace Presenter
         private readonly CursorService cursorService;
         private readonly LevelViewContainer view;
         private readonly ComplimentsWordsService complimentsWordsService;
+        private readonly AudioService audioService;
 
         private ColoringLevelScreen levelScreen;
 
         public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData,
             LoadingPresenterFactory loadingPresenterFactory,
             ScreenNavigator screenNavigator, CursorService cursorService,
-            ComplimentsWordsService complimentsWordsService)
+            ComplimentsWordsService complimentsWordsService, AudioService audioService)
         {
             this.level = level;
             this.view = view;
@@ -34,7 +36,17 @@ namespace Presenter
             this.screenNavigator = screenNavigator;
             this.cursorService = cursorService;
             this.complimentsWordsService = complimentsWordsService;
+            this.audioService = audioService;
 
+            LoadFromSave(level);
+
+            view.Progress.OnValueChanged += level.UpdateColoringProgress;
+
+            level.OnColoringComplete += CompleteLevel;
+        }
+
+        private void LoadFromSave(Level level)
+        {
             switch (level.Stage.Value)
             {
                 case ColoringStage.Cleaning:
@@ -42,10 +54,9 @@ namespace Presenter
                     SetCleaningStage();
                     break;
                 case ColoringStage.Coloring:
-                    SetColoringStageInstant();
+                    SetColoringStageFromSave();
                     break;
             }
-
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
 
             level.OnColoringComplete += CompleteLevel;
@@ -84,6 +95,8 @@ namespace Presenter
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
 
+            audioService.PlaySfxAsync(AudioClipName.WinFX);
+            
             var screen = await screenNavigator.PushScreen<LevelCompletedScreen>();
             screen.SetLevelResult(levelData.LevelResult, level.LevelPlayedTotal + 1);
             screen.OnClickNext += SwitchToNextLevel;
@@ -91,6 +104,7 @@ namespace Presenter
 
         private async void SwitchToNextLevel()
         {
+            audioService.PlaySfxAsync(AudioClipName.ButtonFX);
             view.EnableColoring(false);
             await screenNavigator.CloseScreen<LevelCompletedScreen>();
             await loadingPresenterFactory.Create(1f).LoadAsync();
@@ -98,21 +112,21 @@ namespace Presenter
 
         private void SetCleaningStage()
         {
-            cursorService.SetBrush();
+            cursorService.SetCleaning();
             view.SetColoringData(levelData.DirtView);
         }
 
-        private void SetColoringStageInstant()
+        private void SetColoringStageFromSave()
         {
-            complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
-            cursorService.SetSpray();
+            cursorService.SetColoring();
             view.SetColoringData(levelData.ColoringView);
         }
 
         private async void SetColoringStage()
         {
+            complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
             view.RemoveColoringObject();
-            SetColoringStageInstant();
+            SetColoringStageFromSave();
 
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;

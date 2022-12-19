@@ -1,78 +1,122 @@
+using Client.Audio;
+using Client.Audio.SfxPlayers;
+using Client.Collisions;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Client
 {
-    public class CursorService : MonoBehaviour, IUpdatable
+    //Nihuya ne service
+    public class CursorService : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer cursor;
-
+        [SerializeField] private Trigger2DEventReceiver trigger2DEventReceiver;
+        
         [SerializeField] private Sprite brush;
         [SerializeField] private Sprite sprayCan;
 
-        private readonly Vector3 disabledPos = new Vector3(100, 100, 100);
+        private const AudioClipName cleaningSfx = AudioClipName.CleaningFX;
+        private const AudioClipName colopringSfx = AudioClipName.ColoringFX;
+        
+        private SfxPlaybackSource sfxPlaybackSource;
 
-        private UpdateService updateService;
-
+        private AudioService audioService;
+        private InputService inputService;
 
         private bool isEnabled;
 
         public Vector2 PointerScreenPosition { get; private set; }
 
-        public void Construct(UpdateService updateService)
+        public void SetDependencies(InputService inputService, AudioService audioService)
         {
-            this.updateService = updateService;
+            this.inputService = inputService;
+            this.audioService = audioService;
         }
-
-        public void SetBrush()
+        
+        //TODO: Divide different cursors by different classes 
+        public void SetCleaning()
         {
             Enable();
+            ReleaseCurrentSfx();
 
+            sfxPlaybackSource = audioService.GetPlaybackSource(cleaningSfx);
+            
             cursor.sprite = brush;
             cursor.DOColor(Color.white, 0);
         }
 
-        public void SetSpray()
+        private void ReleaseCurrentSfx()
+        {
+            if (sfxPlaybackSource != null)
+            {
+                audioService.ReleasePlaybackSource(sfxPlaybackSource);
+                sfxPlaybackSource = null;
+            }
+        }
+
+        public void SetColoring()
         {
             Enable();
+            ReleaseCurrentSfx();
+
+            sfxPlaybackSource = audioService.GetPlaybackSource(colopringSfx);
 
             cursor.sprite = sprayCan;
             cursor.DOColor(Color.white, 0);
         }
 
-        public void Disable()
+        private void Enable()
         {
-            updateService.Remove(this);
+            trigger2DEventReceiver.CollisionEnter += PlayFx;
+            trigger2DEventReceiver.CollisionExit += PauseFx;
+            inputService.PointerMove += OnPointerMove;
+            inputService.PointerDown += OnPointerDown;
+            inputService.PointerUp += OnPointerUp;
+        }
+        
+        public void Disable()
+        {           
+            gameObject.SetActive(false);
+            ReleaseCurrentSfx();
+
+            inputService.PointerMove -= OnPointerMove;
+            inputService.PointerDown -= OnPointerDown;
+            inputService.PointerUp -= OnPointerUp;
+        }
+
+        private void PauseFx(Collider2D obj)
+        {
+            sfxPlaybackSource?.Pause();
+        }
+
+        private void PlayFx(Collider2D obj)
+        {
+            sfxPlaybackSource.PlaybackAsync(true);
+        }
+
+        private void OnPointerDown()
+        {
+            gameObject.SetActive(true);
+        }
+
+        private void OnPointerUp()
+        {
             gameObject.SetActive(false);
         }
 
-        public void OnUpdate()
+        private void OnPointerMove(Vector2 mousePoint)
         {
-            if (Input.GetMouseButton(0))
-            {
-                gameObject.SetActive(true);
+            float z = transform.position.z;
+            PointerScreenPosition = mousePoint;
+            Vector3 newPos = Camera.main.ScreenToWorldPoint(PointerScreenPosition);
 
-                float z = transform.position.z;
-                PointerScreenPosition = Input.mousePosition;
-                Vector3 newPos = Camera.main.ScreenToWorldPoint(PointerScreenPosition);
-
-                newPos.z = z;
-                transform.position = newPos;
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-
-        private void Enable()
-        {
-            updateService.Add(this);
+            newPos.z = z;
+            transform.position = newPos;
         }
 
         private void OnDestroy()
         {
-            updateService.Remove(this);
+            Disable();
         }
     }
 }
