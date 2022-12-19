@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 60915757a888ddc45969508ea0a48472, type: 2}
+  m_sharedMaterial: {fileID: -8712994658969214573, guid: 60915757a888ddc45969508ea0a48472, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,9 +193,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3871314469004069501
 MonoBehaviour:
@@ -250,4 +250,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   complimentText: {fileID: 5199524247284523215}
-  canvas: {fileID: 7614430982293476505}
+  complimentsWordsAssets: {fileID: 11400000, guid: 4c5b9d4c124d440af8dd28643a5e186f, type: 2}

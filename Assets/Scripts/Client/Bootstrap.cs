@@ -26,7 +26,6 @@ namespace Client
             InstallLevelsData();
             InstallNavigator();
             InstallСursor();
-            InstallComplimentsWords();
 
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backgroundService, context);
@@ -54,11 +53,6 @@ namespace Client
         private void InstallLevelsData()
         {
             levelsStorage.Bootstrap();
-        }
-
-        private void InstallComplimentsWords()
-        {
-            complimentsWordsService.Bootstrap();
         }
     }
 }
