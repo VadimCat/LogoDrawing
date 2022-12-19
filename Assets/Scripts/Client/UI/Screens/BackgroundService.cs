@@ -8,12 +8,11 @@ using Random = UnityEngine.Random;
 
 namespace Client.Screens
 {
-    public class BackGroundService : MonoBehaviour
+    public class BackgroundService : MonoBehaviour
     {
         [SerializeField] private Canvas canvas;
         [SerializeField] private Image backRoot;
         [SerializeField] private Sprite loadingBack;
-        [SerializeField] private Sprite gameBack;
 
         [SerializeField] private Sprite[] levelBackgroundImages;
         private readonly LinkedList<Sprite> backgrounds = new();

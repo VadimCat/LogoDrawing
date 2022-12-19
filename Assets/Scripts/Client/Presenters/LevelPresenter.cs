@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
 using UI;
-using UnityEngine;
 using Utils.Client;
 
 namespace Presenter
@@ -15,21 +14,23 @@ namespace Presenter
         private const string levelNamePattern = "LEVEL {0}";
         private readonly Level level;
         private readonly LevelViewData levelData;
-        private readonly LevelService levelService;
+        private readonly LoadingPresenterFactory loadingPresenterFactory;
         private readonly ScreenNavigator screenNavigator;
         private readonly CursorService cursorService;
         private readonly LevelViewContainer view;
         private readonly ComplimentsWordsService complimentsWordsService;
 
         private ColoringLevelScreen levelScreen;
-        
-        public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, LevelService levelService,
-            ScreenNavigator screenNavigator, CursorService cursorService, ComplimentsWordsService complimentsWordsService)
+
+        public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData,
+            LoadingPresenterFactory loadingPresenterFactory,
+            ScreenNavigator screenNavigator, CursorService cursorService,
+            ComplimentsWordsService complimentsWordsService)
         {
             this.level = level;
             this.view = view;
             this.levelData = levelData;
-            this.levelService = levelService;
+            this.loadingPresenterFactory = loadingPresenterFactory;
             this.screenNavigator = screenNavigator;
             this.cursorService = cursorService;
             this.complimentsWordsService = complimentsWordsService;
@@ -48,10 +49,9 @@ namespace Presenter
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
 
             level.OnColoringComplete += CompleteLevel;
-            StartLevel();
         }
 
-        private async void StartLevel()
+        public async void Start()
         {
             levelScreen = await screenNavigator.PushScreen<ColoringLevelScreen>();
             levelScreen.SetLevelName(string.Format(levelNamePattern, level.LevelPlayedTotal + 1));
@@ -84,7 +84,6 @@ namespace Presenter
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
 
-            levelService.Save();
             var screen = await screenNavigator.PushScreen<LevelCompletedScreen>();
             screen.SetLevelResult(levelData.LevelResult, level.LevelPlayedTotal + 1);
             screen.OnClickNext += SwitchToNextLevel;
@@ -94,7 +93,7 @@ namespace Presenter
         {
             view.EnableColoring(false);
             await screenNavigator.CloseScreen<LevelCompletedScreen>();
-            await levelService.LoadNextLevel();
+            await loadingPresenterFactory.Create(1f).LoadAsync();
         }
 
         private void SetCleaningStage()
@@ -105,15 +104,15 @@ namespace Presenter
 
         private void SetColoringStageInstant()
         {
+            complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
             cursorService.SetSpray();
             view.SetColoringData(levelData.ColoringView);
         }
-        
+
         private async void SetColoringStage()
         {
             view.RemoveColoringObject();
             SetColoringStageInstant();
-            complimentsWordsService.ShowRandomComplimentWordFromScreenPosition(cursorService.PointerScreenPosition);
 
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;

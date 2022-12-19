@@ -1,5 +1,5 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using DG.Tweening;
 using Utils;
 
 namespace Client.Screens
@@ -22,6 +22,11 @@ namespace Client.Screens
         public void SetProgress(float progress)
         {
             loadingBar.SetLoadingProgress(progress);
+        }
+
+        public async UniTask AnimateLoadingBar(float duration)
+        {
+            await loadingBar.AnimateProgress(duration);
         }
     }
 }

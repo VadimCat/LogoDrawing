@@ -10,7 +10,7 @@ namespace Data.ScriptableObjects
         private readonly Random random = new();
 
         [SerializeField] private List<string> words;
-        [SerializeField] private List<Color> colors;
+        [SerializeField] private List<Color> colors = new List<Color>(){};
 
 
         public string GetRandomWord()

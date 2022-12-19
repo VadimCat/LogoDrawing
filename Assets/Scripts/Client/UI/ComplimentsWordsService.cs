@@ -12,7 +12,7 @@ namespace UI
         [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
 
 
-        public void ShowRandomComplimentWordFromScreenPosition(Vector2 startPosition)
+        public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {
             complimentText.text = complimentsWordsAssets.GetRandomWord();
             complimentText.transform.position = startPosition;
