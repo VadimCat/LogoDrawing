@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 public class UpdateService : MonoBehaviour
@@ -7,9 +8,9 @@ public class UpdateService : MonoBehaviour
 
     private void Update()
     {
-        foreach (var updatable in updatables)
+        for (int i = 0; i < updatables.Count; i++)
         {
-            updatable.OnUpdate();
+            updatables[i].OnUpdate();
         }
     }
 

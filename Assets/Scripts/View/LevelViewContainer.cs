@@ -4,15 +4,23 @@ using Utils;
 
 namespace SceneView
 {
-    public class LevelViewContainer : MonoBehaviour
+    public class LevelViewContainer : MonoBehaviour, IUpdatable
     {
         [SerializeField] private P3dHitScreen hitScreen;
-
-        private ColoringLevelView levelView;
         public ReactiveProperty<float> Progress => progress;
+
+        private UpdateService updateService;
+        private ColoringLevelView levelView;
 
         private readonly ReactiveProperty<float> progress = new();
 
+        public void SetDependencies(UpdateService updateService)
+        {
+            this.updateService = updateService;
+        }
+        
+        
+        
         public void SetColoringData(ColoringLevelView dirtView)
         {
             levelView = Instantiate(dirtView, transform);
@@ -21,6 +29,14 @@ namespace SceneView
         public void EnableColoring(bool enable)
         {
             hitScreen.enabled = enable;
+            if (enable)
+            {
+                updateService.Add(this);
+            }
+            else
+            {
+                updateService.Remove(this);
+            }
         }
 
         public void RemoveColoringObject()
@@ -28,12 +44,8 @@ namespace SceneView
             Destroy(levelView.gameObject);
         }
 
-        private void Update()
+        public void OnUpdate()
         {
-            // HACK: TO FIX INNER BUGGY IMPLEMENTATION OF Coloring plugin
-             if (Mathf.Approximately(1, levelView.ProgressRatio))
-                 return;
-
             progress.Value = levelView.ProgressRatio;
         }
     }

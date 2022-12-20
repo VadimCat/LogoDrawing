@@ -66,6 +66,7 @@ public class LevelService : ISavable, IUpdatable
         SceneManager.SetActiveScene(scene);
         var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
         var view = Object.Instantiate(levelView);
+        view.SetDependencies(updateService);
         //TODO: Level presenter should create or get level from factory
         var level = new Level(viewData.ID, currentLvlInd);
         level.OnColoringComplete += Save;

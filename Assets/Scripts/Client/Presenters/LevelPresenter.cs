@@ -88,7 +88,7 @@ namespace Presenter
 
         private async void CompleteLevel()
         {
-            cursorService.Disable();
+            cursorService.DisableCurrent();
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
 
@@ -109,12 +109,15 @@ namespace Presenter
 
         private void SetCleaningStage()
         {
+            view.EnableColoring(true);
+
             cursorService.SetCleaning();
             view.SetColoringData(levelData.DirtView);
         }
 
         private void SetColoringStageFromSave()
         {
+            view.EnableColoring(true);
             cursorService.SetColoring();
             view.SetColoringData(levelData.ColoringView);
         }
@@ -133,7 +136,6 @@ namespace Presenter
 
 
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
-            view.EnableColoring(true);
         }
     }
 }

@@ -1,7 +1,6 @@
 using Client.Audio;
 using Client.Audio.SfxPlayers;
 using Client.Collisions;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Client
@@ -9,18 +8,14 @@ namespace Client
     //Nihuya ne service
     public class CursorService : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer cursor;
         [SerializeField] private Trigger2DEventReceiver trigger2DEventReceiver;
-        
-        [SerializeField] private Sprite brush;
-        [SerializeField] private Sprite sprayCan;
+        [SerializeField] private Cursor cleaningCursor;
+        [SerializeField] private Cursor coloringCursor;
 
-        private const AudioClipName cleaningSfx = AudioClipName.CleaningFX;
-        private const AudioClipName colopringSfx = AudioClipName.ColoringFX;
+        private Cursor currentCursor;
         
         private SfxPlaybackSource sfxPlaybackSource;
 
-        private AudioService audioService;
         private InputService inputService;
 
         private bool isEnabled;
@@ -30,68 +25,61 @@ namespace Client
         public void SetDependencies(InputService inputService, AudioService audioService)
         {
             this.inputService = inputService;
-            this.audioService = audioService;
+            
+            cleaningCursor.SetDependencies(audioService);
+            coloringCursor.SetDependencies(audioService);
         }
         
-        //TODO: Divide different cursors by different classes 
+        //TODO: Make common method for all brushes activation 
         public void SetCleaning()
         {
-            Enable();
-            ReleaseCurrentSfx();
+            currentCursor?.Stop();
+            DisableCurrent();
+            SubscribeEvents();
 
-            sfxPlaybackSource = audioService.GetPlaybackSource(cleaningSfx);
-            
-            cursor.sprite = brush;
-            cursor.DOColor(Color.white, 0);
-        }
-
-        private void ReleaseCurrentSfx()
-        {
-            if (sfxPlaybackSource != null)
-            {
-                audioService.ReleasePlaybackSource(sfxPlaybackSource);
-                sfxPlaybackSource = null;
-            }
+            currentCursor = cleaningCursor;
+            currentCursor.Play();
         }
 
         public void SetColoring()
         {
-            Enable();
-            ReleaseCurrentSfx();
+            currentCursor?.Stop();
+            DisableCurrent();
+            SubscribeEvents();
 
-            sfxPlaybackSource = audioService.GetPlaybackSource(colopringSfx);
-
-            cursor.sprite = sprayCan;
-            cursor.DOColor(Color.white, 0);
+            currentCursor = coloringCursor;
+            currentCursor.Play();
         }
 
-        private void Enable()
+        private void SubscribeEvents()
         {
-            trigger2DEventReceiver.CollisionEnter += PlayFx;
-            trigger2DEventReceiver.CollisionExit += PauseFx;
+            trigger2DEventReceiver.CollisionEnter += HandleCollisionEnter;
+            trigger2DEventReceiver.CollisionExit += HandleCollisionExit;
             inputService.PointerMove += OnPointerMove;
             inputService.PointerDown += OnPointerDown;
             inputService.PointerUp += OnPointerUp;
         }
-        
-        public void Disable()
-        {           
-            gameObject.SetActive(false);
-            ReleaseCurrentSfx();
 
+        private void HandleCollisionExit(Collider2D obj)
+        {
+            currentCursor.Stop();
+        }
+
+        private void HandleCollisionEnter(Collider2D obj)
+        {
+            currentCursor.Play();
+        }
+
+        public void DisableCurrent()
+        {
+            trigger2DEventReceiver.CollisionEnter -= HandleCollisionEnter;
+            trigger2DEventReceiver.CollisionExit -= HandleCollisionExit;
             inputService.PointerMove -= OnPointerMove;
             inputService.PointerDown -= OnPointerDown;
             inputService.PointerUp -= OnPointerUp;
-        }
-
-        private void PauseFx(Collider2D obj)
-        {
-            sfxPlaybackSource?.Pause();
-        }
-
-        private void PlayFx(Collider2D obj)
-        {
-            sfxPlaybackSource.PlaybackAsync(true);
+            
+            currentCursor?.Stop();
+            currentCursor = null;
         }
 
         private void OnPointerDown()
@@ -116,7 +104,7 @@ namespace Client
 
         private void OnDestroy()
         {
-            Disable();
+            DisableCurrent();
         }
     }
 }
