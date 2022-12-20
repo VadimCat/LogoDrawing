@@ -57,6 +57,7 @@ namespace Presenter
                     SetColoringStageFromSave();
                     break;
             }
+            view.EnableColoring(true);
         }
 
         public async void Start()
@@ -117,7 +118,6 @@ namespace Presenter
 
         private void SetColoringStageFromSave()
         {
-            view.EnableColoring(true);
             cursorService.SetColoring();
             view.SetColoringData(levelData.ColoringView);
         }
@@ -132,10 +132,11 @@ namespace Presenter
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             await UniTask.Delay(2000);
+            
             view.Progress.OnValueChanged += UpdateColoringProgress;
-
-
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
+            
+            view.EnableColoring(true);
         }
     }
 }

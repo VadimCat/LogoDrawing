@@ -206,7 +206,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 6188322221499324871}
-  cooldown: -192.18832
+  cooldown: -214.27333
   currentReader:
     requested: 0
     buffer: {fileID: 0}
@@ -310,6 +310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3000152032301219231, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: counter
+      value: 
+      objectReference: {fileID: 6993011619288143683}
     - target: {fileID: 3486861302997434311, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -328,7 +332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7444262036418379654, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444262036418379654, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_TagString
+      value: EditorOnly
       objectReference: {fileID: 0}
     - target: {fileID: 7727839642729217885, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_RootOrder
@@ -341,6 +349,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 834980982052001440, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
     - {fileID: 2533992128480923197, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 6038028293633064910, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 6748589024762582394, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 5348080401283804021, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 8985728579124261386, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 7220551206333538711, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 3866123342765830593, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+    - {fileID: 6096441270142688416, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
 --- !u!4 &6923485617744374984 stripped
 Transform:

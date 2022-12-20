@@ -354,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1754074149449688504, guid: ebefc2d7364fa7a498aa3469660c7e77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.197
+      value: 0.527
       objectReference: {fileID: 0}
     - target: {fileID: 1754074149449688504, guid: ebefc2d7364fa7a498aa3469660c7e77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -387,6 +387,10 @@ PrefabInstance:
     - target: {fileID: 3629275548981722201, guid: ebefc2d7364fa7a498aa3469660c7e77, type: 3}
       propertyPath: m_Name
       value: VFXPaintCanSpray
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629275548981722201, guid: ebefc2d7364fa7a498aa3469660c7e77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebefc2d7364fa7a498aa3469660c7e77, type: 3}
@@ -454,6 +458,10 @@ PrefabInstance:
     - target: {fileID: 9105537238002725903, guid: c461587e806be5340bd7377dc5f20bd6, type: 3}
       propertyPath: m_Name
       value: VFXDirt
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105537238002725903, guid: c461587e806be5340bd7377dc5f20bd6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c461587e806be5340bd7377dc5f20bd6, type: 3}

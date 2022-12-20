@@ -10,11 +10,9 @@ namespace Client
         [SerializeField] private AudioClipName fxClip;
 
         private SfxPlaybackSource sfxPlayBackSource;
-        private AudioService audioService;
 
         public void SetDependencies(AudioService audioService)
         {
-            this.audioService = audioService;
             sfxPlayBackSource = audioService.GetPlaybackSource(fxClip);
         }
         
