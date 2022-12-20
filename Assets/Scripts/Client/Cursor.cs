@@ -19,7 +19,7 @@ namespace Client
         public void Play()
         {
             gameObject.SetActive(true);
-            sfxPlayBackSource.PlaybackAsync();
+            sfxPlayBackSource.PlaybackAsync(true);
             particle.Play();
         }
 

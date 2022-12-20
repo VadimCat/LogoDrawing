@@ -37,12 +37,6 @@ namespace Presenter
             this.cursorService = cursorService;
             this.complimentsWordsService = complimentsWordsService;
             this.audioService = audioService;
-
-            LoadFromSave(level);
-
-            view.Progress.OnValueChanged += level.UpdateColoringProgress;
-
-            level.OnColoringComplete += CompleteLevel;
         }
 
         private void LoadFromSave(Level level)
@@ -62,6 +56,11 @@ namespace Presenter
 
         public async void Start()
         {
+            LoadFromSave(level);
+
+            view.Progress.OnValueChanged += level.UpdateColoringProgress;
+
+            level.OnColoringComplete += CompleteLevel;
             levelScreen = await screenNavigator.PushScreen<ColoringLevelScreen>();
             levelScreen.SetLevelName(string.Format(levelNamePattern, level.LevelPlayedTotal + 1));
             switch (level.Stage.Value)
