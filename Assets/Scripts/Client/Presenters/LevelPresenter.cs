@@ -1,5 +1,4 @@
 ﻿using System;
-using Client;
 using Client.Audio;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
@@ -8,7 +7,7 @@ using SceneView;
 using UI;
 using Utils.Client;
 
-namespace Presenter
+namespace Client.Presenters
 {
     public class LevelPresenter
     {
@@ -124,12 +123,13 @@ namespace Presenter
         private async void SetColoringStage()
         {
             complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
-            view.RemoveColoringObject();
-            SetColoringStageFromSave();
 
             view.EnableColoring(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
+            
+            view.RemoveColoringObject();
+            SetColoringStageFromSave();
             await UniTask.Delay(2000);
             
             view.Progress.OnValueChanged += UpdateColoringProgress;

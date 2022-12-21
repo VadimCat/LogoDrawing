@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6084307094280660122
+--- !u!1001 &2184628965639253212
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3000152032301219228, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_Name
-      value: stick_1Dirt
+      value: LevelViewBase
       objectReference: {fileID: 0}
     - target: {fileID: 3000152032301219230, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_RootOrder
@@ -54,14 +54,6 @@ PrefabInstance:
     - target: {fileID: 3000152032301219230, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6748589024762582394, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
-      propertyPath: cooldown
-      value: -32.436604
-      objectReference: {fileID: 0}
-    - target: {fileID: 7444262036418379654, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}

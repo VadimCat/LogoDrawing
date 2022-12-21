@@ -12,6 +12,8 @@ namespace Client
         [SerializeField] private Cursor cleaningCursor;
         [SerializeField] private Cursor coloringCursor;
 
+        private readonly Vector3 disabledPosDelta = new(20, 20);
+        
         private Cursor currentCursor;
         
         private SfxPlaybackSource sfxPlaybackSource;
@@ -62,12 +64,12 @@ namespace Client
 
         private void HandleCollisionExit(Collider2D obj)
         {
-            currentCursor.Stop();
+            currentCursor.StopSfx();
         }
 
         private void HandleCollisionEnter(Collider2D obj)
         {
-            currentCursor.Play();
+            currentCursor.PlaySfx();
         }
 
         public void DisableCurrent()
@@ -78,6 +80,7 @@ namespace Client
             inputService.PointerDown -= OnPointerDown;
             inputService.PointerUp -= OnPointerUp;
             
+            transform.Translate(disabledPosDelta);
             currentCursor?.Stop();
             currentCursor = null;
         }

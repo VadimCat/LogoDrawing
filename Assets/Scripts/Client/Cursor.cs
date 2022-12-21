@@ -15,19 +15,28 @@ namespace Client
         {
             sfxPlayBackSource = audioService.GetPlaybackSource(fxClip);
         }
-        
+
+        public void StopSfx()
+        {
+            sfxPlayBackSource.Stop();
+        }
+
+        public void PlaySfx()
+        {
+            sfxPlayBackSource.PlaybackAsync(true);
+        }
+
         public void Play()
         {
             gameObject.SetActive(true);
-            sfxPlayBackSource.PlaybackAsync(true);
             particle.Play();
         }
 
         public void Stop()
         {
+            StopSfx();
             gameObject.SetActive(false);
             particle.Pause();
-            sfxPlayBackSource.Pause();
         }
     }
 }

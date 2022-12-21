@@ -18,9 +18,7 @@ namespace SceneView
         {
             this.updateService = updateService;
         }
-        
-        
-        
+
         public void SetColoringData(ColoringLevelView dirtView)
         {
             levelView = Instantiate(dirtView, transform);

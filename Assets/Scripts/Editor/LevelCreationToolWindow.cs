@@ -168,10 +168,11 @@ namespace Editor
 
             var levelPref = PrefabUtility.InstantiatePrefab(levelBaseColor) as GameObject;
             var sprites = levelPref.GetComponentsInChildren<SpriteRenderer>();
-            sprites[1].sprite = ColorSprite;
-            
-            var colorings = levelPref.GetComponentsInChildren<Renderer>();
-            colorings[2].material = material;
+            sprites[1].sprite = ColorSprite;//HACK
+            var counter = levelPref.GetComponentInChildren<P3dChangeCounter>();
+            counter.Texture = material.mainTexture;
+            counter.MaskTexture = material.mainTexture;
+            levelPref.GetComponentInChildren<MeshRenderer>().material = material;
             
             var colorSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
             DestroyImmediate(levelPref);
