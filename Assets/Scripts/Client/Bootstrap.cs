@@ -1,7 +1,9 @@
 using Client.Audio;
 using Client.Audio.SfxPlayers;
+using Client.Painting;
 using Client.Pools;
 using Client.Screens;
+using Core;
 using SceneView;
 using UI;
 using UnityEngine;
@@ -18,9 +20,10 @@ namespace Client
         [SerializeField] private UpdateService updateService;
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
-
         [SerializeField] private AudioService audioService;
-
+        [Header("Installers")]
+        [SerializeField] private PainterInstaller painterInstaller;
+        
         private Pool<SfxPlaybackSource> sfxPlaybackPool;
 
         private readonly Context context = new();
@@ -32,7 +35,7 @@ namespace Client
             InstallAudioService();
             InstallLevelsData();
             InstallNavigator();
-            
+
             context.Register(new InputService(updateService));
             InstallСursor();
 
@@ -65,7 +68,7 @@ namespace Client
         {
             screenNavigator.Bootstrap();
         }
-
+        
         private void InstallLevelsData()
         {
             levelsStorage.Bootstrap();

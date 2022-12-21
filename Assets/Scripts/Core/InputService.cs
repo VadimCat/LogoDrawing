@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Client
+namespace Core
 {
     public class InputService : IUpdatable, IDisposable
     {

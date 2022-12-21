@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using UnityEngine;
 
 public class UpdateService : MonoBehaviour
