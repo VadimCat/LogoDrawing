@@ -49,7 +49,7 @@ Canvas:
   m_GameObject: {fileID: 6669128334661287245}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe077f99262c44489a28bb682bcb858d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 6669128334661287240}
   screens:
   - {fileID: 8759322470126098185, guid: 3dc1b17ad67f19643aab6410707372b4, type: 3}
   - {fileID: 2673282795225721937, guid: 2a7dc7d5aff9f5f44833dd5a82c50aef, type: 3}
