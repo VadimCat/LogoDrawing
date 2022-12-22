@@ -12,12 +12,10 @@ namespace Utils
         {
             this.backgrounds = backgrounds;
             index = LoadLastIndex();
-            Debug.Log($"index constructor= {index}");
         }
 
         public Sprite GetNext()
         {
-            Debug.Log($"index = {index}");
             index++;
             index = index == backgrounds.Length ? 0 : index;
             SaveLastIndex();
