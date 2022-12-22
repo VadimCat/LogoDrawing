@@ -70,7 +70,6 @@ namespace UI
             x = startPosition.x + distanceX * distancePercentX;
             y = startPosition.y + distanceY * distancePercentY;
             return new Vector2(x, y);
-            ;
         }
     }
 }
