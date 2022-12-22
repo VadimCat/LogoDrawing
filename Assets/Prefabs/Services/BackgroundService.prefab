@@ -209,7 +209,6 @@ MonoBehaviour:
   backRoot: {fileID: 8963441975732018682}
   loadingBack: {fileID: 21300000, guid: f02a4eab85a772644b65e7157bdda71f, type: 3}
   levelBackgroundImages:
-  - {fileID: 21300000, guid: b0739633a389c4fe4b87770ccdc8dc98, type: 3}
   - {fileID: 21300000, guid: c447c665f103e9243ad55add9b0f5b98, type: 3}
   - {fileID: 21300000, guid: e3e4bbbf002c8478995d8f0aa56c2ad5, type: 3}
   - {fileID: 21300000, guid: 207d31a8dfe0648dc94ef8436ac0b79e, type: 3}
