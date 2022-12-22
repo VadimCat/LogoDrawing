@@ -16,12 +16,12 @@ namespace Client.Screens
 
         public void SetCleaningProgress(float progress)
         {
-            loadingBar.SetLoadingProgress(GetThresholdProgress(progress));
+            loadingBar.SetLoadingProgressSmooth(GetThresholdProgress(progress));
         }
 
         public void SetColoringProgress(float progress)
         {
-            loadingBar.SetLoadingProgress(.5f + GetThresholdProgress(progress));
+            loadingBar.SetLoadingProgressSmooth(.5f + GetThresholdProgress(progress));
         }
 
         public void PlayCleaningCompleteVfx()
