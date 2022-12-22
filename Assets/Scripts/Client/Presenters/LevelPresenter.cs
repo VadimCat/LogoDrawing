@@ -122,6 +122,7 @@ namespace Client.Presenters
 
         private async void SetColoringStage()
         {
+            levelScreen.PlayCleaningCompleteVfx();
             complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
 
             view.EnableColoring(false);

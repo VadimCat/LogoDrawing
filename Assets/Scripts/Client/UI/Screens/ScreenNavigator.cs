@@ -33,6 +33,18 @@ namespace Client.Screens
             canvas.worldCamera = Camera.main;
         }
 
+        public async Task<BaseScreen> PushScreen(Type type)
+        {
+            if (CurrentScreen != null)
+            {
+                await CloseCurrent();
+            }
+
+            CurrentScreen = Instantiate(screenOrigins[type], transform);
+            await CurrentScreen.AnimateShow();
+            return CurrentScreen;    
+        }
+        
         public async Task<TScreen> PushScreen<TScreen>() where TScreen : BaseScreen
         {
             if (CurrentScreen != null)

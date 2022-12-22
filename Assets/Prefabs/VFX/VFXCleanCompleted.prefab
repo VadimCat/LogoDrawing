@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: 6775547514316266835}
   - component: {fileID: 7141858148837482643}
   m_Layer: 0
-  m_Name: VFXStageComplete
+  m_Name: VFXCleanCompleted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
