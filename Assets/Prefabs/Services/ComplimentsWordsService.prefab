@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2346590867768956661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 255
+  m_fontColor: {r: 1, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -251,3 +251,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   complimentText: {fileID: 5199524247284523215}
   complimentsWordsAssets: {fileID: 11400000, guid: 4c5b9d4c124d440af8dd28643a5e186f, type: 2}
+  distancePercentY: 0.2
+  distancePercentX: 0.383
+  moveDuration: 1.5
+  moveEase: 1
+  fadeInDuration: 0.5
+  fadeInEase: 1
+  fadeOutDuration: 0.5
+  fadeOutEase: 1
+  rotateDuration: 1.5
+  angle: 15
+  rotationEase: 0
