@@ -1,6 +1,7 @@
 using System;
 using Client;
 using Client.Audio;
+using Client.Painting;
 using Client.Presenters;
 using Client.Screens;
 using Core;
@@ -71,7 +72,8 @@ public class LevelService : ISavable, IUpdatable
         //TODO: Level presenter should create or get level from factory
         var level = new Level(viewData.ID, currentLvlInd);
         level.OnColoringComplete += Save;
-        return new LevelPresenter(level, view, viewData, context.GetService<LoadingPresenterFactory>(), screenNavigator,
+        return new LevelPresenter(level, view, viewData, context.GetService<Painter>(),
+            context.GetService<LoadingPresenterFactory>(), screenNavigator,
             context.GetService<CursorService>(), context.GetService<ComplimentsWordsService>(),
             context.GetService<AudioService>());
     }

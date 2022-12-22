@@ -4,6 +4,7 @@ using Client.Painting;
 using Client.Pools;
 using Client.Screens;
 using Core;
+using Core.CameraProvider;
 using SceneView;
 using UI;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace Client
         [Header("Installers")]
         [SerializeField] private PainterInstaller painterInstaller;
         
+        
         private Pool<SfxPlaybackSource> sfxPlaybackPool;
 
         private readonly Context context = new();
@@ -32,15 +34,16 @@ namespace Client
         private async void Start()
         {
             DontDestroyOnLoad(this);
+            //TODO: Create installers where needed
+            InstallCamera();
             InstallAudioService();
             InstallLevelsData();
             InstallNavigator();
-
-            context.Register(new InputService(updateService));
+            InstallInputService();
             InstallСursor();
-
-            audioService.PlayMusic(AudioClipName.DefaultBackgroundMusic);
-
+            
+            painterInstaller.Install(context);
+            
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backgroundService, context);
             var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
@@ -54,9 +57,20 @@ namespace Client
             await loadingFactory.Create(5).LoadAsync();
         }
 
+        private void InstallCamera()
+        {
+            context.Register(new CameraProvider());
+        }
+
+        private void InstallInputService()
+        {
+            context.Register(new InputService(updateService));
+        }
+
         private void InstallAudioService()
         {
             audioService.Bootstrap();
+            audioService.PlayMusic(AudioClipName.DefaultBackgroundMusic);
         }
 
         private void InstallСursor()

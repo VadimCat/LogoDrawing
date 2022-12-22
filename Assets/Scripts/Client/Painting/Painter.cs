@@ -9,12 +9,13 @@ namespace Client.Painting
     {
         private readonly InputService inputService;
         private readonly CameraProvider cameraProvider;
-        private readonly P3dPaintDecal decal;
+        private readonly P3dPaintDecal paintDecal;
         
         public Painter(InputService inputService, CameraProvider cameraProvider, P3dPaintDecal paintDecal)
         {
             this.inputService = inputService;
             this.cameraProvider = cameraProvider;
+            this.paintDecal = paintDecal;
         }
         
         public void Enable()
@@ -39,7 +40,7 @@ namespace Client.Painting
                 var seed     = 0; // If this paint uses modifiers that aren't marked as 'Unique', then this seed will be used. This should normally be set to 0.
                 var rotation = Quaternion.LookRotation(-hit.normal); // Get the rotation of the paint. This should point TOWARD the surface we want to paint, so we use the inverse normal.
 
-                decal.HandleHitPoint(false, priority, pressure, seed, hit.point, rotation);
+                paintDecal.HandleHitPoint(false, priority, pressure, seed, hit.point, rotation);
             }
         }
     }

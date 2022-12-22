@@ -1,6 +1,8 @@
-﻿namespace Core.Installers
+﻿using UnityEngine;
+
+namespace Core.Installers
 {
-    public abstract class MonoInstaller<T> : IInstaller<T>
+    public abstract class MonoInstaller<T> : MonoBehaviour, IInstaller<T>
     {
         protected abstract T Create(Context context);
         

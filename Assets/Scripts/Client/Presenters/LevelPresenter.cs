@@ -1,5 +1,6 @@
 ﻿using System;
 using Client.Audio;
+using Client.Painting;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
@@ -14,6 +15,7 @@ namespace Client.Presenters
         private const string levelNamePattern = "LEVEL {0}";
         private readonly Level level;
         private readonly LevelViewData levelData;
+        private readonly Painter painter;
         private readonly LoadingPresenterFactory loadingPresenterFactory;
         private readonly ScreenNavigator screenNavigator;
         private readonly CursorService cursorService;
@@ -23,7 +25,7 @@ namespace Client.Presenters
 
         private ColoringLevelScreen levelScreen;
 
-        public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData,
+        public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, Painter painter,
             LoadingPresenterFactory loadingPresenterFactory,
             ScreenNavigator screenNavigator, CursorService cursorService,
             ComplimentsWordsService complimentsWordsService, AudioService audioService)
@@ -31,6 +33,7 @@ namespace Client.Presenters
             this.level = level;
             this.view = view;
             this.levelData = levelData;
+            this.painter = painter;
             this.loadingPresenterFactory = loadingPresenterFactory;
             this.screenNavigator = screenNavigator;
             this.cursorService = cursorService;
@@ -50,7 +53,8 @@ namespace Client.Presenters
                     SetColoringStageFromSave();
                     break;
             }
-            view.EnableColoring(true);
+            view.EnableProgressUpdate(true);
+            painter.Enable();
         }
 
         public async void Start()
@@ -101,14 +105,16 @@ namespace Client.Presenters
         private async void SwitchToNextLevel()
         {
             audioService.PlaySfxAsync(AudioClipName.ButtonFX);
-            view.EnableColoring(false);
+            view.EnableProgressUpdate(false);
+            painter.Disable();
             await screenNavigator.CloseScreen<LevelCompletedScreen>();
             await loadingPresenterFactory.Create(1f).LoadAsync();
         }
 
         private void SetCleaningStage()
         {
-            view.EnableColoring(true);
+            view.EnableProgressUpdate(true);
+            painter.Enable();
 
             cursorService.SetCleaning();
             view.SetColoringData(levelData.DirtView);
@@ -124,7 +130,8 @@ namespace Client.Presenters
         {
             complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
 
-            view.EnableColoring(false);
+            view.EnableProgressUpdate(false);
+            painter.Disable();
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             
@@ -135,7 +142,8 @@ namespace Client.Presenters
             view.Progress.OnValueChanged += UpdateColoringProgress;
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
             
-            view.EnableColoring(true);
+            view.EnableProgressUpdate(true);
+            painter.Enable();
         }
     }
 }

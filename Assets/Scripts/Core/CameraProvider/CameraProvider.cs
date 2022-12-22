@@ -16,7 +16,7 @@ namespace Core.CameraProvider
 
         private void ChangeCamera(Scene arg0, LoadSceneMode arg1)
         {
-            mainCamera = MainCamera;
+            mainCamera = Camera.main;
         }
     }
 }
