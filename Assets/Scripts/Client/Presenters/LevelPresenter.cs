@@ -1,5 +1,6 @@
 ﻿using System;
 using Client.Audio;
+using Client.Cursors;
 using Client.Painting;
 using Client.Screens;
 using Cysharp.Threading.Tasks;
@@ -26,8 +27,7 @@ namespace Client.Presenters
         private ColoringLevelScreen levelScreen;
 
         public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, Painter painter,
-            LoadingPresenterFactory loadingPresenterFactory,
-            ScreenNavigator screenNavigator, CursorService cursorService,
+            LoadingPresenterFactory loadingPresenterFactory, ScreenNavigator screenNavigator, CursorService cursorService,
             ComplimentsWordsService complimentsWordsService, AudioService audioService)
         {
             this.level = level;

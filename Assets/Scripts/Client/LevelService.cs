@@ -1,6 +1,7 @@
 using System;
 using Client;
 using Client.Audio;
+using Client.Cursors;
 using Client.Painting;
 using Client.Presenters;
 using Client.Screens;

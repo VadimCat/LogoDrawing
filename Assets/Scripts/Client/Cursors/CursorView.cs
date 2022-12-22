@@ -2,11 +2,13 @@
 using Client.Audio.SfxPlayers;
 using UnityEngine;
 
-namespace Client
+namespace Client.Cursors
 {
-    public class Cursor : MonoBehaviour
+    public class CursorView : MonoBehaviour
     {
         [SerializeField] private ParticleSystem particle;
+        [SerializeField] private Sprite sprite;
+        
         [SerializeField] private AudioClipName fxClip;
 
         private SfxPlaybackSource sfxPlayBackSource;

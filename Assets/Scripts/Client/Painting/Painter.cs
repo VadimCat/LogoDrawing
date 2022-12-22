@@ -20,17 +20,17 @@ namespace Client.Painting
         
         public void Enable()
         {
-            inputService.PointerMove += Paint;
+            inputService.PointerMoveScreenSpace += Paint;
         }
         
         public void Disable()
         {
-            inputService.PointerMove -= Paint;
+            inputService.PointerMoveScreenSpace -= Paint;
         }
         
-        private void Paint(Vector2 obj)
+        private void Paint(Vector3 screenPos)
         {
-            var ray = cameraProvider.MainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = cameraProvider.MainCamera.ScreenPointToRay(screenPos);
 
             if (Physics.Raycast(ray, out var hit))
             {

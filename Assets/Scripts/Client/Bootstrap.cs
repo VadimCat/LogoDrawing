@@ -1,5 +1,6 @@
 using Client.Audio;
 using Client.Audio.SfxPlayers;
+using Client.Cursors;
 using Client.Painting;
 using Client.Pools;
 using Client.Screens;
@@ -64,7 +65,7 @@ namespace Client
 
         private void InstallInputService()
         {
-            context.Register(new InputService(updateService));
+            context.Register(new InputService(updateService, context.GetService<CameraProvider>()));
         }
 
         private void InstallAudioService()

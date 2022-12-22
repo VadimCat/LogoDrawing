@@ -6,16 +6,19 @@ namespace Core
     public class InputService : IUpdatable, IDisposable
     {
         private readonly UpdateService updateService;
-        public event Action<Vector2> PointerMove;
+        private readonly CameraProvider.CameraProvider cameraProvider;
+        public event Action<Vector3> PointerMoveScreenSpace;
+        public event Action<Vector3> PointerMoveWorldSpace;
         public event Action PointerDown;
         public event Action PointerUp;
 
         private bool isEnabled;
 
-        public InputService(UpdateService updateService)
+        public InputService(UpdateService updateService, CameraProvider.CameraProvider cameraProvider)
         {
             this.updateService = updateService;
-            
+            this.cameraProvider = cameraProvider;
+
             updateService.Add(this);
         }
 
@@ -28,7 +31,8 @@ namespace Core
             }
             else if (isEnabled && Input.GetMouseButton(0))
             {
-                PointerMove?.Invoke(Input.mousePosition);
+                PointerMoveScreenSpace?.Invoke(Input.mousePosition);
+                PointerMoveWorldSpace?.Invoke(cameraProvider.MainCamera.ScreenToWorldPoint(Input.mousePosition));
             }
             else if (isEnabled && Input.GetMouseButtonUp(0))
             {
@@ -40,7 +44,7 @@ namespace Core
         public void Dispose()
         {
             updateService.Remove(this);
-            PointerMove = null;
+            PointerMoveScreenSpace = null;
             PointerDown = null;
             PointerUp = null;
         }
