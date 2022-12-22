@@ -724,7 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBar: {fileID: 5752507678532653041}
   levelName: {fileID: 132715597773895400}
-  cleanCompleteVFX: {fileID: 0}
+  cleanCompleteVFX: {fileID: 8775727652146669805}
 --- !u!1 &8816495265934349793
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,5 +862,10 @@ PrefabInstance:
 --- !u!4 &6829448229269060352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4024982320810937141, guid: e4824e027865b544c81ef2f47149921e, type: 3}
+  m_PrefabInstance: {fileID: 7574085780929867829}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8775727652146669805 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1212923154191554776, guid: e4824e027865b544c81ef2f47149921e, type: 3}
   m_PrefabInstance: {fileID: 7574085780929867829}
   m_PrefabAsset: {fileID: 0}
