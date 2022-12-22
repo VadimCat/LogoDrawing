@@ -206,7 +206,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 6188322221499324871}
-  cooldown: -214.27333
+  cooldown: -216.65448
   currentReader:
     requested: 0
     buffer: {fileID: 0}
@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EditorOnly
       objectReference: {fileID: 0}
+    - target: {fileID: 2838838786844520413, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3000152032301219228, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_Name
       value: LevelViewBaseColor
@@ -314,6 +318,10 @@ PrefabInstance:
       propertyPath: counter
       value: 
       objectReference: {fileID: 6993011619288143683}
+    - target: {fileID: 3374282121746761620, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3486861302997434311, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -322,6 +330,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 208528a3c7e05cd4e8b7fbeb878d9a5d, type: 2}
+    - target: {fileID: 6642894732474874922, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: cooldown
+      value: -44.07527
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642894732474874922, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: registeredPaintableTexture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6748589024762582394, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: texture
       value: 
