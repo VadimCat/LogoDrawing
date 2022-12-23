@@ -7,7 +7,8 @@ namespace Client.Screens
     {
         [SerializeField] private TextLoadingBar loadingBar;
         [SerializeField] private TMP_Text levelName;
-
+        [SerializeField] private ParticleSystem cleanCompleteVFX;
+        
         public void SetLevelName(string name)
         {
             levelName.text = name;
@@ -23,6 +24,11 @@ namespace Client.Screens
             loadingBar.SetLoadingProgress(.5f + GetThresholdProgress(progress));
         }
 
+        public void PlayCleaningCompleteVfx()
+        {
+            cleanCompleteVFX.Play();
+        }
+        
         private float GetThresholdProgress(float progress)
         {
             return progress / 2;
