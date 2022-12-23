@@ -54,7 +54,6 @@ namespace Client.Presenters
                     break;
             }
             view.EnableProgressUpdate(true);
-            painter.Enable();
         }
 
         public async void Start()
@@ -106,7 +105,6 @@ namespace Client.Presenters
         {
             audioService.PlaySfxAsync(AudioClipName.ButtonFX);
             view.EnableProgressUpdate(false);
-            painter.Disable();
             await screenNavigator.CloseScreen<LevelCompletedScreen>();
             await loadingPresenterFactory.Create(1f).LoadAsync();
         }
@@ -114,7 +112,6 @@ namespace Client.Presenters
         private void SetCleaningStage()
         {
             view.EnableProgressUpdate(true);
-            painter.Enable();
 
             cursorService.SetCleaning();
             view.SetColoringData(levelData.DirtView);
@@ -131,7 +128,6 @@ namespace Client.Presenters
             complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
 
             view.EnableProgressUpdate(false);
-            painter.Disable();
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             
@@ -143,7 +139,6 @@ namespace Client.Presenters
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
             
             view.EnableProgressUpdate(true);
-            painter.Enable();
         }
     }
 }

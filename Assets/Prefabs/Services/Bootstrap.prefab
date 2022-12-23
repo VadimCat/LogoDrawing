@@ -59,6 +59,7 @@ MonoBehaviour:
   cursorService: {fileID: 907379513697181792}
   complimentsWordsService: {fileID: 4032787900542854738}
   audioService: {fileID: 2999049635880329263}
+  painterInstaller: {fileID: 0}
 --- !u!1 &3889840572335614494
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5119629567882330040, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5119629567882330040, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -276,6 +277,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CursorService
       objectReference: {fileID: 0}
+    - target: {fileID: 7315578663198054453, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 9144226188916966620}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
 --- !u!114 &907379513697181792 stripped
@@ -292,6 +297,11 @@ MonoBehaviour:
 --- !u!4 &907379513697181798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5119629567882330040, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
+  m_PrefabInstance: {fileID: 5448013233213759454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9144226188916966620 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3854494618316774146, guid: c3fa90acf669eb14abb2c0f518313d1f, type: 3}
   m_PrefabInstance: {fileID: 5448013233213759454}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5771970123141404811

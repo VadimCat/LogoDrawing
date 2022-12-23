@@ -7,30 +7,18 @@ namespace Client.Painting
 {
     public class Painter
     {
-        private readonly InputService inputService;
         private readonly CameraProvider cameraProvider;
         private readonly P3dPaintDecal paintDecal;
         
-        public Painter(InputService inputService, CameraProvider cameraProvider, P3dPaintDecal paintDecal)
+        public Painter(CameraProvider cameraProvider, P3dPaintDecal paintDecal)
         {
-            this.inputService = inputService;
             this.cameraProvider = cameraProvider;
             this.paintDecal = paintDecal;
         }
         
-        public void Enable()
+        public void Paint(Vector3 inputPos)
         {
-            inputService.PointerMoveScreenSpace += Paint;
-        }
-        
-        public void Disable()
-        {
-            inputService.PointerMoveScreenSpace -= Paint;
-        }
-        
-        private void Paint(Vector3 screenPos)
-        {
-            var ray = cameraProvider.MainCamera.ScreenPointToRay(screenPos);
+            var ray = cameraProvider.MainCamera.ScreenPointToRay(inputPos);
 
             if (Physics.Raycast(ray, out var hit))
             {

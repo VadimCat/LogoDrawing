@@ -1,29 +1,24 @@
-﻿using Core;
+﻿using Core.CameraProvider;
 using UnityEngine;
 
 namespace Client.Cursors
 {
     public class DirectCursorInputHandler : ICursorInputHandler
     {
-        private readonly InputService inputService;
+        private readonly CameraProvider cameraProvider;
+        private readonly Transform cursorRoot;
 
-        public DirectCursorInputHandler(InputService inputService)
+        public DirectCursorInputHandler(CameraProvider cameraProvider, Transform cursorRoot)
         {
-            this.inputService = inputService;
-
-            inputService.PointerMoveWorldSpace += HandleFromInput;
+            this.cameraProvider = cameraProvider;
+            this.cursorRoot = cursorRoot;
         }
 
-        private void HandleFromInput(Vector2 obj)
+        public void HandleFromInput(Vector3 inputPos)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void HandleFromInput(Vector3 worldPos)
-        {
-            
-            // pos.z = transform.position.z;
-            // transform.position = pos;
+            Vector3 newPos = cameraProvider.MainCamera.ScreenToWorldPoint(inputPos);
+            newPos.z = cursorRoot.position.z;
+            cursorRoot.transform.position = newPos;
         }
     }
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bf0b34af394b8cbfa1338a1e02eb81, type: 3}
+  m_Name: ColoringCursorViewData
+  m_EditorClassIdentifier: 
+  view: {fileID: 3206246790777639434, guid: 73c2e09d98f65114e91dfd6fc673e2eb, type: 3}
+  clipName: 4

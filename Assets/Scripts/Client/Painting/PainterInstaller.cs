@@ -15,7 +15,7 @@ namespace Client.Painting
         protected override Painter Create(Context context)
         {
             paintDecal.Radius = coloringConfig.BrushRadius;
-            return new Painter(context.GetService<InputService>(), context.GetService<CameraProvider>(), paintDecal);
+            return new Painter(context.GetService<CameraProvider>(), paintDecal);
         }
     }
 }

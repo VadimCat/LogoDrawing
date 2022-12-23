@@ -23,10 +23,10 @@ namespace Client
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
         [SerializeField] private AudioService audioService;
-        [Header("Installers")]
-        [SerializeField] private PainterInstaller painterInstaller;
-        
-        
+
+        [Header("Installers")] [SerializeField]
+        private PainterInstaller painterInstaller;
+
         private Pool<SfxPlaybackSource> sfxPlaybackPool;
 
         private readonly Context context = new();
@@ -41,10 +41,9 @@ namespace Client
             InstallLevelsData();
             InstallNavigator();
             InstallInputService();
-            InstallСursor();
-            
             painterInstaller.Install(context);
-            
+            InstallСursor();
+
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
                 backgroundService, context);
             var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
@@ -76,14 +75,16 @@ namespace Client
 
         private void InstallСursor()
         {
-            cursorService.SetDependencies(context.GetService<InputService>(), audioService);
+            cursorService.SetDependencies(context.GetService<InputService>(), audioService,
+                context.GetService<Painter>(), context.GetService<CameraProvider>());
+            cursorService.Bootstrap();
         }
 
         private void InstallNavigator()
         {
             screenNavigator.Bootstrap();
         }
-        
+
         private void InstallLevelsData()
         {
             levelsStorage.Bootstrap();
