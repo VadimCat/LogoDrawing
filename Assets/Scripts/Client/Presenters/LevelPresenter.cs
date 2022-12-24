@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
 using UI;
+using UnityEngine;
 using Utils.Client;
 
 namespace Client.Presenters
@@ -68,6 +69,7 @@ namespace Client.Presenters
                     view.Progress.OnValueChanged += UpdateCleaningProgress;
                     break;
                 case ColoringStage.Coloring:
+                    SetCleaningProgress(1f);
                     view.Progress.OnValueChanged += UpdateColoringProgress;
                     break;
                 default:
@@ -77,10 +79,15 @@ namespace Client.Presenters
 
         private void UpdateColoringProgress(float progress, float prevProgress)
         {
-            levelScreen.SetColoringProgress(progress);
+            levelScreen.UpdateColoringProgress(progress);
         }
 
         private void UpdateCleaningProgress(float progress, float prevProgress)
+        {
+            levelScreen.UpdateCleaningProgress(progress);
+        }
+
+        private void SetCleaningProgress(float progress)
         {
             levelScreen.SetCleaningProgress(progress);
         }

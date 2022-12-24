@@ -9,22 +9,26 @@ namespace Client.Screens
 {
     public class TextLoadingBar : MonoBehaviour
     {
+        private const float SPEED_PERCENT = .5f;
         [SerializeField] private Image loadingBar;
         [SerializeField] private TMP_Text progress;
-        private readonly List<Tween> fillAmountTweens = new();
 
+        private Tween currentTween;
         private const string ProgressTemplate = "{0}%";
+
+        public void UpdateLoadingProgress(float normalProgress)
+        {
+            var duration = normalProgress * SPEED_PERCENT;
+            
+            currentTween?.Kill();
+            currentTween = loadingBar.DOFillAmount(normalProgress, duration).SetLink(gameObject);
+            currentTween.onUpdate += () => SetTextProgress(loadingBar.fillAmount);
+        }
 
         public void SetLoadingProgress(float normalProgress)
         {
             loadingBar.fillAmount = normalProgress;
             SetTextProgress(normalProgress);
-        }
-
-        public void SetLoadingProgressSmooth(float normalProgress)
-        {
-            SetTextProgress(normalProgress);
-            fillAmountTweens.Add(loadingBar.DOFillAmount(normalProgress, .5f));
         }
 
         public async UniTask AnimateProgress(float duration)
@@ -38,14 +42,6 @@ namespace Client.Screens
         private void SetTextProgress(float normalProgress)
         {
             progress.text = string.Format(ProgressTemplate, (normalProgress * 100).ToString("N0"));
-        }
-
-        private void OnDestroy()
-        {
-            foreach (var t in fillAmountTweens)
-            {
-                t.Kill();
-            }
         }
     }
 }
