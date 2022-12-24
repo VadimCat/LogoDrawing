@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -252,13 +252,13 @@ MonoBehaviour:
   complimentText: {fileID: 5199524247284523215}
   complimentsWordsAssets: {fileID: 11400000, guid: 4c5b9d4c124d440af8dd28643a5e186f, type: 2}
   distancePercentY: 0.2
-  distancePercentX: 0.383
-  moveDuration: 1.5
+  distancePercentX: 0.5
+  moveDuration: 1
   moveEase: 1
   fadeInDuration: 0.5
   fadeInEase: 1
   fadeOutDuration: 0.5
   fadeOutEase: 1
-  rotateDuration: 1.5
-  angle: 15
+  rotateDuration: 0
+  angle: 10
   rotationEase: 0
