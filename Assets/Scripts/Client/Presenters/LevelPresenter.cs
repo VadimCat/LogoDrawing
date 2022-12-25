@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
 using UI;
-using UnityEngine;
 using Utils.Client;
 
 namespace Client.Presenters
