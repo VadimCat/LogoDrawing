@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Client.Screens;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Client;
 
-namespace Client.Screens
+namespace Client.UI.Screens
 {
     public class ScreenNavigator : MonoBehaviour, IBootstrapable
     {
@@ -45,7 +46,7 @@ namespace Client.Screens
             return CurrentScreen;    
         }
         
-        public async Task<TScreen> PushScreen<TScreen>() where TScreen : BaseScreen
+        public async UniTask<TScreen> PushScreen<TScreen>() where TScreen : BaseScreen
         {
             if (CurrentScreen != null)
             {

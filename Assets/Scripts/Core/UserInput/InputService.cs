@@ -1,23 +1,20 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core
+namespace Core.UserInput
 {
     public class InputService : IUpdatable, IDisposable
     {
         private readonly UpdateService updateService;
-        private readonly CameraProvider.CameraProvider cameraProvider;
-        public event Action<Vector3> PointerMoveScreenSpace;
-        public event Action<Vector3> PointerMoveWorldSpace;
-        public event Action PointerDown;
-        public event Action PointerUp;
+        public event Action<Vector2> PointerMoveScreenSpace;
+        public event Action<Vector2> PointerDown;
+        public event Action<Vector2> PointerUp;
 
         private bool isEnabled;
 
-        public InputService(UpdateService updateService, CameraProvider.CameraProvider cameraProvider)
+        public InputService(UpdateService updateService)
         {
             this.updateService = updateService;
-            this.cameraProvider = cameraProvider;
 
             updateService.Add(this);
         }
@@ -26,17 +23,16 @@ namespace Core
         {
             if (Input.GetMouseButtonDown(0))
             {
-                PointerDown?.Invoke();
+                PointerDown?.Invoke(Input.mousePosition);
                 isEnabled = true;
             }
             else if (isEnabled && Input.GetMouseButton(0))
             {
                 PointerMoveScreenSpace?.Invoke(Input.mousePosition);
-                PointerMoveWorldSpace?.Invoke(cameraProvider.MainCamera.ScreenToWorldPoint(Input.mousePosition));
             }
             else if (isEnabled && Input.GetMouseButtonUp(0))
             {
-                PointerUp?.Invoke();
+                PointerUp?.Invoke(Input.mousePosition);
                 isEnabled = false;
             }
         }

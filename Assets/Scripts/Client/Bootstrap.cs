@@ -4,8 +4,10 @@ using Client.Cursors;
 using Client.Painting;
 using Client.Pools;
 using Client.Screens;
+using Client.UI.Screens;
 using Core;
-using Core.CameraProvider;
+using Core.Camera;
+using Core.UserInput;
 using SceneView;
 using UI;
 using UnityEngine;
@@ -23,9 +25,12 @@ namespace Client
         [SerializeField] private CursorService cursorService;
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
         [SerializeField] private AudioService audioService;
+        [SerializeField] private JoystickInputConfig joystickInputConfig;
 
-        [Header("Installers")] [SerializeField]
-        private PainterInstaller painterInstaller;
+        [Header("Installers")]
+        [SerializeField] private PainterInstaller painterInstaller;
+
+        [SerializeField] private JoystickInstaller joystickInstaller;
 
         private Pool<SfxPlaybackSource> sfxPlaybackPool;
 
@@ -41,7 +46,9 @@ namespace Client
             InstallLevelsData();
             InstallNavigator();
             InstallInputService();
+            context.Register(updateService);
             painterInstaller.Install(context);
+            joystickInstaller.Install(context);
             InstallСursor();
 
             levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
@@ -49,7 +56,6 @@ namespace Client
             var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
 
             context.Register(audioService);
-            context.Register(cursorService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
             context.Register(loadingFactory);
@@ -64,7 +70,7 @@ namespace Client
 
         private void InstallInputService()
         {
-            context.Register(new InputService(updateService, context.GetService<CameraProvider>()));
+            context.Register(new InputService(updateService));
         }
 
         private void InstallAudioService()
@@ -75,8 +81,12 @@ namespace Client
 
         private void InstallСursor()
         {
+            var factory = new CursorInputHandlerFactory(context, joystickInputConfig);
+
             cursorService.SetDependencies(context.GetService<InputService>(), audioService,
-                context.GetService<Painter>(), context.GetService<CameraProvider>());
+                context.GetService<Painter>(), context.GetService<CameraProvider>(),
+                context.GetService<Joystick>(), factory);
+            context.Register(cursorService);
             cursorService.Bootstrap();
         }
 

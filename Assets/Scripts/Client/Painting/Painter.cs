@@ -1,5 +1,5 @@
 ﻿using Core;
-using Core.CameraProvider;
+using Core.Camera;
 using PaintIn3D;
 using UnityEngine;
 
@@ -16,10 +16,10 @@ namespace Client.Painting
             this.paintDecal = paintDecal;
         }
         
-        public void Paint(Vector3 inputPos)
+        public void Paint(Vector3 worldPos)
         {
-            var ray = cameraProvider.MainCamera.ScreenPointToRay(inputPos);
-
+            // var ray = cameraProvider.MainCamera.ray(worldPos);
+            var ray = new Ray(worldPos, Vector3.forward);
             if (Physics.Raycast(ray, out var hit))
             {
                 //Comments from P3DPaintFromCode

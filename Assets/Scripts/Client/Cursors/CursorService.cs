@@ -1,8 +1,8 @@
 using Client.Audio;
 using Client.Collisions;
 using Client.Painting;
-using Core;
-using Core.CameraProvider;
+using Core.Camera;
+using Core.UserInput;
 using UnityEngine;
 using Utils.Client;
 
@@ -14,7 +14,8 @@ namespace Client.Cursors
         [SerializeField] private CursorViewData cleaningCursorViewData;
         [SerializeField] private CursorViewData coloringCursorViewData;
 
-        private readonly Vector3 disabledPosDelta = new(20, 20);
+        public Rigidbody2D cursorRigidbody => trigger2DEventReceiver.Rigidbody;
+        
         private CursorPresenterBase cleaningCursor;
         private CursorPresenterBase coloringCursor;
 
@@ -24,42 +25,44 @@ namespace Client.Cursors
         private AudioService audioService;
         private Painter painter;
         private CameraProvider cameraProvider;
+        private Joystick joystick;
+        private CursorInputHandlerFactory cursorInputHandlerFactory;
 
         public Vector2 PointerScreenPosition { get; private set; }
 
         public void SetDependencies(InputService inputService, AudioService audioService, Painter painter,
-            CameraProvider cameraProvider)
+            CameraProvider cameraProvider, Joystick joystick, CursorInputHandlerFactory cursorInputHandlerFactory)
         {
             this.audioService = audioService;
             this.inputService = inputService;
             this.painter = painter;
             this.cameraProvider = cameraProvider;
+            this.joystick = joystick;
+            this.cursorInputHandlerFactory = cursorInputHandlerFactory;
         }
         
-
         public void Bootstrap()
         {
             cleaningCursor = new CleaningBrushCursorPresenter(
                 inputService,
                 trigger2DEventReceiver,
                 cleaningCursorViewData,
-                painter,
-                new DirectCursorInputHandler(cameraProvider, transform),
+                cursorInputHandlerFactory.Create<JoystickInputHandler>(),
                 audioService,
-                transform);
+                trigger2DEventReceiver.transform);
             cleaningCursor.Disable();
 
             coloringCursor = new ColoringCursorPresenter(
                 inputService,
                 trigger2DEventReceiver,
                 coloringCursorViewData,
-                painter,
-                new DirectCursorInputHandler(cameraProvider, transform),
+                cursorInputHandlerFactory.Create<JoystickInputHandler>(),
                 audioService,
-                transform);
+                trigger2DEventReceiver.transform);
             coloringCursor.Disable();
-        }
 
+        }
+        
         //TODO: Make common method for all brushes activation 
         public void SetCleaning()
         {

@@ -1,5 +1,5 @@
 ﻿using Core;
-using Core.CameraProvider;
+using Core.Camera;
 using Core.Installers;
 using PaintIn3D;
 using SceneView;

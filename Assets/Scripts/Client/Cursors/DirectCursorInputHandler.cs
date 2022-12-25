@@ -1,4 +1,5 @@
-﻿using Core.CameraProvider;
+﻿using Client.Painting;
+using Core.Camera;
 using UnityEngine;
 
 namespace Client.Cursors
@@ -6,19 +7,28 @@ namespace Client.Cursors
     public class DirectCursorInputHandler : ICursorInputHandler
     {
         private readonly CameraProvider cameraProvider;
-        private readonly Transform cursorRoot;
+        private readonly Painter painter;
+        private readonly Rigidbody2D rigidbody;
 
-        public DirectCursorInputHandler(CameraProvider cameraProvider, Transform cursorRoot)
+        public DirectCursorInputHandler(CameraProvider cameraProvider, Painter painter, Rigidbody2D rigidbody)
         {
             this.cameraProvider = cameraProvider;
-            this.cursorRoot = cursorRoot;
+            this.painter = painter;
+            this.rigidbody = rigidbody;
         }
 
-        public void HandleFromInput(Vector3 inputPos)
+        public void HandlePointerDown(Vector2 inputPos)
+        { }
+
+        public void HandlePointerMove(Vector2 inputPos)
         {
             Vector3 newPos = cameraProvider.MainCamera.ScreenToWorldPoint(inputPos);
-            newPos.z = cursorRoot.position.z;
-            cursorRoot.transform.position = newPos;
+            newPos.z = rigidbody.transform.position.z;
+            rigidbody.MovePosition(newPos);
+            painter.Paint(rigidbody.transform.position);
         }
+
+        public void HandlePointerUp(Vector2 inputPus)
+        { }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Client.Audio;
 using Client.Collisions;
-using Client.Painting;
-using Core;
+using Core.UserInput;
 using UnityEngine;
 
 namespace Client.Cursors
@@ -9,18 +8,21 @@ namespace Client.Cursors
     public class CleaningBrushCursorPresenter : CursorPresenterBase
     {
         public CleaningBrushCursorPresenter(InputService inputService, Trigger2DEventReceiver triggerEventReceiver,
-            CursorViewData cursorViewData, Painter painter, ICursorInputHandler cursorInputHandler,
+            CursorViewData cursorViewData, ICursorInputHandler cursorInputHandler,
             AudioService audioService, Transform cursorRoot) :
-            base(inputService, triggerEventReceiver, cursorViewData, painter, cursorInputHandler, audioService, cursorRoot)
+            base(inputService, triggerEventReceiver, cursorViewData, cursorInputHandler, audioService, cursorRoot)
         {
         }
 
-        protected override void OnPointerUp()
+        protected override void OnPointerMoveAbstract(Vector2 inputPos)
+        { }
+
+        protected override void OnPointerUpAbstract(Vector2 inputPos)
         {
             TriggerEventReceiver.EnableSimulation(false);
         }
 
-        protected override void OnPointerDown()
+        protected override void OnPointerDownAbstract(Vector2 inputPos)
         {
             if(!isEnabled)
                 return;
@@ -37,12 +39,12 @@ namespace Client.Cursors
             SfxPlaybackSource.PlaybackAsync(true);
         }
 
-        protected override void AbstractEnable()
+        protected override void EnableAbstract()
         {            
             View.gameObject.SetActive(true);
         }
 
-        protected override void AbstractDisable()
+        protected override void DisableAbstract()
         {
             View.gameObject.SetActive(false);
         }
