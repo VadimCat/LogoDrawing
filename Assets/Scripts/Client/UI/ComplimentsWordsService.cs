@@ -13,7 +13,9 @@ namespace UI
         [SerializeField] private TMP_Text complimentText;
         [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
         [SerializeField] private ComplimentsWordsConfig complimentsWordsConfig;
-        
+
+        private Sequence animationsSequence;
+
         public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {
             complimentText.text = complimentsWordsAssets.GetRandomWord();
@@ -30,22 +32,25 @@ namespace UI
             complimentText.transform.rotation = Quaternion.identity;
 
             complimentText.alpha = 0;
-            complimentText
+            animationsSequence = DOTween.Sequence();
+            animationsSequence.Join(complimentText
                 .DOFade(1, complimentsWordsConfig.fadeOutDuration)
-                .SetEase(complimentsWordsConfig.fadeOutEase);
+                .SetEase(complimentsWordsConfig.fadeOutEase));
 
-            complimentText.transform
+            animationsSequence.Join(complimentText.transform
                 .DOMove(targetPosition, complimentsWordsConfig.moveDuration)
-                .SetEase(complimentsWordsConfig.moveEase);
+                .SetEase(complimentsWordsConfig.moveEase));
 
-            complimentText.transform
-                .DORotate(new Vector3(0, 0, complimentsWordsConfig.angle * angleFactor), complimentsWordsConfig.rotateDuration)
-                .SetEase(complimentsWordsConfig.rotationEase);
+            animationsSequence.Join(complimentText.transform
+                .DORotate(new Vector3(0, 0, complimentsWordsConfig.angle * angleFactor),
+                    complimentsWordsConfig.rotateDuration)
+                .SetEase(complimentsWordsConfig.rotationEase));
 
-            complimentText
+            animationsSequence.Join(complimentText
                 .DOFade(0, complimentsWordsConfig.fadeInDuration)
                 .SetDelay(complimentsWordsConfig.moveDuration - complimentsWordsConfig.fadeInDuration)
-                .SetEase(complimentsWordsConfig.fadeInEase);
+                .SetEase(complimentsWordsConfig.fadeInEase));
+            animationsSequence.Play();
         }
 
         private Vector2 GetTargetPosition(Vector2 startPosition)
