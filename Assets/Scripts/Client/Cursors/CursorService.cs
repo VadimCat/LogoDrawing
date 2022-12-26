@@ -56,7 +56,7 @@ namespace Client.Cursors
                 inputService,
                 trigger2DEventReceiver,
                 coloringCursorViewData,
-                cursorInputHandlerFactory.Create<JoystickInputHandler>(),
+                cursorInputHandlerFactory.Create<DirectCursorInputHandler>(),
                 audioService,
                 trigger2DEventReceiver.transform);
             coloringCursor.Disable();

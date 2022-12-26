@@ -10,8 +10,7 @@ namespace UI
     {
         [SerializeField] private TMP_Text complimentText;
         [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
-
-
+        
         public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {
             complimentText.text = complimentsWordsAssets.GetRandomWord();
@@ -24,7 +23,6 @@ namespace UI
             complimentText.transform.DOMove(targetPosition, 1)
                 .OnComplete(() => complimentText.gameObject.SetActive(false));
         }
-        
 
         private Vector2 GetTargetPosition(Vector2 startPosition)
         {

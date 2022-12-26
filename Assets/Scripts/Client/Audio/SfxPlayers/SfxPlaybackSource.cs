@@ -9,6 +9,8 @@ namespace Client.Audio.SfxPlayers
         [SerializeField] private AudioSource source;
         private AudioClipConfig clipConfig;
         private UniTaskCompletionSource<bool> completionSource;
+
+        public bool IsPlaying => source.isPlaying;
         
         public void SetDependencies(AudioClipConfig clipConfig)
         {
@@ -21,7 +23,7 @@ namespace Client.Audio.SfxPlayers
         {
             source.loop = isLooped;
             source.Play();
-            await UniTask.WaitWhile(IsPlaying);
+            await UniTask.WaitWhile(() => IsPlaying);
         }
 
         public void Pause()
@@ -46,11 +48,6 @@ namespace Client.Audio.SfxPlayers
             source.loop = false;
             source.Stop();
             source.clip = null;
-        }
-        
-        private bool IsPlaying()
-        {
-            return source.isPlaying;
         }
     }
 }

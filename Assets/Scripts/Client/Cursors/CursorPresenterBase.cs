@@ -43,7 +43,8 @@ namespace Client.Cursors
         {
             if(!isEnabled)
                 return;
-            
+         
+            OnPointerMoveAbstract(inputPos);
             CursorInputHandler.HandlePointerMove(inputPos);
         }
 
@@ -82,6 +83,7 @@ namespace Client.Cursors
 
         public void Enable()
         {
+            TriggerEventReceiver.gameObject.SetActive(true);
             isEnabled = true;
             EnableAbstract();
         }
@@ -89,7 +91,8 @@ namespace Client.Cursors
         public void Disable()
         {
             isEnabled = false;
-
+            TriggerEventReceiver.gameObject.SetActive(false);
+            
             DisableAbstract();
         }
     }

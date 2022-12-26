@@ -1,6 +1,5 @@
 ﻿using Client.Audio;
 using Client.Collisions;
-using Client.Painting;
 using Core.UserInput;
 using UnityEngine;
 
@@ -34,6 +33,10 @@ namespace Client.Cursors
 
         protected override void OnPointerMoveAbstract(Vector2 inputPos)
         {
+            if (isEnabled && !SfxPlaybackSource.IsPlaying)
+            {
+                SfxPlaybackSource.PlaybackAsync(true);
+            }
         }
 
         protected override void OnCollisionStay(Collider2D collider2D)
@@ -55,6 +58,7 @@ namespace Client.Cursors
 
         protected override void DisableAbstract()
         {
+            SfxPlaybackSource.Stop();
             View.gameObject.SetActive(false);
         }
     }
