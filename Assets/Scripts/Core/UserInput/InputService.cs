@@ -1,21 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core
+namespace Core.UserInput
 {
     public class InputService : IUpdatable, IDisposable
     {
         private readonly UpdateService updateService;
-        public event Action<Vector2> PointerMove;
-        public event Action PointerDown;
-        public event Action PointerUp;
+        public event Action<Vector2> PointerMoveScreenSpace;
+        public event Action<Vector2> PointerDown;
+        public event Action<Vector2> PointerUp;
 
         private bool isEnabled;
 
         public InputService(UpdateService updateService)
         {
             this.updateService = updateService;
-            
+
             updateService.Add(this);
         }
 
@@ -23,16 +23,16 @@ namespace Core
         {
             if (Input.GetMouseButtonDown(0))
             {
-                PointerDown?.Invoke();
+                PointerDown?.Invoke(Input.mousePosition);
                 isEnabled = true;
             }
             else if (isEnabled && Input.GetMouseButton(0))
             {
-                PointerMove?.Invoke(Input.mousePosition);
+                PointerMoveScreenSpace?.Invoke(Input.mousePosition);
             }
             else if (isEnabled && Input.GetMouseButtonUp(0))
             {
-                PointerUp?.Invoke();
+                PointerUp?.Invoke(Input.mousePosition);
                 isEnabled = false;
             }
         }
@@ -40,7 +40,7 @@ namespace Core
         public void Dispose()
         {
             updateService.Remove(this);
-            PointerMove = null;
+            PointerMoveScreenSpace = null;
             PointerDown = null;
             PointerUp = null;
         }

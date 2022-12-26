@@ -7,5 +7,6 @@ namespace Client.Collisions
         public event Action<TCollisionData> CollisionEnter;
         public event Action<TCollisionData> CollisionStay;
         public event Action<TCollisionData> CollisionExit;
+        public void EnableSimulation(bool isEnabled);
     }
 }

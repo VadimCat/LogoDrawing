@@ -1,5 +1,5 @@
 ﻿using Core;
-using Core.CameraProvider;
+using Core.Camera;
 using PaintIn3D;
 using UnityEngine;
 
@@ -7,30 +7,19 @@ namespace Client.Painting
 {
     public class Painter
     {
-        private readonly InputService inputService;
         private readonly CameraProvider cameraProvider;
-        private readonly P3dPaintDecal decal;
+        private readonly P3dPaintDecal paintDecal;
         
-        public Painter(InputService inputService, CameraProvider cameraProvider, P3dPaintDecal paintDecal)
+        public Painter(CameraProvider cameraProvider, P3dPaintDecal paintDecal)
         {
-            this.inputService = inputService;
             this.cameraProvider = cameraProvider;
+            this.paintDecal = paintDecal;
         }
         
-        public void Enable()
+        public void Paint(Vector3 worldPos)
         {
-            inputService.PointerMove += Paint;
-        }
-        
-        public void Disable()
-        {
-            inputService.PointerMove -= Paint;
-        }
-        
-        private void Paint(Vector2 obj)
-        {
-            var ray = cameraProvider.MainCamera.ScreenPointToRay(Input.mousePosition);
-
+            // var ray = cameraProvider.MainCamera.ray(worldPos);
+            var ray = new Ray(worldPos, Vector3.forward);
             if (Physics.Raycast(ray, out var hit))
             {
                 //Comments from P3DPaintFromCode
@@ -39,7 +28,7 @@ namespace Client.Painting
                 var seed     = 0; // If this paint uses modifiers that aren't marked as 'Unique', then this seed will be used. This should normally be set to 0.
                 var rotation = Quaternion.LookRotation(-hit.normal); // Get the rotation of the paint. This should point TOWARD the surface we want to paint, so we use the inverse normal.
 
-                decal.HandleHitPoint(false, priority, pressure, seed, hit.point, rotation);
+                paintDecal.HandleHitPoint(false, priority, pressure, seed, hit.point, rotation);
             }
         }
     }

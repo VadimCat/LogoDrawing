@@ -114,7 +114,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6936936, y: 1.7387388}
   m_EdgeRadius: 0
---- !u!1 &3000152031736089514
+--- !u!1 &272964452368738408
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,87 +122,87 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3000152031736089516}
-  - component: {fileID: 3000152031736089519}
+  - component: {fileID: 5942971270933971765}
   m_Layer: 0
-  m_Name: Paint
+  m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3000152031736089516
+--- !u!4 &5942971270933971765
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000152031736089514}
+  m_GameObject: {fileID: 272964452368738408}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3036125221805250862}
   m_Father: {fileID: 3000152032301219230}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3000152031736089519
-MonoBehaviour:
+--- !u!1 &2831309472133981095
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000152031736089514}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3036125221805250862}
+  - component: {fileID: 3334719278147451211}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3036125221805250862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831309472133981095}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5942971270933971765}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &3334719278147451211
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831309472133981095}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b36498e7e45483f478ff74ab3f1cb21c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  targetModel: {fileID: 0}
-  group:
-    index: 0
-  targetTexture: {fileID: 0}
-  blendMode:
-    Index: 5
-    Color: {r: 1, g: 1, b: 1, a: 1}
-    Texture: {fileID: 0}
-    Kernel: 1
-    Channels: {x: 1, y: 1, z: 1, w: 1}
-  texture: {fileID: 0}
-  shape: {fileID: 2800000, guid: eb2c4ecdfbcb4bd4eb3057da4db6fa5a, type: 3}
-  shapeChannel: 3
-  color: {r: 1, g: 1, b: 1, a: 1}
-  opacity: 1
-  angle: 0
-  scale: {x: 1, y: 1, z: 15}
-  radius: 0.15
-  hardness: 1
-  wrapping: 0
-  normalFront: 0.9
-  normalBack: 0
-  normalFade: 0.1
-  tileTexture: {fileID: 0}
-  tileTransform: {fileID: 0}
-  tileOpacity: 3
-  tileTransition: 4
-  modifiers:
-    modifiers:
-    - rid: 0
-    modifierDatas: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 0
-      type: {class: P3dModifyAngleRandom, ns: PaintIn3D, asm: PaintIn3D}
-      data:
-        preview: 1
-        unique: 1
-        min: -180
-        max: 180
-        blend: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.2, y: 1.5}
+  - {x: 1.2, y: 1.5}
+  - {x: 1.2, y: -1.5}
+  - {x: -1.2, y: -1.5}
+  - {x: -1.2, y: 1.5}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &3000152032301219228
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3000152031736089516}
+  - {fileID: 5942971270933971765}
   - {fileID: 6068054454371401199}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -250,7 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counter: {fileID: 6748589024762582394}
-  decal: {fileID: 3000152031736089519}
   coloringConfig: {fileID: 11400000, guid: 3b16ed59170f1d043b175315711bc193, type: 2}
 --- !u!1 &3374282121746761620
 GameObject:
@@ -458,7 +457,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 8139499672289258841}
-  cooldown: -42.027416
+  cooldown: -149.24243
   currentReader:
     requested: 0
     buffer: {fileID: 0}
@@ -785,7 +784,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 8985728579124261386}
-  cooldown: -42.027416
+  cooldown: -149.24243
   currentReader:
     requested: 0
     buffer: {fileID: 0}

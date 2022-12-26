@@ -1,11 +1,9 @@
 ﻿using System;
-using Client.UI.Screens;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Utils;
 
-namespace Client.Screens
+namespace Client.UI.Screens
 {
     public class BackgroundService : MonoBehaviour
     {

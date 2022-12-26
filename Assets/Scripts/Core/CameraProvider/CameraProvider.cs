@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Core.CameraProvider
+namespace Core.Camera
 {
     public class CameraProvider
     {
-        private Camera mainCamera;
+        private UnityEngine.Camera mainCamera;
 
-        public Camera MainCamera => mainCamera;
+        public UnityEngine.Camera MainCamera => mainCamera;
 
         public CameraProvider()
         {
@@ -16,7 +16,7 @@ namespace Core.CameraProvider
 
         private void ChangeCamera(Scene arg0, LoadSceneMode arg1)
         {
-            mainCamera = MainCamera;
+            mainCamera = UnityEngine.Camera.main;
         }
     }
 }

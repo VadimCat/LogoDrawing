@@ -1,12 +1,10 @@
-﻿using PaintIn3D;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 
 namespace SceneView
 {
     public class LevelViewContainer : MonoBehaviour, IUpdatable
     {
-        [SerializeField] private P3dHitScreen hitScreen;
         public ReactiveProperty<float> Progress => progress;
 
         private UpdateService updateService;
@@ -24,9 +22,8 @@ namespace SceneView
             levelView = Instantiate(dirtView, transform);
         }
 
-        public void EnableColoring(bool enable)
+        public void EnableProgressUpdate(bool enable)
         {
-            hitScreen.enabled = enable;
             if (enable)
             {
                 updateService.Add(this);
