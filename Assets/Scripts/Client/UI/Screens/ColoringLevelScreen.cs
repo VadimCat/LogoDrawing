@@ -13,15 +13,20 @@ namespace Client.Screens
         {
             levelName.text = name;
         }
-
+        
         public void SetCleaningProgress(float progress)
         {
             loadingBar.SetLoadingProgress(GetThresholdProgress(progress));
         }
-
-        public void SetColoringProgress(float progress)
+        
+        public void UpdateCleaningProgress(float progress)
         {
-            loadingBar.SetLoadingProgress(.5f + GetThresholdProgress(progress));
+            loadingBar.UpdateLoadingProgress(GetThresholdProgress(progress));
+        }
+        
+        public void UpdateColoringProgress(float progress)
+        {
+            loadingBar.UpdateLoadingProgress(.5f + GetThresholdProgress(progress));
         }
 
         public void PlayCleaningCompleteVfx()
