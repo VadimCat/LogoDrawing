@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Data.ScriptableObjects
+namespace Client.UI.Compliments
 {
     [CreateAssetMenu]
-    public class ComplimentsWordsAssets : ScriptableObject
+    public class ComplimentsWordsAsset : ScriptableObject
     {
         private readonly Random random = new();
 
         [SerializeField] private List<string> words;
-        [SerializeField] private List<Color> colors = new List<Color>(){};
+        [SerializeField] private List<Color> colors = new();
 
 
         public string GetRandomWord()

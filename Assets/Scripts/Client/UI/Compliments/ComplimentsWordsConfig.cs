@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Client.UI
+namespace Client.UI.Compliments
 {
     [CreateAssetMenu]
     public class ComplimentsWordsConfig : ScriptableObject

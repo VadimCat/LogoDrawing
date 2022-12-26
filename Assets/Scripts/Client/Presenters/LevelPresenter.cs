@@ -1,10 +1,10 @@
 ﻿using System;
 using Client.Audio;
 using Client.Screens;
+using Client.UI.Compliments;
 using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
-using UI;
 using Utils.Client;
 
 namespace Client.Presenters

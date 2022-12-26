@@ -1,26 +1,23 @@
-using System;
-using Client.UI;
-using Data.ScriptableObjects;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace UI
+namespace Client.UI.Compliments
 {
     public class ComplimentsWordsService : MonoBehaviour
     {
         [SerializeField] private TMP_Text complimentText;
-        [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
+        [SerializeField] private ComplimentsWordsAsset complimentsWordsAsset;
         [SerializeField] private ComplimentsWordsConfig complimentsWordsConfig;
 
         private Sequence animationsSequence;
 
         public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {
-            complimentText.text = complimentsWordsAssets.GetRandomWord();
+            complimentText.text = complimentsWordsAsset.GetRandomWord();
             complimentText.transform.position = startPosition;
-            complimentText.color = complimentsWordsAssets.GetRandomColor();
+            complimentText.color = complimentsWordsAsset.GetRandomColor();
 
             var targetPosition = GetTargetPosition(startPosition);
             var angleFactor = targetPosition.x > startPosition.x ? -1 : 1;
