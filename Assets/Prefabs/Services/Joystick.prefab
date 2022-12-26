@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thumb: {fileID: 3537872790862839970}
   movementAreaRadius: 75
-  deadZoneRadius: 0
+  deadZoneRadius: 20
   isDynamicJoystick: 1
   dynamicJoystickMovementArea: {fileID: 0}
   canFollowPointer: 0

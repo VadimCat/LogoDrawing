@@ -8,10 +8,21 @@ namespace Client.Screens
 {
     public class TextLoadingBar : MonoBehaviour
     {
+        private const float SPEED_PERCENT = .5f;
         [SerializeField] private Image loadingBar;
         [SerializeField] private TMP_Text progress;
 
+        private Tween currentTween;
         private const string ProgressTemplate = "{0}%";
+
+        public void UpdateLoadingProgress(float normalProgress)
+        {
+            var duration = normalProgress * SPEED_PERCENT;
+            
+            currentTween?.Kill();
+            currentTween = loadingBar.DOFillAmount(normalProgress, duration).SetLink(gameObject);
+            currentTween.onUpdate += () => SetTextProgress(loadingBar.fillAmount);
+        }
 
         public void SetLoadingProgress(float normalProgress)
         {

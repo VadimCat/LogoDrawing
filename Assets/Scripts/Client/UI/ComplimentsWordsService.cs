@@ -1,15 +1,15 @@
-using Data.ScriptableObjects;
+using Client.UI.Compliments;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace UI
+namespace Client.UI
 {
     public class ComplimentsWordsService : MonoBehaviour
     {
         [SerializeField] private TMP_Text complimentText;
-        [SerializeField] private ComplimentsWordsAssets complimentsWordsAssets;
+        [SerializeField] private ComplimentsWordsAsset complimentsWordsAssets;
         
         public void ShowRandomFromScreenPosition(Vector2 startPosition)
         {

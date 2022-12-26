@@ -4,12 +4,12 @@ using Client.Cursors;
 using Client.Painting;
 using Client.Pools;
 using Client.Screens;
+using Client.UI;
 using Client.UI.Screens;
 using Core;
 using Core.Camera;
 using Core.UserInput;
 using SceneView;
-using UI;
 using UnityEngine;
 using Utils.Client;
 
