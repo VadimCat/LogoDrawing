@@ -60,6 +60,7 @@ MonoBehaviour:
   complimentsWordsService: {fileID: 4032787900542854738}
   audioService: {fileID: 2999049635880329263}
   joystickInputConfig: {fileID: 11400000, guid: d79aa35fccd22484f85b5df1263a6022, type: 2}
+  directCursorInputHandlerConfig: {fileID: 11400000, guid: f4c5eb0d218799f41a3927bd163bbf14, type: 2}
   painterInstaller: {fileID: 0}
   joystickInstaller: {fileID: 0}
 --- !u!1 &3889840572335614494

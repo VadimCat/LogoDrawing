@@ -3,7 +3,6 @@ using Client.Audio.SfxPlayers;
 using Client.Cursors;
 using Client.Painting;
 using Client.Pools;
-using Client.UI;
 using Client.UI.Compliments;
 using Client.UI.Screens;
 using Core;
@@ -26,6 +25,7 @@ namespace Client
         [SerializeField] private ComplimentsWordsService complimentsWordsService;
         [SerializeField] private AudioService audioService;
         [SerializeField] private JoystickInputConfig joystickInputConfig;
+        [SerializeField] private DirectCursorInputHandlerConfig directCursorInputHandlerConfig;
 
         [Header("Installers")]
         [SerializeField] private PainterInstaller painterInstaller;
@@ -81,7 +81,7 @@ namespace Client
 
         private void InstallСursor()
         {
-            var factory = new CursorInputHandlerFactory(context, joystickInputConfig);
+            var factory = new CursorInputHandlerFactory(context, joystickInputConfig, directCursorInputHandlerConfig);
 
             cursorService.SetDependencies(context.GetService<InputService>(), audioService,
                 context.GetService<Painter>(), context.GetService<CameraProvider>(),

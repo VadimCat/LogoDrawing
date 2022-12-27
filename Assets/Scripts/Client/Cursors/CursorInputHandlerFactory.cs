@@ -1,8 +1,6 @@
-﻿using Client.Painting;
-using Core;
+﻿using Core;
 using Core.Camera;
 using Core.UserInput;
-using Cysharp.Threading.Tasks;
 
 namespace Client.Cursors
 {
@@ -10,11 +8,13 @@ namespace Client.Cursors
     {
         private readonly Context context;
         private readonly JoystickInputConfig joystickInputConfig;
+        private readonly DirectCursorInputHandlerConfig directCursorInputHandlerConfig;
 
-        public CursorInputHandlerFactory(Context context, JoystickInputConfig joystickInputConfig)
+        public CursorInputHandlerFactory(Context context, JoystickInputConfig joystickInputConfig, DirectCursorInputHandlerConfig directCursorInputHandlerConfig)
         {
             this.context = context;
             this.joystickInputConfig = joystickInputConfig;
+            this.directCursorInputHandlerConfig = directCursorInputHandlerConfig;
         }
 
         public ICursorInputHandler Create<TInputHandler>() where TInputHandler : class, ICursorInputHandler
@@ -22,7 +22,7 @@ namespace Client.Cursors
             if (typeof(TInputHandler) == typeof(DirectCursorInputHandler))
             {
                 return new DirectCursorInputHandler(context.GetService<CameraProvider>(),
-                    context.GetService<CursorService>().cursorRigidbody);
+                    context.GetService<CursorService>().cursorRigidbody, directCursorInputHandlerConfig);
             }
             else
             {
