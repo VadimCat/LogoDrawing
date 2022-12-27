@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8314698130419438937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0006, y: -0.00084, z: -0.03}
-  m_LocalScale: {x: 1.1295632, y: 1.159449, z: 1.1518}
+  m_LocalScale: {x: 1.065404, y: 1.0935923, z: 1.0863777}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6923485617744374984}
@@ -94,6 +94,18 @@ PrefabInstance:
     - target: {fileID: 1911109923, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030032003270893508, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5980649
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030032003270893508, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6401156
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030032003270893508, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.579662
       objectReference: {fileID: 0}
     - target: {fileID: 1218416445588848063, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive
@@ -174,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 6096441270142688416, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f04419b49a40544ba5375c45387a24a, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6642894732474874922, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: cooldown
       value: -44.07527
@@ -189,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 31584b60f04665a4fa59869bc1d5ce65, type: 3}
     - target: {fileID: 6748589024762582394, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: cooldown
-      value: -98.25772
+      value: -108.81344
       objectReference: {fileID: 0}
     - target: {fileID: 7444262036418379654, guid: 24f88ba2d933d664daf563b34db0c0cd, type: 3}
       propertyPath: m_IsActive

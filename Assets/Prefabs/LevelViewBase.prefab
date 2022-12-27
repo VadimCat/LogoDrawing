@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 1218416445588848063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.03}
-  m_LocalScale: {x: 1.691074, y: 1.7355721, z: 1.6716}
+  m_LocalScale: {x: 1.5980649, y: 1.6401156, z: 1.579662}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6068054454371401199}
@@ -449,7 +449,7 @@ MonoBehaviour:
   async: 1
   downsampleSteps: 3
   registeredPaintableTexture: {fileID: 8985728579124261386}
-  cooldown: -199.64796
+  cooldown: -225.57233
   currentReader:
     requested: 0
     buffer: {fileID: 0}

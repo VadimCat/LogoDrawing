@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 7053141291014775416}
   spriteRenderer: {fileID: 8028073118058649118}
-  drawPoint: {fileID: 0}
+  drawPoint: {fileID: 2937008804396650125}
 --- !u!1 &605632532361620969
 GameObject:
   m_ObjectHideFlags: 0
