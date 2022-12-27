@@ -28,6 +28,8 @@ namespace Client.Cursors
         private Joystick joystick;
         private CursorInputHandlerFactory cursorInputHandlerFactory;
 
+        private Vector3 initialPos;
+
         public Vector2 PointerScreenPosition { get; private set; }
 
         public void SetDependencies(InputService inputService, AudioService audioService, Painter painter,
@@ -43,6 +45,8 @@ namespace Client.Cursors
         
         public void Bootstrap()
         {
+            initialPos = trigger2DEventReceiver.transform.position;
+            
             cleaningCursor = new CleaningBrushCursorPresenter(
                 inputService,
                 trigger2DEventReceiver,
@@ -60,7 +64,6 @@ namespace Client.Cursors
                 audioService,
                 trigger2DEventReceiver.transform);
             coloringCursor.Disable();
-
         }
         
         //TODO: Make common method for all brushes activation 
@@ -82,6 +85,8 @@ namespace Client.Cursors
         {
             currentCursor?.Disable();
             currentCursor = null;
+            
+            trigger2DEventReceiver.transform.position = initialPos;
         }
 
         private void OnDestroy()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5119629567882330040}
   - component: {fileID: 5119629567882330046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CursorService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 7512192005703839218}
   - component: {fileID: 4346316995342176310}
   - component: {fileID: 990272950}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RootCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5119629569537755017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.16}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -28,7 +28,7 @@ namespace Client.Cursors
         {
             joystick.OnPointerMove(inputPos);
             var axis = joystick.Value;
-            cursorRb.MovePosition(cursorRb.transform.position + (Vector3)axis * Time.deltaTime * joystickInputConfig.Speed);
+            cursorRb.MovePosition(cursorRb.transform.position + (Vector3)axis * Time.fixedDeltaTime * joystickInputConfig.Speed);
             
             painter.Paint(cursorRb.transform.position);
         }
