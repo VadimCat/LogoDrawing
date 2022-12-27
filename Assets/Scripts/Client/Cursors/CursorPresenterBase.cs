@@ -1,6 +1,7 @@
 ﻿using Client.Audio;
 using Client.Audio.SfxPlayers;
 using Client.Collisions;
+using Client.Painting;
 using Core.UserInput;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Client.Cursors
     public abstract class CursorPresenterBase
     {
         protected readonly Vector2 DisabledDelta = new Vector2(10, 10);
+        private readonly Painter painter;
         protected readonly Trigger2DEventReceiver TriggerEventReceiver;
         protected readonly ICursorInputHandler CursorInputHandler;
         protected readonly InputService InputService;
@@ -18,10 +20,11 @@ namespace Client.Cursors
 
         protected bool isEnabled;
         
-        public CursorPresenterBase(InputService inputService, Trigger2DEventReceiver triggerEventReceiver,
+        public CursorPresenterBase(Painter painter, InputService inputService, Trigger2DEventReceiver triggerEventReceiver,
             CursorViewData cursorViewData, ICursorInputHandler cursorInputHandler,
             AudioService audioService, Transform cursorRoot)
         {
+            this.painter = painter;
             this.TriggerEventReceiver = triggerEventReceiver;
             this.CursorInputHandler = cursorInputHandler;
             this.InputService = inputService;
@@ -46,6 +49,7 @@ namespace Client.Cursors
          
             OnPointerMoveAbstract(inputPos);
             CursorInputHandler.HandlePointerMove(inputPos);
+            painter.Paint(View.DrawPoint.position);
         }
 
         private void OnPointerUp(Vector2 inputPos)

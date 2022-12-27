@@ -22,11 +22,11 @@ namespace Client.Cursors
             if (typeof(TInputHandler) == typeof(DirectCursorInputHandler))
             {
                 return new DirectCursorInputHandler(context.GetService<CameraProvider>(),
-                    context.GetService<Painter>(), context.GetService<CursorService>().cursorRigidbody);
+                    context.GetService<CursorService>().cursorRigidbody);
             }
             else
             {
-                return new JoystickInputHandler(context.GetService<Painter>(), context.GetService<Joystick>(),
+                return new JoystickInputHandler(context.GetService<Joystick>(), 
                     context.GetService<CursorService>().cursorRigidbody, joystickInputConfig);
             }
         }

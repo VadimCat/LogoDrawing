@@ -49,6 +49,7 @@ namespace Client.Cursors
             initialPos = trigger2DEventReceiver.transform.position;
             
             cleaningCursor = new CleaningBrushCursorPresenter(
+                painter, 
                 inputService,
                 trigger2DEventReceiver,
                 cleaningCursorViewData,
@@ -58,6 +59,7 @@ namespace Client.Cursors
             cleaningCursor.Disable();
 
             coloringCursor = new ColoringCursorPresenter(
+                painter, 
                 inputService,
                 trigger2DEventReceiver,
                 coloringCursorViewData,

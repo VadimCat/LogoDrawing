@@ -1,5 +1,6 @@
 ﻿using Client.Audio;
 using Client.Collisions;
+using Client.Painting;
 using Core.UserInput;
 using UnityEngine;
 
@@ -7,10 +8,10 @@ namespace Client.Cursors
 {
     public class CleaningBrushCursorPresenter : CursorPresenterBase
     {
-        public CleaningBrushCursorPresenter(InputService inputService, Trigger2DEventReceiver triggerEventReceiver,
+        public CleaningBrushCursorPresenter(Painter painter, InputService inputService, Trigger2DEventReceiver triggerEventReceiver,
             CursorViewData cursorViewData, ICursorInputHandler cursorInputHandler,
             AudioService audioService, Transform cursorRoot) :
-            base(inputService, triggerEventReceiver, cursorViewData, cursorInputHandler, audioService, cursorRoot)
+            base(painter, inputService, triggerEventReceiver, cursorViewData, cursorInputHandler, audioService, cursorRoot)
         {
         }
 
