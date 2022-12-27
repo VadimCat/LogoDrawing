@@ -8,7 +8,9 @@ using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Models;
 using SceneView;
+using UnityEngine;
 using Utils.Client;
+using Random = UnityEngine.Random;
 
 namespace Client.Presenters
 {
@@ -133,7 +135,7 @@ namespace Client.Presenters
         private async void SetColoringStage()
         {
             levelScreen.PlayCleaningCompleteVfx();
-            complimentsWordsService.ShowRandomFromScreenPosition(cursorService.PointerScreenPosition);
+            complimentsWordsService.ShowRandomFromScreenPosition(complimentsWordsService.transform.position + Vector3.one * Random.Range(-200, 200));
 
             view.EnableProgressUpdate(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
