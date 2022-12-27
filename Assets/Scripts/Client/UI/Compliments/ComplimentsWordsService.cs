@@ -21,10 +21,10 @@ namespace Client.UI.Compliments
 
             var targetPosition = GetTargetPosition(startPosition);
             var angleFactor = targetPosition.x > startPosition.x ? -1 : 1;
-            StartTweensAnimations(targetPosition, angleFactor);
+            StartAnimation(targetPosition, angleFactor);
         }
 
-        private void StartTweensAnimations(Vector2 targetPosition, int angleFactor)
+        private void StartAnimation(Vector2 targetPosition, int angleFactor)
         {
             complimentText.transform.rotation = Quaternion.identity;
 

@@ -1,3 +1,4 @@
+using System;
 using Client.Audio;
 using Client.Collisions;
 using Client.Painting;
@@ -30,7 +31,7 @@ namespace Client.Cursors
 
         private Vector3 initialPos;
 
-        public Vector2 PointerScreenPosition { get; private set; }
+        public Vector2 LastCursorPosition {get; private set; } 
 
         public void SetDependencies(InputService inputService, AudioService audioService, Painter painter,
             CameraProvider cameraProvider, Joystick joystick, CursorInputHandlerFactory cursorInputHandlerFactory)
@@ -85,7 +86,8 @@ namespace Client.Cursors
         {
             currentCursor?.Disable();
             currentCursor = null;
-            
+
+            LastCursorPosition = trigger2DEventReceiver.transform.position; 
             trigger2DEventReceiver.transform.position = initialPos;
         }
 

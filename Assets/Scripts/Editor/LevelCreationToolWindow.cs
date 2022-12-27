@@ -98,7 +98,7 @@ namespace Editor
         private void CreateLevel(string levelName, Sprite maskSprite, Sprite colorSprite)
         {
             var material = CreateLevelMaterial(levelName, maskSprite);
-            var maskSavedPref = CreateMaskPref(levelName, maskSprite);
+            var maskSavedPref = CreateMaskPref(levelName, material);
             var colorSavedPref = CreateColorPref(levelName, colorSprite, material);
 
             AddConfig(levelName, maskSavedPref, colorSavedPref, colorSprite);
@@ -179,13 +179,13 @@ namespace Editor
             return colorSavedPref;
         }
 
-        private static GameObject CreateMaskPref(string levelName, Sprite sprite)
+        private static GameObject CreateMaskPref(string levelName, Material material)
         {
             string path = Path.Combine("Assets\\Prefabs\\Levels", levelName, $"{levelName}Dirt.prefab");
             
             var levelPref = PrefabUtility.InstantiatePrefab(levelBaseGrey) as GameObject;
-            var sprites = levelPref.GetComponentsInChildren<SpriteRenderer>();
-            sprites[1].sprite = sprite;
+            var sprites = levelPref.GetComponentsInChildren<MeshRenderer>();
+            sprites[1].material = material;
 
             var maskSavedPref = PrefabUtility.SaveAsPrefabAsset(levelPref, path);
             DestroyImmediate(levelPref);
