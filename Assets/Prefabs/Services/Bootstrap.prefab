@@ -305,6 +305,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907379513116661682}
     m_Modifications:
+    - target: {fileID: 5982997632185443839, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982997632185443839, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 6669128334661287244, guid: 422e870f1e656684988b108db764a5cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -392,6 +400,14 @@ PrefabInstance:
     - target: {fileID: 6669128334661287245, guid: 422e870f1e656684988b108db764a5cf, type: 3}
       propertyPath: m_Name
       value: ScreenNavigator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886787662599524953, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886787662599524953, guid: 422e870f1e656684988b108db764a5cf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422e870f1e656684988b108db764a5cf, type: 3}

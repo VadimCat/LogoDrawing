@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db52a4fba3b4d52996603c23a292206, type: 3}
   m_Name: JoystickInputConfig
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 1.5
