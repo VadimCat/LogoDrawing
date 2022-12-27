@@ -3,7 +3,7 @@ using Client.Audio;
 using Client.Cursors;
 using Client.Painting;
 using Client.Screens;
-using Client.UI;
+using Client.UI.Compliments;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Models;

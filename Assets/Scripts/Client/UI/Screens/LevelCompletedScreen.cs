@@ -1,11 +1,12 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
-namespace Client.Screens
+namespace Client.UI.Screens
 {
     public class LevelCompletedScreen : BaseScreen
     {
@@ -54,10 +55,10 @@ namespace Client.Screens
             this.levelName.text = string.Format(levelNamePattern, levelNumber);
         }
 
-        private void FireNext()
+        private async void FireNext()
         {
-            nextButton.transform.DOScale(0.9f, 0.1f)
-            .OnComplete(Complete);
+            await nextButton.transform.DOScale(0.9f, 0.1f).AwaitForComplete();
+            Complete();
         }
 
         private void Complete()

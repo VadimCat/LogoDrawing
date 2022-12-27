@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Client.Screens
+namespace Client.UI.Screens
 {
     public abstract class BaseScreen : MonoBehaviour
     {

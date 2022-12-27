@@ -50,9 +50,6 @@ namespace Client.Cursors
 
         private void OnPointerUp(Vector2 inputPos)
         {
-            if(!isEnabled)
-                return;
-            
             OnPointerUpAbstract(inputPos);
             CursorInputHandler.HandlePointerUp(inputPos);
         }
@@ -92,6 +89,7 @@ namespace Client.Cursors
         {
             isEnabled = false;
             TriggerEventReceiver.gameObject.SetActive(false);
+            // OnPointerUp();
             
             DisableAbstract();
         }

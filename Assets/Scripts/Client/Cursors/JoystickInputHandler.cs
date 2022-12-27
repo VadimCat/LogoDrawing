@@ -37,5 +37,14 @@ namespace Client.Cursors
         {
             joystick.OnPointerUp(inputPos);
         }
+
+        public void Enable()
+        {
+        }
+
+        public void Disable()
+        {
+            joystick.gameObject.SetActive(false);
+        }
     }
 }
