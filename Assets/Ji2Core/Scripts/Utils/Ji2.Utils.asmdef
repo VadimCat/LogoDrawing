@@ -1,10 +1,7 @@
 {
-    "name": "Models",
+    "name": "Ji2.Utils",
     "rootNamespace": "",
-    "references": [
-        "GUID:b96b642de575e3c43989b09990b38818",
-        "GUID:75d9021ae7bc8d44a8fcd6946a25ab5d"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

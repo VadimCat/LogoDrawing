@@ -1,17 +1,18 @@
-﻿using Client.Screens;
-using Client.UI.Screens;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using Ji2Core.Core.ScreenNavigation;
+using Ji2Core.UI.Screens;
 using UnityEngine;
 
-namespace Client
+namespace Client.Presenters
 {
+    //TODO: Unify to be available to move Ji2.CorePresenters
     public class LoadingPresenter
     {
         private readonly ScreenNavigator screenNavigator;
         private readonly LevelService levelService;
         private readonly float forceLoadingDuration;
 
-        private AppLoadingScreen loadingScreen;
+        private LoadingScreen loadingScreen;
 
         public LoadingPresenter(ScreenNavigator screenNavigator, LevelService levelService)
         {
@@ -39,26 +40,26 @@ namespace Client
         
         private async UniTask Load(float forceLoadingDuration)
         {
-            loadingScreen = await screenNavigator.PushScreen<AppLoadingScreen>();
+            loadingScreen = await screenNavigator.PushScreen<LoadingScreen>();
 
             var fakeProgressTask = loadingScreen.AnimateLoadingBar(forceLoadingDuration);
             var nextLevel = await levelService.LoadNextLevelAsync();
 
             await fakeProgressTask;
-            await screenNavigator.CloseScreen<AppLoadingScreen>();
+            await screenNavigator.CloseScreen<LoadingScreen>();
             
             nextLevel.Start();
         }
         
         private async UniTask Load()
         {
-            loadingScreen = await screenNavigator.PushScreen<AppLoadingScreen>();
+            loadingScreen = await screenNavigator.PushScreen<LoadingScreen>();
             levelService.OnProgressUpdate += UpdateLoadingScreen;
             var level = await levelService.LoadNextLevelAsync();
             
             levelService.OnProgressUpdate -= UpdateLoadingScreen;
 
-            await screenNavigator.CloseScreen<AppLoadingScreen>();
+            await screenNavigator.CloseScreen<LoadingScreen>();
             level.Start();
         }
         

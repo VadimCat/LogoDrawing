@@ -1,12 +1,14 @@
 using System;
-using Client.Audio;
 using Client.Cursors;
 using Client.Painting;
 using Client.Presenters;
-using Client.UI.Compliments;
 using Client.UI.Screens;
 using Core;
 using Cysharp.Threading.Tasks;
+using Ji2Core.Core.Compliments;
+using Ji2Core.Core.ScreenNavigation;
+using Ji2Core.Core.Audio;
+using Ji2Core.Models;
 using Models;
 using SceneView;
 using UnityEngine;
@@ -65,7 +67,7 @@ namespace Client
             ForceFullProgress();
             updateService.Remove(this);
 
-            backgroundService.SwitchBackground(Background.Game);
+            backgroundService.SwitchBackground(BackgroundService.Background.Game);
             var scene = SceneManager.GetSceneByName("LevelScene");
             SceneManager.SetActiveScene(scene);
             var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);

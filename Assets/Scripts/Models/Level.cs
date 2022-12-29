@@ -1,4 +1,5 @@
 using System;
+using Ji2Core.Models;
 using UnityEngine;
 using Utils;
 

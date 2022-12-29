@@ -1,11 +1,12 @@
 ﻿using System;
-using Client.Audio;
 using Client.Cursors;
 using Client.Painting;
 using Client.Screens;
-using Client.UI.Compliments;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
+using Ji2Core.Core.Compliments;
+using Ji2Core.Core.ScreenNavigation;
+using Ji2Core.Core.Audio;
 using Models;
 using SceneView;
 using UnityEngine;
