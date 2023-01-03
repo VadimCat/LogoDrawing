@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace YMMJSONUtils
+namespace Ji2Core.Plugins.AppMetrica
 {
     public enum JObjectKind
     {

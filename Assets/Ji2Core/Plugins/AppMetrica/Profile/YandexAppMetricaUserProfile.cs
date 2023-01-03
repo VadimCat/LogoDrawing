@@ -8,24 +8,27 @@
 
 using System.Collections.Generic;
 
-public class YandexAppMetricaUserProfile
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    private readonly List<YandexAppMetricaUserProfileUpdate> _updates = new List<YandexAppMetricaUserProfileUpdate>();
-
-    public List<YandexAppMetricaUserProfileUpdate> GetUserProfileUpdates()
+    public class YandexAppMetricaUserProfile
     {
-        return new List<YandexAppMetricaUserProfileUpdate>(_updates);
-    }
+        private readonly List<YandexAppMetricaUserProfileUpdate> _updates = new List<YandexAppMetricaUserProfileUpdate>();
 
-    public YandexAppMetricaUserProfile Apply(YandexAppMetricaUserProfileUpdate update)
-    {
-        _updates.Add(update);
-        return this;
-    }
+        public List<YandexAppMetricaUserProfileUpdate> GetUserProfileUpdates()
+        {
+            return new List<YandexAppMetricaUserProfileUpdate>(_updates);
+        }
 
-    public YandexAppMetricaUserProfile ApplyFromArray(List<YandexAppMetricaUserProfileUpdate> updates)
-    {
-        _updates.AddRange(updates);
-        return this;
+        public YandexAppMetricaUserProfile Apply(YandexAppMetricaUserProfileUpdate update)
+        {
+            _updates.Add(update);
+            return this;
+        }
+
+        public YandexAppMetricaUserProfile ApplyFromArray(List<YandexAppMetricaUserProfileUpdate> updates)
+        {
+            _updates.AddRange(updates);
+            return this;
+        }
     }
 }

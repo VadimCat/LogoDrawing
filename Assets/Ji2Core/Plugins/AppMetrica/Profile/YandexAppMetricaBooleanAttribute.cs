@@ -6,29 +6,32 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public class YandexAppMetricaBooleanAttribute
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    private const string AttributeName = "customBoolean";
-
-    private readonly string _key;
-
-    public YandexAppMetricaBooleanAttribute(string key)
+    public class YandexAppMetricaBooleanAttribute
     {
-        _key = key;
-    }
+        private const string AttributeName = "customBoolean";
 
-    public YandexAppMetricaUserProfileUpdate WithValue(bool value)
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", _key, value);
-    }
+        private readonly string _key;
 
-    public YandexAppMetricaUserProfileUpdate WithValueIfUndefined(bool value)
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueIfUndefined", _key, value);
-    }
+        public YandexAppMetricaBooleanAttribute(string key)
+        {
+            _key = key;
+        }
 
-    public YandexAppMetricaUserProfileUpdate WithValueReset()
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", _key);
+        public YandexAppMetricaUserProfileUpdate WithValue(bool value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", _key, value);
+        }
+
+        public YandexAppMetricaUserProfileUpdate WithValueIfUndefined(bool value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueIfUndefined", _key, value);
+        }
+
+        public YandexAppMetricaUserProfileUpdate WithValueReset()
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", _key);
+        }
     }
 }

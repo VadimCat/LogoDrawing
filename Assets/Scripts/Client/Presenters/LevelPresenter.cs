@@ -1,12 +1,12 @@
 ﻿using System;
 using Client.Cursors;
 using Client.Painting;
-using Client.Screens;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
+using Ji2Core.Plugins.AppMetrica;
 using Models;
 using SceneView;
 using UnityEngine;
@@ -16,7 +16,7 @@ namespace Client.Presenters
 {
     public class LevelPresenter
     {
-        private const string levelNamePattern = "LEVEL {0}";
+        private const string LEVEL_NAME_PATTERN = "LEVEL {0}";
         private readonly Level level;
         private readonly LevelViewData levelData;
         private readonly Painter painter;
@@ -28,7 +28,7 @@ namespace Client.Presenters
         private readonly AudioService audioService;
 
         private ColoringLevelScreen levelScreen;
-
+        
         public LevelPresenter(Level level, LevelViewContainer view, LevelViewData levelData, Painter painter,
             LoadingPresenterFactory loadingPresenterFactory, ScreenNavigator screenNavigator, CursorService cursorService,
             ComplimentsWordsService complimentsWordsService, AudioService audioService)
@@ -61,13 +61,15 @@ namespace Client.Presenters
 
         public async void Start()
         {
+            AppMetrica.Instance.ReportEvent("TEST_START");
+            
             LoadFromSave(level);
 
             view.Progress.OnValueChanged += level.UpdateColoringProgress;
 
             level.OnColoringComplete += CompleteLevel;
             levelScreen = await screenNavigator.PushScreen<ColoringLevelScreen>();
-            levelScreen.SetLevelName(string.Format(levelNamePattern, level.LevelPlayedTotal + 1));
+            levelScreen.SetLevelName(string.Format(LEVEL_NAME_PATTERN, level.LevelPlayedTotal + 1));
             switch (level.Stage.Value)
             {
                 case ColoringStage.Cleaning:
@@ -99,6 +101,8 @@ namespace Client.Presenters
 
         private async void CompleteLevel()
         {
+            AppMetrica.Instance.ReportEvent("TEST_FINISH");
+
             cursorService.DisableCurrent();
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;

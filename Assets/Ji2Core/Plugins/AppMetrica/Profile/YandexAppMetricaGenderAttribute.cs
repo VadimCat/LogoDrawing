@@ -6,24 +6,27 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public class YandexAppMetricaGenderAttribute
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    public enum Gender
+    public class YandexAppMetricaGenderAttribute
     {
-        MALE,
-        FEMALE,
-        OTHER
-    }
+        public enum Gender
+        {
+            MALE,
+            FEMALE,
+            OTHER
+        }
 
-    private const string AttributeName = "gender";
+        private const string AttributeName = "gender";
 
-    public YandexAppMetricaUserProfileUpdate WithValue(Gender value)
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", null, value.ToString());
-    }
+        public YandexAppMetricaUserProfileUpdate WithValue(Gender value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", null, value.ToString());
+        }
 
-    public YandexAppMetricaUserProfileUpdate WithValueReset()
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", null);
+        public YandexAppMetricaUserProfileUpdate WithValueReset()
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", null);
+        }
     }
 }

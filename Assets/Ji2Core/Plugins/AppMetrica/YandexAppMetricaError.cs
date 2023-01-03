@@ -6,9 +6,12 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public enum YandexAppMetricaRequestDeviceIDError
+namespace Ji2Core.Plugins.AppMetrica
 {
-    UNKNOWN,
-    NETWORK,
-    INVALID_RESPONSE
+    public enum YandexAppMetricaRequestDeviceIDError
+    {
+        UNKNOWN,
+        NETWORK,
+        INVALID_RESPONSE
+    }
 }

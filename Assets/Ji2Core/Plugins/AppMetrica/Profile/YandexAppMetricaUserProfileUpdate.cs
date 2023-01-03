@@ -6,25 +6,28 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public struct YandexAppMetricaUserProfileUpdate
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    public string AttributeName { get; set; }
-
-    public string MethodName { get; set; }
-
-    public string Key { get; set; }
-
-    public object[] Values { get; set; }
-
-    public YandexAppMetricaUserProfileUpdate(
-        string attributeName,
-        string methodName,
-        string key,
-        params object[] values) : this()
+    public struct YandexAppMetricaUserProfileUpdate
     {
-        AttributeName = attributeName;
-        MethodName = methodName;
-        Key = key;
-        Values = values;
+        public string AttributeName { get; set; }
+
+        public string MethodName { get; set; }
+
+        public string Key { get; set; }
+
+        public object[] Values { get; set; }
+
+        public YandexAppMetricaUserProfileUpdate(
+            string attributeName,
+            string methodName,
+            string key,
+            params object[] values) : this()
+        {
+            AttributeName = attributeName;
+            MethodName = methodName;
+            Key = key;
+            Values = values;
+        }
     }
 }

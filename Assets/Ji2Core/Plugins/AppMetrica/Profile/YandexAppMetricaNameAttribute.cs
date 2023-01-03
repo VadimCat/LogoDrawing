@@ -6,17 +6,20 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public class YandexAppMetricaNameAttribute
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    private const string AttributeName = "name";
-
-    public YandexAppMetricaUserProfileUpdate WithValue(string value)
+    public class YandexAppMetricaNameAttribute
     {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", null, value);
-    }
+        private const string AttributeName = "name";
 
-    public YandexAppMetricaUserProfileUpdate WithValueReset()
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", null);
+        public YandexAppMetricaUserProfileUpdate WithValue(string value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", null, value);
+        }
+
+        public YandexAppMetricaUserProfileUpdate WithValueReset()
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", null);
+        }
     }
 }

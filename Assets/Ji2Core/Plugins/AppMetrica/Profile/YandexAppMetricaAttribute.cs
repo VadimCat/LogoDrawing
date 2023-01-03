@@ -6,45 +6,48 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public abstract class YandexAppMetricaAttribute
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    public static YandexAppMetricaBirthDateAttribute BirthDate()
+    public abstract class YandexAppMetricaAttribute
     {
-        return new YandexAppMetricaBirthDateAttribute();
-    }
+        public static YandexAppMetricaBirthDateAttribute BirthDate()
+        {
+            return new YandexAppMetricaBirthDateAttribute();
+        }
 
-    public static YandexAppMetricaGenderAttribute Gender()
-    {
-        return new YandexAppMetricaGenderAttribute();
-    }
+        public static YandexAppMetricaGenderAttribute Gender()
+        {
+            return new YandexAppMetricaGenderAttribute();
+        }
 
-    public static YandexAppMetricaNameAttribute Name()
-    {
-        return new YandexAppMetricaNameAttribute();
-    }
+        public static YandexAppMetricaNameAttribute Name()
+        {
+            return new YandexAppMetricaNameAttribute();
+        }
 
-    public static YandexAppMetricaNotificationsEnabledAttribute NotificationsEnabled()
-    {
-        return new YandexAppMetricaNotificationsEnabledAttribute();
-    }
+        public static YandexAppMetricaNotificationsEnabledAttribute NotificationsEnabled()
+        {
+            return new YandexAppMetricaNotificationsEnabledAttribute();
+        }
 
-    public static YandexAppMetricaBooleanAttribute CustomBoolean(string key)
-    {
-        return new YandexAppMetricaBooleanAttribute(key);
-    }
+        public static YandexAppMetricaBooleanAttribute CustomBoolean(string key)
+        {
+            return new YandexAppMetricaBooleanAttribute(key);
+        }
 
-    public static YandexAppMetricaCounterAttribute CustomCounter(string key)
-    {
-        return new YandexAppMetricaCounterAttribute(key);
-    }
+        public static YandexAppMetricaCounterAttribute CustomCounter(string key)
+        {
+            return new YandexAppMetricaCounterAttribute(key);
+        }
 
-    public static YandexAppMetricaNumberAttribute CustomNumber(string key)
-    {
-        return new YandexAppMetricaNumberAttribute(key);
-    }
+        public static YandexAppMetricaNumberAttribute CustomNumber(string key)
+        {
+            return new YandexAppMetricaNumberAttribute(key);
+        }
 
-    public static YandexAppMetricaStringAttribute CustomString(string key)
-    {
-        return new YandexAppMetricaStringAttribute(key);
+        public static YandexAppMetricaStringAttribute CustomString(string key)
+        {
+            return new YandexAppMetricaStringAttribute(key);
+        }
     }
 }

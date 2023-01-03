@@ -6,29 +6,32 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-public class YandexAppMetricaStringAttribute
+namespace Ji2Core.Plugins.AppMetrica.Profile
 {
-    private const string AttributeName = "customString";
-
-    private readonly string _key;
-
-    public YandexAppMetricaStringAttribute(string key)
+    public class YandexAppMetricaStringAttribute
     {
-        _key = key;
-    }
+        private const string AttributeName = "customString";
 
-    public YandexAppMetricaUserProfileUpdate WithValue(string value)
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", _key, value);
-    }
+        private readonly string _key;
 
-    public YandexAppMetricaUserProfileUpdate WithValueIfUndefined(string value)
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueIfUndefined", _key, value);
-    }
+        public YandexAppMetricaStringAttribute(string key)
+        {
+            _key = key;
+        }
 
-    public YandexAppMetricaUserProfileUpdate WithValueReset()
-    {
-        return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", _key);
+        public YandexAppMetricaUserProfileUpdate WithValue(string value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValue", _key, value);
+        }
+
+        public YandexAppMetricaUserProfileUpdate WithValueIfUndefined(string value)
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueIfUndefined", _key, value);
+        }
+
+        public YandexAppMetricaUserProfileUpdate WithValueReset()
+        {
+            return new YandexAppMetricaUserProfileUpdate(AttributeName, "withValueReset", _key);
+        }
     }
 }
