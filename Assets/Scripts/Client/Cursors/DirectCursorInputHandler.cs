@@ -1,4 +1,4 @@
-﻿using Core.Camera;
+﻿using Ji2Core.Core;
 using UnityEngine;
 
 namespace Client.Cursors

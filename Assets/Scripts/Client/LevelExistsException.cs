@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Editor
+namespace Client
 {
     public class LevelExistsException : Exception
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Utils.Client
+namespace Client
 {
     [CreateAssetMenu]
     public class LevelViewData : ScriptableObject

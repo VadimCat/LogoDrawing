@@ -1,4 +1,4 @@
-﻿namespace Utils.Client
+﻿namespace Ji2Core.Core
 {
     public interface IBootstrapable
     {

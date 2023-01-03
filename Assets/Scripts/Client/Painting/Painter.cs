@@ -1,5 +1,4 @@
-﻿using Core;
-using Core.Camera;
+﻿using Ji2Core.Core;
 using PaintIn3D;
 using UnityEngine;
 

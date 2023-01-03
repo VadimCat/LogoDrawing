@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Ji2Core.UI.Screens;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utils.Client;
 
 namespace Ji2Core.Core.ScreenNavigation
 {

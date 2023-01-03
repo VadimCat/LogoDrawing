@@ -1,7 +1,7 @@
-﻿using Client.Collisions;
-using Client.Painting;
-using Core.UserInput;
+﻿using Client.Painting;
 using Ji2Core.Core.Audio;
+using Ji2Core.Core.Collisions;
+using Ji2Core.Core.UserInput;
 using UnityEngine;
 
 namespace Client.Cursors
