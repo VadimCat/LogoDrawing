@@ -1,5 +1,4 @@
-﻿using Client.Audio;
-using Ji2Core.Core.Audio;
+﻿using Ji2Core.Core.Audio;
 using UnityEngine;
 
 namespace Client.Cursors

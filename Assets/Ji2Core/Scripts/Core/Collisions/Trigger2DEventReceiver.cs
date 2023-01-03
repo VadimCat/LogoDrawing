@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Client.Collisions
+namespace Ji2Core.Core.Collisions
 {
     public class Trigger2DEventReceiver : MonoBehaviour, ICollidable<Collider2D>
     {

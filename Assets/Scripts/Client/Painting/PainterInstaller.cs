@@ -1,6 +1,5 @@
-﻿using Core;
-using Core.Camera;
-using Core.Installers;
+﻿using Ji2Core.Core;
+using Ji2Core.Core.Installers;
 using PaintIn3D;
 using SceneView;
 using UnityEngine;

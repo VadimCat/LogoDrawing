@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Client;
 using PaintIn3D;
 using SceneView;
 using UnityEditor;
 using UnityEngine;
-using Utils.Client;
 
 namespace Editor
 {

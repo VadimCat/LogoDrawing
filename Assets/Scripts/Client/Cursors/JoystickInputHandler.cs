@@ -1,5 +1,5 @@
 ﻿using Client.Painting;
-using Core.UserInput;
+using Ji2Core.Core.UserInput;
 using UnityEngine;
 
 namespace Client.Cursors

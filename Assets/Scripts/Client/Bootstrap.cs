@@ -1,17 +1,16 @@
 using Client.Cursors;
 using Client.Painting;
-using Client.Pools;
 using Client.Presenters;
+using Client.States;
 using Client.UI.Screens;
-using Core;
-using Core.Camera;
-using Core.UserInput;
+using Ji2Core.Core;
 using Ji2Core.Core.Audio;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
+using Ji2Core.Core.States;
+using Ji2Core.Core.UserInput;
 using SceneView;
 using UnityEngine;
-using Utils.Client;
 
 namespace Client
 {
@@ -33,10 +32,9 @@ namespace Client
 
         [SerializeField] private JoystickInstaller joystickInstaller;
 
-        private Pool<SfxPlaybackSource> sfxPlaybackPool;
-
+        private AppSession appSession; 
+            
         private readonly Context context = new();
-        private LevelService levelService;
 
         private async void Start()
         {
@@ -52,16 +50,23 @@ namespace Client
             joystickInstaller.Install(context);
             InstallСursor();
 
-            levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
-                backgroundService, context);
+            var sceneLoader = new SceneLoader(updateService);
+            
+            var levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
+                backgroundService, context, sceneLoader);
             var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
 
+            context.Register(sceneLoader);
             context.Register(audioService);
             context.Register(levelService);
             context.Register(complimentsWordsService);
             context.Register(loadingFactory);
-
-            await loadingFactory.Create(5).LoadAsync();
+            
+            StateMachine appStateMachine = new StateMachine(new StateFactory(context));
+            
+            appSession = new AppSession(appStateMachine);
+            
+            appSession.StateMachine.Enter<InitialState>();
         }
 
         private void InstallCamera()
@@ -94,6 +99,7 @@ namespace Client
         private void InstallNavigator()
         {
             screenNavigator.Bootstrap();
+            context.Register(screenNavigator);
         }
 
         private void InstallLevelsData()

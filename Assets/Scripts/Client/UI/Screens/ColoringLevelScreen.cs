@@ -1,10 +1,9 @@
-using Client.UI.Screens;
-using Ji2Core.Core.ScreenNavigation;
+using Client.Screens;
 using Ji2Core.UI.Screens;
 using TMPro;
 using UnityEngine;
 
-namespace Client.Screens
+namespace Client.UI.Screens
 {
     public class ColoringLevelScreen : BaseScreen
     {

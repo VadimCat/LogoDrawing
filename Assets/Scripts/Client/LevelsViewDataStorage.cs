@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Editor;
+using Ji2Core.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace Utils.Client
+namespace Client
 {
     [CreateAssetMenu]
     public class LevelsViewDataStorage : ScriptableObject, IBootstrapable

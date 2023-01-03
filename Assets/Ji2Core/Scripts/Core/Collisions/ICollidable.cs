@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Client.Collisions
+namespace Ji2Core.Core.Collisions
 {
     public interface ICollidable<TCollisionData>
     {

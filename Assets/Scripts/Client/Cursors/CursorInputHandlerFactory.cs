@@ -1,6 +1,5 @@
-﻿using Core;
-using Core.Camera;
-using Core.UserInput;
+﻿using Ji2Core.Core;
+using Ji2Core.Core.UserInput;
 
 namespace Client.Cursors
 {
