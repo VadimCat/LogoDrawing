@@ -10,7 +10,7 @@ namespace Models
     public class Level : ISavable
     {
         private const string StartEvent = "level_start"; 
-        private const string FinishEvent = "level_start"; 
+        private const string FinishEvent = "level_finish"; 
         private const string LevelNumberKey = "level_number";
         private const string LevelNameKey = "level_name";
         private const string LevelCountKey = "level_count"; 
