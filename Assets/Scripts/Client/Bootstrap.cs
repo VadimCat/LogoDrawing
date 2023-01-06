@@ -4,11 +4,13 @@ using Client.Presenters;
 using Client.States;
 using Client.UI.Screens;
 using Ji2Core.Core;
+using Ji2Core.Core.Analytics;
 using Ji2Core.Core.Audio;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.States;
 using Ji2Core.Core.UserInput;
+using Ji2Core.Plugins.AppMetrica;
 using SceneView;
 using UnityEngine;
 
@@ -36,7 +38,7 @@ namespace Client
             
         private readonly Context context = new();
 
-        private async void Start()
+        private void Start()
         {
             DontDestroyOnLoad(this);
             //TODO: Create installers where needed
@@ -52,8 +54,11 @@ namespace Client
 
             var sceneLoader = new SceneLoader(updateService);
             
+            var analytics = new Analytics(); 
+            analytics.AddLogger(new YandexMetricaLogger(AppMetrica.Instance));
+            
             var levelService = new LevelService(levelsStorage, levelViewOrigin, screenNavigator, updateService,
-                backgroundService, context, sceneLoader);
+                backgroundService, context, sceneLoader, analytics);
             var loadingFactory = new LoadingPresenterFactory(screenNavigator, levelService);
 
             context.Register(sceneLoader);

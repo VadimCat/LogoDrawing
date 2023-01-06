@@ -1,10 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Client.Cursors;
 using Client.Painting;
 using Client.Presenters;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core;
+using Ji2Core.Core.Analytics;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
@@ -29,6 +31,7 @@ namespace Client
         private readonly ScreenNavigator screenNavigator;
         private readonly UpdateService updateService;
         private readonly SceneLoader sceneLoader;
+        private readonly Analytics analytics;
         private readonly BackgroundService backgroundService;
         private readonly Context context;
 
@@ -37,13 +40,14 @@ namespace Client
         //TODO: Check dependencies and use context where needed
         public LevelService(LevelsViewDataStorage levelsViewDataStorage, LevelViewContainer levelView,
             ScreenNavigator screenNavigator, UpdateService updateService, BackgroundService backgroundService,
-            Context context, SceneLoader sceneLoader)
+            Context context, SceneLoader sceneLoader, Analytics analytics)
         {
             this.levelsViewDataStorage = levelsViewDataStorage;
             this.levelView = levelView;
             this.screenNavigator = screenNavigator;
             this.updateService = updateService;
             this.sceneLoader = sceneLoader;
+            this.analytics = analytics;
             this.backgroundService = backgroundService;
             this.context = context;
 
@@ -53,26 +57,35 @@ namespace Client
         public async UniTask<LevelPresenter> LoadNextLevelAsync()
         {
             currentLvlInd++;
-            int lvlToLoad = GetNormalizedLevelInd(currentLvlInd);
+            int normalizedLevelIndex = currentLvlInd % levelsViewDataStorage.levelsList.Count;
+            int loop = currentLvlInd / levelsViewDataStorage.levelsList.Count;
 
-            var sceneLoadingTask = sceneLoader.LoadScene("LevelScene");
-            await UniTask.WhenAll(sceneLoadingTask, UniTask.Delay(2000));
+            int lvlToLoad = normalizedLevelIndex;
 
-            backgroundService.SwitchBackground(BackgroundService.Background.Game);
+            await LoadLevelScene();
 
             var viewData = levelsViewDataStorage.GetData(levelsViewDataStorage.levelsList[lvlToLoad]);
             var view = Object.Instantiate(levelView);
             view.SetDependencies(updateService);
-            
+
             //TODO: Level presenter should create or get level from factory?
-            
-            var level = new Level(viewData.ID, currentLvlInd);
+
+            var level = new Level(viewData.ID, currentLvlInd, loop, analytics);
             level.OnColoringComplete += Save;
-            
-            return new LevelPresenter(level, view, viewData, context.GetService<Painter>(),
-                context.GetService<LoadingPresenterFactory>(), screenNavigator,
-                context.GetService<CursorService>(), context.GetService<ComplimentsWordsService>(),
-                context.GetService<AudioService>());
+
+            return new LevelPresenter(level, view, viewData,
+                context.GetService<LoadingPresenterFactory>(),
+                screenNavigator,
+                context.GetService<CursorService>(),
+                context.GetService<ComplimentsWordsService>(),
+                context.GetService<AudioService>(), updateService);
+        }
+
+        private async Task LoadLevelScene()
+        {
+            backgroundService.SwitchBackground(BackgroundService.Background.Game);
+            var sceneLoadingTask = sceneLoader.LoadScene("LevelScene");
+            await UniTask.WhenAll(sceneLoadingTask, UniTask.Delay(2000));
         }
 
         public void OnUpdate()
@@ -94,16 +107,6 @@ namespace Client
         public void ClearSave()
         {
             PlayerPrefs.DeleteKey(SAVE_KEY);
-        }
-
-        private int GetNormalizedLevelInd(int lvlInd)
-        {
-            while (lvlInd >= levelsViewDataStorage.levelsList.Count)
-            {
-                lvlInd -= levelsViewDataStorage.levelsList.Count;
-            }
-
-            return lvlInd;
         }
     }
 }
