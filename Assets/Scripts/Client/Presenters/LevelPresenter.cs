@@ -157,6 +157,7 @@ namespace Client.Presenters
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             levelScreen.ShowNextButton();
             cursorService.DisableCurrent();
+            cursorService.DisableJoystick();
             levelScreen.OnClickNext += SetColoringStageAfterClickNextButton;
         }
 

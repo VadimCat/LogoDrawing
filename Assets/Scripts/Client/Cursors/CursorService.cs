@@ -70,6 +70,7 @@ namespace Client.Cursors
         //TODO: Make common method for all brushes activation 
         public void SetCleaning()
         {
+            joystick.gameObject.SetActive(true);
             DisableCurrent();
             cleaningCursor.Enable();
             currentCursor = cleaningCursor;
@@ -89,6 +90,11 @@ namespace Client.Cursors
 
             LastCursorPosition = trigger2DEventReceiver.transform.position; 
             trigger2DEventReceiver.transform.position = initialPos;
+        }
+
+        public void DisableJoystick()
+        {
+            joystick.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
