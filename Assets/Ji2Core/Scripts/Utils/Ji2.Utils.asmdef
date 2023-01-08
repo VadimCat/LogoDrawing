@@ -1,7 +1,7 @@
 {
     "name": "Ji2.Utils",
     "rootNamespace": "",
-    "references": [],
+    "references": ["GUID:75d9021ae7bc8d44a8fcd6946a25ab5d"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
