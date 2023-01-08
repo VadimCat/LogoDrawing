@@ -83,7 +83,7 @@ namespace Client.Presenters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             level.LogAnalyticsLevelStart();
             updateService.Add(this);
         }
@@ -112,7 +112,7 @@ namespace Client.Presenters
         {
             updateService.Remove(this);
             level.LogAnalyticsLevelFinish();
-            
+
             cursorService.DisableCurrent();
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
@@ -155,7 +155,14 @@ namespace Client.Presenters
             view.EnableProgressUpdate(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
+            levelScreen.ShowNextButton();
+            cursorService.DisableCurrent();
+            levelScreen.OnClickNext += SetColoringStageAfterClickNextButton;
+        }
 
+        private async void SetColoringStageAfterClickNextButton()
+        {
+            levelScreen.HideNextButton();
             view.RemoveColoringObject();
             SetColoringStageFromSave();
             await UniTask.Delay(2000);
