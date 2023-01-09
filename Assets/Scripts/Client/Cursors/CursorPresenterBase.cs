@@ -41,6 +41,22 @@ namespace Client.Cursors
             View = Object.Instantiate(cursorViewData.View, cursorRoot);
         }
 
+        public void Disable()
+        {
+            isEnabled = false;
+            TriggerEventReceiver.gameObject.SetActive(false);
+            // OnPointerUp(Vector2.zero);
+            
+            DisableAbstract();
+        }
+
+        public void Enable()
+        {
+            TriggerEventReceiver.gameObject.SetActive(true);
+            isEnabled = true;
+            EnableAbstract();
+        }
+
         private void OnPointerMove(Vector2 inputPos)
         {
             if(!isEnabled)
@@ -67,34 +83,25 @@ namespace Client.Cursors
         }
 
         protected abstract void OnPointerDownAbstract(Vector2 inputPos);
+
         protected abstract void OnPointerMoveAbstract(Vector2 inputPos);
+
         protected abstract void OnPointerUpAbstract(Vector2 inputPos);
 
         //TODO: Use aggregation with classes like CursorParticleBehaviour,
+
+
         //TODO: which will be aggregated inside class and will solve their problems on their own
+
+
         protected abstract void OnCollisionStay(Collider2D collider2D);
 
         protected abstract void OnCollisionExit(Collider2D obj);
+
         protected abstract void OnCollisionEnter(Collider2D obj);
 
         protected abstract void EnableAbstract();
 
         protected abstract void DisableAbstract();
-
-        public void Enable()
-        {
-            TriggerEventReceiver.gameObject.SetActive(true);
-            isEnabled = true;
-            EnableAbstract();
-        }
-
-        public void Disable()
-        {
-            isEnabled = false;
-            TriggerEventReceiver.gameObject.SetActive(false);
-            // OnPointerUp();
-            
-            DisableAbstract();
-        }
     }
 }

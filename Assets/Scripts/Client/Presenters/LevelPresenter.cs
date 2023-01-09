@@ -1,13 +1,11 @@
 ﻿using System;
 using Client.Cursors;
-using Client.Painting;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
-using Ji2Core.Plugins.AppMetrica;
 using Models;
 using SceneView;
 using UnityEngine;
@@ -83,7 +81,7 @@ namespace Client.Presenters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             level.LogAnalyticsLevelStart();
             updateService.Add(this);
         }
@@ -112,7 +110,7 @@ namespace Client.Presenters
         {
             updateService.Remove(this);
             level.LogAnalyticsLevelFinish();
-            
+
             cursorService.DisableCurrent();
             view.gameObject.SetActive(false);
             view.Progress.OnValueChanged -= UpdateColoringProgress;
@@ -155,7 +153,14 @@ namespace Client.Presenters
             view.EnableProgressUpdate(false);
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
+            levelScreen.ShowNextButton();
+            cursorService.DisableCurrent();
+            levelScreen.OnClickNext += SetColoringStageAfterClickNextButton;
+        }
 
+        private async void SetColoringStageAfterClickNextButton()
+        {
+            levelScreen.HideNextButton();
             view.RemoveColoringObject();
             SetColoringStageFromSave();
             await UniTask.Delay(2000);

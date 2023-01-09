@@ -21,7 +21,6 @@ namespace Models
 
 
         //Used to show a bit faked overdone progress to avoid non-visible remaining pixels to paint.
-
         //Calculated as 1 / PRf : where PRf is progress to mark level as completed
         private const float LEVEL_PROGRESS_MULTIPLIER = 1.02f;
         private const float COLORING_COMPLETE_THRESHOLD = .999f;

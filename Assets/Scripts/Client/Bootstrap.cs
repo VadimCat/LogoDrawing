@@ -95,8 +95,7 @@ namespace Client
             var factory = new CursorInputHandlerFactory(context, joystickInputConfig, directCursorInputHandlerConfig);
 
             cursorService.SetDependencies(context.GetService<InputService>(), audioService,
-                context.GetService<Painter>(), context.GetService<CameraProvider>(),
-                context.GetService<Joystick>(), factory);
+                context.GetService<Painter>(), factory);
             context.Register(cursorService);
             cursorService.Bootstrap();
         }
