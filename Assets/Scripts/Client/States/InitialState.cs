@@ -9,45 +9,45 @@ namespace Client.States
 {
     public class InitialState : IState
     {
-        private const string GameSceneName = "LevelScene";
-        private readonly StateMachine _stateMachine;
-        private readonly ScreenNavigator _screenNavigator;
-        private readonly SceneLoader _sceneLoader;
+        private const string GAME_SCENE_NAME = "LevelScene";
+        private readonly StateMachine stateMachine;
+        private readonly ScreenNavigator screenNavigator;
+        private readonly SceneLoader sceneLoader;
 
-        private LoadingScreen _loadingScreen;
+        private LoadingScreen loadingScreen;
     
         public InitialState(StateMachine stateMachine, ScreenNavigator screenNavigator, SceneLoader sceneLoader)
         {
-            _stateMachine = stateMachine;
-            _screenNavigator = screenNavigator;
-            _sceneLoader = sceneLoader;
+            this.stateMachine = stateMachine;
+            this.screenNavigator = screenNavigator;
+            this.sceneLoader = sceneLoader;
         }
 
         public async UniTask Exit()
         {
-            await _screenNavigator.CloseScreen<LoadingScreen>();
+            await screenNavigator.CloseScreen<LoadingScreen>();
         }
 
         public async UniTask Enter()
         {
-            var loadingTask = _sceneLoader.LoadScene(GameSceneName);
-            var facebookTask = LoadFB();
-            _loadingScreen = await _screenNavigator.PushScreen<LoadingScreen>();
+            var loadingTask = sceneLoader.LoadScene(GAME_SCENE_NAME);
+            var facebookTask = LoadFb();
+            loadingScreen = await screenNavigator.PushScreen<LoadingScreen>();
         
-            _sceneLoader.OnProgressUpdate += UpdateProgress;
+            // sceneLoader.OnProgressUpdate += UpdateProgress;
             await UniTask.WhenAll(loadingTask, facebookTask);
             
             
-            _sceneLoader.OnProgressUpdate -= UpdateProgress;
+            // sceneLoader.OnProgressUpdate -= UpdateProgress;
         
-            await _screenNavigator.CloseScreen<LoadingScreen>();
+            await screenNavigator.CloseScreen<LoadingScreen>();
 
-            _loadingScreen = null;
+            loadingScreen = null;
 
-            _stateMachine.Enter<GameState>();
+            stateMachine.Enter<GameState>();
         }
 
-        private async UniTask LoadFB()
+        private async UniTask LoadFb()
         {
             var taskCompletionSource = new UniTaskCompletionSource<bool>();
             FB.Init(() => OnFbInitComplete(taskCompletionSource));
@@ -64,7 +64,7 @@ namespace Client.States
 
         private void UpdateProgress(float progress)
         {
-            _loadingScreen.SetProgress(progress);
+            loadingScreen.SetProgress(progress);
         }
     }
 

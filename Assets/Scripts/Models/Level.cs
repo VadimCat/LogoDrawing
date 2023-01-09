@@ -9,11 +9,11 @@ namespace Models
 {
     public class Level : ISavable
     {
-        private const string StartEvent = "level_start"; 
-        private const string FinishEvent = "level_finish"; 
+        private const string StartEvent = "level_start";
+        private const string FinishEvent = "level_finish";
         private const string LevelNumberKey = "level_number";
         private const string LevelNameKey = "level_name";
-        private const string LevelCountKey = "level_count"; 
+        private const string LevelCountKey = "level_count";
         private const string LevelLoopKey = "level_loop";
         private const string LevelRandomKey = "level_random";
         private const string LevelTypeKey = "level_type";
@@ -54,7 +54,7 @@ namespace Models
         public void UpdateColoringProgress(float progress, float oldValue)
         {
             progress = Mathf.Clamp01(progress * LEVEL_PROGRESS_MULTIPLIER);
-            
+
             switch (stage.Value)
             {
                 case ColoringStage.Cleaning:
@@ -122,28 +122,27 @@ namespace Models
             PlayerPrefs.SetString(id, stage.Value.ToString());
         }
 
+        //TODO: saves are commented, delete comments if theres will be no saves in future
         public void Load()
         {
             if (PlayerPrefs.HasKey(TimeKey))
             {
                 playTime = PlayerPrefs.GetFloat(TimeKey);
-                
+
                 LogAnalyticsLevelFinish(LevelExitType.game_closed);
                 PlayerPrefs.DeleteKey(TimeKey);
-                
-                Debug.LogError("LOG EXIT");
             }
-            
-            if (PlayerPrefs.HasKey(id))
-            {
-                var stringStage = PlayerPrefs.GetString(id);
-
-                if (Enum.TryParse<ColoringStage>(stringStage, out var value))
-                {
-                    stage = new ReactiveProperty<ColoringStage>(value);
-                }
-            }
-            else
+            // if (PlayerPrefs.HasKey(id))
+            // {
+            //     var stringStage = PlayerPrefs.GetString(id);
+            //
+            //     if (Enum.TryParse<ColoringStage>(stringStage, out var value))
+            // {
+            // stage = new ReactiveProperty<ColoringStage>(value);
+            stage = new ReactiveProperty<ColoringStage>(ColoringStage.Cleaning);
+            //     }
+            // }
+            // else
             {
                 playTime = 0;
             }
@@ -154,17 +153,17 @@ namespace Models
             PlayerPrefs.DeleteKey(TimeKey);
             PlayerPrefs.DeleteKey(id);
         }
-        
     }
 
     public enum LevelExitType
     {
         // ReSharper disable once InconsistentNaming
         win,
+
         // ReSharper disable once InconsistentNaming
         game_closed
     }
-    
+
     public enum ColoringStage
     {
         Cleaning,
