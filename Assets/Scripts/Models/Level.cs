@@ -10,6 +10,7 @@ namespace Models
     public class Level : ISavable
     {
         private const string StartEvent = "level_start"; 
+        private const string FinishEvent = "level_finish"; 
         private const string LevelNumberKey = "level_number";
         private const string LevelNameKey = "level_name";
         private const string LevelCountKey = "level_count"; 
@@ -112,21 +113,27 @@ namespace Models
                 [TimeKey] = playTime
             };
 
-            playTime = 0;
-
-            analytics.LogEventDirectlyTo<YandexMetricaLogger>(StartEvent, eventData);
+            analytics.LogEventDirectlyTo<YandexMetricaLogger>(FinishEvent, eventData);
             analytics.ForceSendDirectlyTo<YandexMetricaLogger>();
-            playTime = 0;
         }
 
         public void Save()
         {
             PlayerPrefs.SetString(id, stage.Value.ToString());
-            PlayerPrefs.SetFloat(TimeKey, playTime);
         }
 
         public void Load()
         {
+            if (PlayerPrefs.HasKey(TimeKey))
+            {
+                playTime = PlayerPrefs.GetFloat(TimeKey);
+                
+                LogAnalyticsLevelFinish(LevelExitType.game_closed);
+                PlayerPrefs.DeleteKey(TimeKey);
+                
+                Debug.LogError("LOG EXIT");
+            }
+            
             if (PlayerPrefs.HasKey(id))
             {
                 var stringStage = PlayerPrefs.GetString(id);
@@ -135,15 +142,16 @@ namespace Models
                 {
                     stage = new ReactiveProperty<ColoringStage>(value);
                 }
-
-                playTime = PlayerPrefs.GetFloat(TimeKey);
-                
-                LogAnalyticsLevelFinish(LevelExitType.game_closed);
+            }
+            else
+            {
+                playTime = 0;
             }
         }
 
         public void ClearSave()
         {
+            PlayerPrefs.DeleteKey(TimeKey);
             PlayerPrefs.DeleteKey(id);
         }
         

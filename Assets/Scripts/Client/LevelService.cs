@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Client.Cursors;
-using Client.Painting;
 using Client.Presenters;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
