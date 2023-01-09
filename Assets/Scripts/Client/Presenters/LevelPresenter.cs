@@ -154,12 +154,12 @@ namespace Client.Presenters
             view.Progress.OnValueChanged -= level.UpdateColoringProgress;
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             levelScreen.ShowNextButton();
-            cursorService.DisableCurrent();
             levelScreen.OnClickNext += SetColoringStageAfterClickNextButton;
         }
 
         private async void SetColoringStageAfterClickNextButton()
         {
+            cursorService.DisableCurrent();
             levelScreen.HideNextButton();
             view.RemoveColoringObject();
             SetColoringStageFromSave();
