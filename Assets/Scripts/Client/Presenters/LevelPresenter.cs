@@ -1,13 +1,11 @@
 ﻿using System;
 using Client.Cursors;
-using Client.Painting;
 using Client.UI.Screens;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
-using Ji2Core.Plugins.AppMetrica;
 using Models;
 using SceneView;
 using UnityEngine;
@@ -157,7 +155,6 @@ namespace Client.Presenters
             view.Progress.OnValueChanged -= UpdateCleaningProgress;
             levelScreen.ShowNextButton();
             cursorService.DisableCurrent();
-            cursorService.DisableJoystick();
             levelScreen.OnClickNext += SetColoringStageAfterClickNextButton;
         }
 

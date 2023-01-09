@@ -23,22 +23,17 @@ namespace Client.Cursors
         private InputService inputService;
         private AudioService audioService;
         private Painter painter;
-        private CameraProvider cameraProvider;
-        private Joystick joystick;
         private CursorInputHandlerFactory cursorInputHandlerFactory;
 
         private Vector3 initialPos;
 
-        public Vector2 LastCursorPosition {get; private set; } 
 
         public void SetDependencies(InputService inputService, AudioService audioService, Painter painter,
-            CameraProvider cameraProvider, Joystick joystick, CursorInputHandlerFactory cursorInputHandlerFactory)
+            CursorInputHandlerFactory cursorInputHandlerFactory)
         {
             this.audioService = audioService;
             this.inputService = inputService;
             this.painter = painter;
-            this.cameraProvider = cameraProvider;
-            this.joystick = joystick;
             this.cursorInputHandlerFactory = cursorInputHandlerFactory;
         }
         
@@ -70,7 +65,6 @@ namespace Client.Cursors
         //TODO: Make common method for all brushes activation 
         public void SetCleaning()
         {
-            joystick.gameObject.SetActive(true);
             DisableCurrent();
             cleaningCursor.Enable();
             currentCursor = cleaningCursor;
@@ -88,13 +82,7 @@ namespace Client.Cursors
             currentCursor?.Disable();
             currentCursor = null;
 
-            LastCursorPosition = trigger2DEventReceiver.transform.position; 
             trigger2DEventReceiver.transform.position = initialPos;
-        }
-
-        public void DisableJoystick()
-        {
-            joystick.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
