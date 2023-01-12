@@ -11,12 +11,13 @@ using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.States;
 using Ji2Core.Core.UserInput;
 using Ji2Core.Plugins.AppMetrica;
+using Models;
 using SceneView;
 using UnityEngine;
 
 namespace Client
 {
-    public class Bootstrap : MonoBehaviour
+    public class Bootstrap : BootstraperBase
     {
         [SerializeField] private LevelsViewDataStorage levelsStorage;
         [SerializeField] private LevelViewContainer levelViewOrigin;
@@ -38,7 +39,7 @@ namespace Client
             
         private readonly Context context = new();
 
-        private void Start()
+        protected override void Start()
         {
             DontDestroyOnLoad(this);
             //TODO: Create installers where needed
