@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Client.Cursors;
 using Client.Presenters;
 using Client.UI.Screens;
+using Client.View;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core;
 using Ji2Core.Core.Analytics;
@@ -11,7 +12,6 @@ using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
 using Ji2Core.Models;
 using Models;
-using SceneView;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

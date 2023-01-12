@@ -1,13 +1,13 @@
 ﻿using System;
 using Client.Cursors;
 using Client.UI.Screens;
+using Client.View;
 using Cysharp.Threading.Tasks;
 using Ji2Core.Core;
 using Ji2Core.Core.Compliments;
 using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
 using Models;
-using SceneView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

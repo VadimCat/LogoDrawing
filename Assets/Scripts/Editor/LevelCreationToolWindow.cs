@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Client;
+using Client.View;
 using PaintIn3D;
-using SceneView;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace Editor
 {
     public class LevelCreationToolWindow : EditorWindow
     {
-        private const string BaseArtPath = "Assets/Art/LevelsArt/";
+        private const string BASE_ART_PATH = "Assets/Art/LevelsArt/";
 
         private static GameObject levelBaseGrey;
         private static GameObject levelBaseColor;
@@ -23,11 +23,7 @@ namespace Editor
         private static Sprite maskSprite;
 
         private static string levelName;
-
-        private static string assetsDirectory => Path.Combine(Directory.GetCurrentDirectory(), "Assets");
-
-        private bool isInitialized = false;
-
+        
         [MenuItem("Tools/LevelCreationTool")]
         private static void ShowWindow()
         {
@@ -72,7 +68,7 @@ namespace Editor
                 var assets = AssetDatabase.FindAssets("t:Sprite");
 
                 var pathes = from guid in assets
-                    where AssetDatabase.GUIDToAssetPath(guid).Contains(BaseArtPath)
+                    where AssetDatabase.GUIDToAssetPath(guid).Contains(BASE_ART_PATH)
                     select AssetDatabase.GUIDToAssetPath(guid);
 
                 var spritePathes = pathes.ToArray();

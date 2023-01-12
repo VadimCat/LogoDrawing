@@ -3,6 +3,7 @@ using Client.Painting;
 using Client.Presenters;
 using Client.States;
 using Client.UI.Screens;
+using Client.View;
 using Ji2Core.Core;
 using Ji2Core.Core.Analytics;
 using Ji2Core.Core.Audio;
@@ -12,7 +13,6 @@ using Ji2Core.Core.States;
 using Ji2Core.Core.UserInput;
 using Ji2Core.Plugins.AppMetrica;
 using Models;
-using SceneView;
 using UnityEngine;
 
 namespace Client

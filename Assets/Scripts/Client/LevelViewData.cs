@@ -1,4 +1,4 @@
-﻿using SceneView;
+﻿using Client.View;
 using UnityEngine;
 using UnityEngine.Serialization;
 

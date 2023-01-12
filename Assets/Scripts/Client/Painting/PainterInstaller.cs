@@ -1,7 +1,7 @@
-﻿using Ji2Core.Core;
+﻿using Client.View;
+using Ji2Core.Core;
 using Ji2Core.Core.Installers;
 using PaintIn3D;
-using SceneView;
 using UnityEngine;
 
 namespace Client.Painting
