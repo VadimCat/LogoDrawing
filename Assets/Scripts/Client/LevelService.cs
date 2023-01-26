@@ -12,6 +12,7 @@ using Ji2Core.Core.ScreenNavigation;
 using Ji2Core.Core.Audio;
 using Ji2Core.Models;
 using Models;
+using UI.Background;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

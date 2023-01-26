@@ -13,6 +13,7 @@ using Ji2Core.Core.States;
 using Ji2Core.Core.UserInput;
 using Ji2Core.Plugins.AppMetrica;
 using Models;
+using UI.Background;
 using UnityEngine;
 
 namespace Client
@@ -37,7 +38,7 @@ namespace Client
 
         private AppSession appSession; 
             
-        private readonly Context context = new();
+        private readonly Context context = Context.GetInstance();
 
         protected override void Start()
         {

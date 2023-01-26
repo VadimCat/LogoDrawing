@@ -15,9 +15,9 @@ namespace Client.States
             this.context = context;
         }
 
-        public Dictionary<Type, IState> GetStates(StateMachine stateMachine)
+        public Dictionary<Type, IExitableState> GetStates(StateMachine stateMachine)
         {
-            var dict = new Dictionary<Type, IState>();
+            var dict = new Dictionary<Type, IExitableState>();
             
             dict[typeof(InitialState)] = new InitialState(stateMachine,
                 context.GetService<Ji2Core.Core.ScreenNavigation.ScreenNavigator>(),
@@ -26,6 +26,6 @@ namespace Client.States
             dict[typeof(GameState)] = new GameState(context.GetService<LoadingPresenterFactory>());
 
             return dict;
-        } 
+        }
     }
 }
